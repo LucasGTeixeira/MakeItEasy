@@ -1,4 +1,4 @@
 package domain.usecases.produto;
 
-public class ValidarProduto {
+public class ProdutoValidator {
 }

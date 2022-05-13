@@ -7,18 +7,39 @@ import domain.entities.produto.Produto;
 import java.util.List;
 
 public class Venda {
+    private Integer id;
     private Float valorTotal;
     private Boolean disponibilidade;
     private Cliente cliente;
     private Campanha campanha;
     private List<Produto> produtos;
 
-    public Venda(Float valorTotal, Boolean disponibilidade, Cliente cliente, Campanha campanha, List<Produto> produtos) {
+    private FormaPagamento formaPagamento;
+
+    public Venda(Integer id, Float valorTotal, Boolean disponibilidade, Cliente cliente, Campanha campanha, List<Produto> produtos, FormaPagamento formaPagamento) {
+        this.id = id;
         this.valorTotal = valorTotal;
         this.disponibilidade = disponibilidade;
         this.cliente = cliente;
         this.campanha = campanha;
         this.produtos = produtos;
+        this.formaPagamento = formaPagamento;
+    }
+
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Float getValorTotal() {

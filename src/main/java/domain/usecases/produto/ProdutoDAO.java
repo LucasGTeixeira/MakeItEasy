@@ -1,4 +1,8 @@
 package domain.usecases.produto;
 
-public class ProdutoDAO {
+import domain.entities.produto.Produto;
+import domain.usecases.utils.DAO;
+
+public interface ProdutoDAO extends DAO<Produto, Integer> {
+
 }

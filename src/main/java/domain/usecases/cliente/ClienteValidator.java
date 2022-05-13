@@ -1,4 +1,4 @@
 package domain.usecases.cliente;
 
-public class ValidarCliente {
+public class ClienteValidator {
 }

@@ -1,6 +1,7 @@
 package domain.entities.cliente;
 
 public class Cliente {
+    //TODO Adicionar Campo ID
     private String cpf;
     private String nomeCompleto;
     private String telefone;

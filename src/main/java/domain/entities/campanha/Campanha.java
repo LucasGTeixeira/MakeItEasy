@@ -1,37 +1,67 @@
 package domain.entities.campanha;
 
 import domain.entities.empresa.Empresa;
-import domain.entities.produto.Produto;
 
-import java.util.List;
+import java.time.LocalDate;
 
 public class Campanha {
-    private Integer codigio;
+    private Integer codigo; //serve como ID da Campanha
+    private String nome;
+
+    private String edicao;
+
+    private LocalDate dataLancamento;
+
+    private LocalDate dataExpiracao;
     private Empresa empresa;
-    private List<Produto> produtos;
-    private CategoriaProdutos categoria;
 
-    public Campanha(Integer codigio, Empresa empresa, List<Produto> produtos, CategoriaProdutos categoria) {
-        this.codigio = codigio;
+    public Campanha(Integer codigo, String nome, String edicao, LocalDate dataLancamento, LocalDate dataExpiracao, Empresa empresa) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.edicao = edicao;
+        this.dataLancamento = dataLancamento;
+        this.dataExpiracao = dataExpiracao;
         this.empresa = empresa;
-        this.produtos = produtos;
-        this.categoria = categoria;
     }
 
-    public CategoriaProdutos getCategoria() {
-        return categoria;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCategoria(CategoriaProdutos categoria) {
-        this.categoria = categoria;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Integer getCodigio() {
-        return codigio;
+    public String getEdicao() {
+        return edicao;
     }
 
-    public void setCodigio(Integer codigio) {
-        this.codigio = codigio;
+    public void setEdicao(String edicao) {
+        this.edicao = edicao;
+    }
+
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public void setDataLancamento(LocalDate dataLancamento) {
+        this.dataLancamento = dataLancamento;
+    }
+
+    public LocalDate getDataExpiracao() {
+        return dataExpiracao;
+    }
+
+    public void setDataExpiracao(LocalDate dataExpiracao) {
+        this.dataExpiracao = dataExpiracao;
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public Empresa getEmpresa() {
@@ -42,20 +72,15 @@ public class Campanha {
         this.empresa = empresa;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
     @Override
     public String toString() {
         return "Campanha{" +
-                "codigio=" + codigio +
+                "codigo=" + codigo +
+                ", nome='" + nome + '\'' +
+                ", edicao='" + edicao + '\'' +
+                ", dataLancamento=" + dataLancamento +
+                ", dataExpiracao=" + dataExpiracao +
                 ", empresa=" + empresa +
-                ", produtos=" + produtos +
                 '}';
     }
 }

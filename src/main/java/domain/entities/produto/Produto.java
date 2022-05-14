@@ -6,8 +6,8 @@ import domain.entities.campanha.CategoriaProdutos;
 import java.math.BigDecimal;
 
 public class Produto {
-    //TODO adicionar campo ID
-    private Integer codProduto;
+    private Integer id;
+    private Long codProduto;
     private String nome;
     private CategoriaProdutos categoria;
     private BigDecimal valor;
@@ -15,7 +15,8 @@ public class Produto {
 
     private Campanha campanha;
 
-    public Produto(Integer codProduto, String nome, CategoriaProdutos categoria, BigDecimal valor, Boolean disponibilidade, Campanha campanha) {
+    public Produto(Integer id, Long codProduto, String nome, CategoriaProdutos categoria, BigDecimal valor, Boolean disponibilidade, Campanha campanha) {
+        this.id = id;
         this.codProduto = codProduto;
         this.nome = nome;
         this.categoria = categoria;
@@ -48,11 +49,19 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public Integer getCodProduto() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Long getCodProduto() {
         return codProduto;
     }
 
-    public void setCodProduto(Integer codProduto) {
+    public void setCodProduto(Long codProduto) {
         this.codProduto = codProduto;
     }
 
@@ -75,7 +84,8 @@ public class Produto {
     @Override
     public String toString() {
         return "Produto{" +
-                "codProduto=" + codProduto +
+                "id=" + id +
+                ", codProduto=" + codProduto +
                 ", nome='" + nome + '\'' +
                 ", categoria=" + categoria +
                 ", valor=" + valor +

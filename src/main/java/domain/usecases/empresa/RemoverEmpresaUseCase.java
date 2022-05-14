@@ -17,9 +17,9 @@ public class RemoverEmpresaUseCase {
         return empresaDAO.delete(empresa);
     }
 
-    public boolean delete(String cnpj){
-        if(cnpj == null || empresaDAO.findByCnpj(cnpj).isEmpty())
-            throw new EntityNotFoundException("Cnpj nulo ou não encontrado");
-        return empresaDAO.deleteByKey(cnpj);
+    public boolean delete(Integer id){
+        if(id == null || empresaDAO.findOne(id).isEmpty())
+            throw new EntityNotFoundException("id nulo ou não encontrado");
+        return empresaDAO.deleteByKey(id);
     }
 }

@@ -1,4 +1,4 @@
-package domain.usecases.empresa.campanha;
+package domain.usecases.campanha;
 
 public class AdicionarCampanhaUseCase {
 }

@@ -1,7 +1,7 @@
 package domain.entities.cliente;
 
 public class Cliente {
-    //TODO Adicionar Campo ID
+    private Integer id;
     private String cpf;
     private String nomeCompleto;
     private String telefone;
@@ -9,7 +9,8 @@ public class Cliente {
     private String endereco;
     private String status;
 
-    public Cliente(String cpf, String nomeCompleto, String telefone, String email, String endereco, String status) {
+    public Cliente(Integer id, String cpf, String nomeCompleto, String telefone, String email, String endereco, String status) {
+        this.id = id;
         this.cpf = cpf;
         this.nomeCompleto = nomeCompleto;
         this.telefone = telefone;
@@ -66,10 +67,19 @@ public class Cliente {
         this.status = status;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
-                "cpf='" + cpf + '\'' +
+                "id=" + id +
+                ", cpf='" + cpf + '\'' +
                 ", nomeCompleto='" + nomeCompleto + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", email='" + email + '\'' +

@@ -19,7 +19,12 @@ public class ListarEmpresasUseCase {
         return empresaDAO.findByCnpj(cnpj);
     }
 
-    //TODO Adicionar findOne ?
+    public Optional<Empresa> findOne(Integer id){
+        if(id == null){
+            throw new IllegalArgumentException("Id não pode ser nulo");
+        }
+        return empresaDAO.findOne(id);
+    }
 
     public List<Empresa> findAll(){
         return empresaDAO.findAll();

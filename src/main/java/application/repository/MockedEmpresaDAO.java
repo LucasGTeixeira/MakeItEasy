@@ -3,47 +3,68 @@ package application.repository;
 import domain.entities.empresa.Empresa;
 import domain.usecases.empresa.EmpresaDAO;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class MockedEmpresaDAO implements EmpresaDAO {
 
-    private static final Map<String, Empresa> fakeDb = new LinkedHashMap<>();
+    private static final Map<Integer, Empresa> fakeDb = new LinkedHashMap<>();
+    private static int autoIncrementId;
+
 
     @Override
     public Optional<Empresa> findByCnpj(String cnpj) {
-        return Optional.empty();
+        return fakeDb.values()
+                .stream()//abstração da pesquisa
+                .filter(empresa -> empresa.getCnpj().equals(cnpj))//procurar todas as empresas que tenham o cnpj iguais ao do parâmetro
+                .findAny(); //retorna um Optional de Empresas
     }
 
     @Override
-    public String create(Empresa empresa) {
-        return empresa.getCnpj(); // TODO (adicionar na entidade empresa um ID para datar no banco?)
+    public Integer create(Empresa empresa) {
+        autoIncrementId++; //incrementa o ID
+        empresa.setId(autoIncrementId); //setta o id para o campo de empresa
+        fakeDb.put(autoIncrementId, empresa);
+        return autoIncrementId; //retorna o valor statico incrementado
     }
 
     @Override
-    public Optional<Empresa> findOne(String cnpj) {
-        return Optional.empty();
+    public Optional<Empresa> findOne(Integer id) {
+        return fakeDb.values().stream()//abstração
+                .filter(empresa -> empresa.getId().equals(id))//filtrar por id
+                .findAny();//retornar Optional de Empresa com o mesmo id
     }
 
     @Override
     public List<Empresa> findAll() {
-        return null;
+        return new ArrayList<>(fakeDb.values());//retorna uma lista dos valores dentro do banco
     }
 
     @Override
     public boolean update(Empresa empresa) {
+        Integer id = empresa.getId();
+        if(fakeDb.containsKey(id)){
+            fakeDb.replace(id, empresa);
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean deleteByKey(String cnpj) {
+    public boolean deleteByKey(Integer id) {
+        if(fakeDb.containsKey(id)){
+            fakeDb.remove(id);
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean delete(Empresa empresa) {
+        Integer id = empresa.getId();
+        if(fakeDb.containsKey(id)){
+            fakeDb.remove(id);
+            return true;
+        }
         return false;
     }
 }

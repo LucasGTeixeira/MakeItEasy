@@ -1,5 +1,6 @@
 package domain.usecases.utils;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 public abstract class Validator<T> {
@@ -12,5 +13,9 @@ public abstract class Validator<T> {
     public static boolean nullOrEmpty(Collection collection){
         return collection == null || collection.isEmpty();
     } //sobrecarga para collections
+
+    public static boolean nullOrEmpty(LocalDate localDate){
+        return localDate == null;
+    }//sobrecarga para campo date
 
 }

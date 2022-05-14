@@ -12,19 +12,19 @@ public class MockedEmpresaDAO implements EmpresaDAO {
 
 
     @Override
-    public Optional<Empresa> findByCnpj(String cnpj) {
-        return fakeDb.values()
-                .stream()//abstração da pesquisa
-                .filter(empresa -> empresa.getCnpj().equals(cnpj))//procurar todas as empresas que tenham o cnpj iguais ao do parâmetro
-                .findAny(); //retorna um Optional de Empresas
-    }
-
-    @Override
     public Integer create(Empresa empresa) {
         autoIncrementId++; //incrementa o ID
         empresa.setId(autoIncrementId); //setta o id para o campo de empresa
         fakeDb.put(autoIncrementId, empresa);
         return autoIncrementId; //retorna o valor statico incrementado
+    }
+
+    @Override
+    public Optional<Empresa> findByCnpj(String cnpj) {
+        return fakeDb.values()
+                .stream()//abstração da pesquisa
+                .filter(empresa -> empresa.getCnpj().equals(cnpj))//procurar todas as empresas que tenham o cnpj iguais ao do parâmetro
+                .findAny(); //retorna um Optional de Empresas
     }
 
     @Override

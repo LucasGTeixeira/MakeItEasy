@@ -1,4 +1,4 @@
-package domain.entities.campanha;
+package domain.entities.produto;
 
 public enum CategoriaProdutos {
     COSMETICOS("Cosméticos"),

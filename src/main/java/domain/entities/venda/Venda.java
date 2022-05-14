@@ -13,7 +13,6 @@ public class Venda {
     private Cliente cliente;
     private Campanha campanha;
     private List<Produto> produtos;
-
     private FormaPagamento formaPagamento;
 
     public Venda(Integer id, Float valorTotal, Boolean disponibilidade, Cliente cliente, Campanha campanha, List<Produto> produtos, FormaPagamento formaPagamento) {

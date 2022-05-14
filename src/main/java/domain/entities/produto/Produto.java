@@ -1,7 +1,6 @@
 package domain.entities.produto;
 
 import domain.entities.campanha.Campanha;
-import domain.entities.campanha.CategoriaProdutos;
 
 import java.math.BigDecimal;
 

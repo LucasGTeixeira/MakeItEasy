@@ -5,7 +5,8 @@ import domain.entities.empresa.Empresa;
 import java.time.LocalDate;
 
 public class Campanha {
-    private Integer codigo; //serve como ID da Campanha
+    private Integer id;
+    private String codigo;
     private String nome;
 
     private String edicao;
@@ -13,15 +14,41 @@ public class Campanha {
     private LocalDate dataLancamento;
 
     private LocalDate dataExpiracao;
-    private Empresa empresa;
+    private String cnpjEmpresa;
 
-    public Campanha(Integer codigo, String nome, String edicao, LocalDate dataLancamento, LocalDate dataExpiracao, Empresa empresa) {
+    public Campanha(Integer id, String codigo, String nome, String edicao, LocalDate dataLancamento, LocalDate dataExpiracao, String cnpjEmpresa) {
+        this.id = id;
         this.codigo = codigo;
         this.nome = nome;
         this.edicao = edicao;
         this.dataLancamento = dataLancamento;
         this.dataExpiracao = dataExpiracao;
-        this.empresa = empresa;
+        this.cnpjEmpresa = cnpjEmpresa;
+    }
+
+    public Campanha(String codigo, String nome, String edicao, LocalDate dataLancamento, LocalDate dataExpiracao, String cnpjEmpresa) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.edicao = edicao;
+        this.dataLancamento = dataLancamento;
+        this.dataExpiracao = dataExpiracao;
+        this.cnpjEmpresa = cnpjEmpresa;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -56,31 +83,24 @@ public class Campanha {
         this.dataExpiracao = dataExpiracao;
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    public String getCnpjEmpresa() {
+        return cnpjEmpresa;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public void setCnpjEmpresa(String cnpjEmpresa) {
+        this.cnpjEmpresa = cnpjEmpresa;
     }
 
     @Override
     public String toString() {
         return "Campanha{" +
-                "codigo=" + codigo +
+                "id=" + id +
+                ", codigo='" + codigo + '\'' +
                 ", nome='" + nome + '\'' +
                 ", edicao='" + edicao + '\'' +
                 ", dataLancamento=" + dataLancamento +
                 ", dataExpiracao=" + dataExpiracao +
-                ", empresa=" + empresa +
+                ", cnpjEmpresa='" + cnpjEmpresa + '\'' +
                 '}';
     }
 }

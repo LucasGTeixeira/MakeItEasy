@@ -3,11 +3,13 @@ package domain.usecases.empresa;
 import domain.entities.campanha.Campanha;
 import domain.entities.empresa.Empresa;
 import domain.usecases.campanha.CampanhaDAO;
+import domain.usecases.utils.Exceptions.EmpresaRelatedToCampanhaException;
 import domain.usecases.utils.Exceptions.EntityNotFoundException;
 
+import java.util.Objects;
 import java.util.Optional;
 
-public class RemoverEmpresaUseCase { //TODO conferir se há campanha relacionada antes de deletar
+public class RemoverEmpresaUseCase {
 
     private EmpresaDAO empresaDAO;
     private CampanhaDAO campanhaDAO;
@@ -18,12 +20,8 @@ public class RemoverEmpresaUseCase { //TODO conferir se há campanha relacionada
     }
 
     public boolean isEmpresaInCampanha(Empresa empresa){
-        return campanhaDAO.findByCnpj(empresa.getCnpj()).isEmpty();
+        return campanhaDAO.findByCnpj(empresa.getCnpj()).isPresent();
     }
-
-//    public boolean isEmpresaInCampanha(Integer id){
-//        return true;
-//    }
 
     public boolean delete(Empresa empresa){
         if(empresa == null || empresaDAO.findByCnpj(empresa.getCnpj()).isEmpty() || isEmpresaInCampanha(empresa))
@@ -31,9 +29,13 @@ public class RemoverEmpresaUseCase { //TODO conferir se há campanha relacionada
         return empresaDAO.delete(empresa);
     }
 
-    public boolean delete(Integer id){ //TODO fazer verificação de empresa dentro de campanhas
-        if(id == null || empresaDAO.findOne(id).isEmpty())
+    public boolean delete(Integer id){
+        boolean idNotFound = empresaDAO.findOne(id).isEmpty();
+        if(id == null || idNotFound)
             throw new EntityNotFoundException("id nulo ou não encontrado");
+        boolean isEmpresaRelatedToCampanha = isEmpresaInCampanha(empresaDAO.findOne(id).get());
+        if (isEmpresaRelatedToCampanha)
+            throw new EmpresaRelatedToCampanhaException("Há campanhas relacionadas com esta empresa");
         return empresaDAO.deleteByKey(id);
     }
 }

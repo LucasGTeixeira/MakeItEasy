@@ -32,7 +32,7 @@ public class Main {
         Empresa empresa2 = new Empresa("15897", "Empresa2 Ltda");
         Empresa empresa3 = new Empresa("65489", "Empresa3 Ltda");
         Empresa empresa4 = new Empresa("11111", "Empresa4 Ltda");
-        Empresa empresa5 = new Empresa(3,"65489", "EmpresaModificada Ltda");
+        Empresa empresa5 = new Empresa(3,"65489", "Empresa Modificada");
 
 
         Campanha campanha1 = new Campanha("451611", "beleza natural", "verão 2014",
@@ -43,6 +43,11 @@ public class Main {
                 LocalDate.of(2022, 2, 21),
                 LocalDate.of(2022, 3, 10),
                 "15486");
+        Campanha campanha3= new Campanha(1,"451611", "nome Modificado", "2022",
+                LocalDate.of(2022, 2, 21),
+                LocalDate.of(2022, 3, 10),
+                "15486");
+
 
 
         //INSERINDO ENTIDADES NO HASHMAP
@@ -56,23 +61,38 @@ public class Main {
 
         System.out.println("\nLISTA DE TODAS AS EMPRESAS");
         listarEmpresasUseCase.findAll().forEach(System.out::println);
+        System.out.println("\nLISTA DE TODAS AS CAMPANHAS");
+        listarCampanhasUseCase.findAll().forEach(System.out::println);
 
         System.out.println("\nENCONTRAR EMPRESA COM CNPJ '65489'");
         Optional<Empresa> empresaBuscada = listarEmpresasUseCase.findByCnpj("65489"); //encontrar por cnpj
         System.out.println("\n" + empresaBuscada);
 
+        System.out.println("\nENCONTRAR CAMPANHA COM CODIGO '666666'");
+        Optional<Campanha> campanhaBuscada = listarCampanhasUseCase.findByCodigo("666666"); //encontrar por código
+        System.out.println("\n" + campanhaBuscada);
+
         //TESTE QUE GERA UM EmpresaRelatedToCampanhaException
         //removerEmpresaUseCase.delete(1);
 
-        //TESTE DE EXCLUSÃO COM SUCESSO
+        //TESTES DE EXCLUSÃO COM SUCESSO
         System.out.println("\n Excluindo a empresa 2");
         removerEmpresaUseCase.delete(emp2); //removendo por cnpj
         listarEmpresasUseCase.findAll().forEach(System.out::println);
+
+        System.out.println("\n Excluindo a campnha 2");
+        removerCampanhaUseCase.delete(2);
+        listarCampanhasUseCase.findAll().forEach(System.out::println);
 
         //MODIFICAR EMPRESA COM cnpj = 65489 COM OS DADOS DO OBJETO empresa5
         modificarEmpresaUseCase.update(empresa5);
         System.out.println("\n Modificando razão social");
         System.out.println(listarEmpresasUseCase.findByCnpj("65489"));
+
+        //MODIFICAR CAMPANHA COM codigo = 66666 com os dados de campanha3
+        modificarCampanhaUseCase.update(campanha3);
+        System.out.println("\n Modificando campanha com codigo 451611");
+        System.out.println(listarCampanhasUseCase.findByCodigo("451611"));
     }
 
     private static void injecaoDependencias() {

@@ -96,6 +96,7 @@ public class Main {
     }
 
     private static void injecaoDependencias() {
+        //TODO testar CRUD de cliente
         CampanhaDAO campanhaDAO = new MockedCampanhaDAO();
         EmpresaDAO empresaDAO = new MockedEmpresaDAO();
 

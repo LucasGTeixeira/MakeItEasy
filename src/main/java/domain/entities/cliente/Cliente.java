@@ -1,5 +1,7 @@
 package domain.entities.cliente;
 
+import java.time.LocalDate;
+
 public class Cliente {
     private Integer id;
     private String cpf;
@@ -7,9 +9,20 @@ public class Cliente {
     private String telefone;
     private String email;
     private String endereco;
-    private String status;
+    private ClienteStatus status;
+    private LocalDate dataNascimento;
 
-    public Cliente(Integer id, String cpf, String nomeCompleto, String telefone, String email, String endereco, String status) {
+    public Cliente(String cpf, String nomeCompleto, String telefone, String email, String endereco, ClienteStatus status, LocalDate dataNascimento) {
+        this.cpf = cpf;
+        this.nomeCompleto = nomeCompleto;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+        this.status = status;
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Cliente(Integer id, String cpf, String nomeCompleto, String telefone, String email, String endereco, ClienteStatus status, LocalDate dataNascimento) {
         this.id = id;
         this.cpf = cpf;
         this.nomeCompleto = nomeCompleto;
@@ -17,6 +30,7 @@ public class Cliente {
         this.email = email;
         this.endereco = endereco;
         this.status = status;
+        this.dataNascimento = dataNascimento;
     }
 
     public String getCpf() {
@@ -59,12 +73,20 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public String getStatus() {
+    public ClienteStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ClienteStatus status) {
         this.status = status;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public Integer getId() {

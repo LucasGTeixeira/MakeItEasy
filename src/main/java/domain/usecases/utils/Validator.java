@@ -14,6 +14,10 @@ public abstract class Validator<T> {
         return collection == null || collection.isEmpty();
     } //sobrecarga para collections
 
+    public static boolean nullOrEmpty(Enum enumeracao){
+        return enumeracao == null;
+    }
+
     public static boolean nullOrEmpty(LocalDate localDate){
         return localDate == null;
     }//sobrecarga para campo date

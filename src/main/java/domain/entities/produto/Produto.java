@@ -6,30 +6,38 @@ import java.math.BigDecimal;
 
 public class Produto {
     private Integer id;
-    private Long codProduto;
+    private Integer codProduto;
     private String nome;
     private CategoriaProdutos categoria;
     private BigDecimal valor;
-    private Boolean disponibilidade;
+    private Boolean disponibilidade; //TODO checar esse campo durante o cadastro de uma venda
+    private String codCampanha;
 
-    private Campanha campanha;
-
-    public Produto(Integer id, Long codProduto, String nome, CategoriaProdutos categoria, BigDecimal valor, Boolean disponibilidade, Campanha campanha) {
+    public Produto(Integer id, Integer codProduto, String nome, CategoriaProdutos categoria, BigDecimal valor, Boolean disponibilidade, String codCampanha) {
         this.id = id;
         this.codProduto = codProduto;
         this.nome = nome;
         this.categoria = categoria;
         this.valor = valor;
         this.disponibilidade = disponibilidade;
-        this.campanha = campanha;
+        this.codCampanha = codCampanha;
     }
 
-    public Campanha getCampanha() {
-        return campanha;
+    public Produto(Integer codProduto, String nome, CategoriaProdutos categoria, BigDecimal valor, Boolean disponibilidade, String codCampanha) {
+        this.codProduto = codProduto;
+        this.nome = nome;
+        this.categoria = categoria;
+        this.valor = valor;
+        this.disponibilidade = disponibilidade;
+        this.codCampanha = codCampanha;
     }
 
-    public void setCampanha(Campanha campanha) {
-        this.campanha = campanha;
+    public String getCodCampanha() {
+        return codCampanha;
+    }
+
+    public void setCodCampanha(String codCampanha) {
+        this.codCampanha = codCampanha;
     }
 
     public BigDecimal getValor() {
@@ -56,11 +64,11 @@ public class Produto {
         this.id = id;
     }
 
-    public Long getCodProduto() {
+    public Integer getCodProduto() {
         return codProduto;
     }
 
-    public void setCodProduto(Long codProduto) {
+    public void setCodProduto(Integer codProduto) {
         this.codProduto = codProduto;
     }
 
@@ -89,7 +97,7 @@ public class Produto {
                 ", categoria=" + categoria +
                 ", valor=" + valor +
                 ", disponibilidade=" + disponibilidade +
-                ", campanha=" + campanha +
+                ", codCampanha='" + codCampanha + '\'' +
                 '}';
     }
 }

@@ -9,11 +9,11 @@ import java.util.List;
 public class Venda {
     private Integer id;
     private Float valorTotal;
-    private Boolean disponibilidade;
     private Cliente cliente;
     private Campanha campanha;
     private List<Produto> produtos;
     private FormaPagamento formaPagamento;
+    private Boolean disponibilidade; //TODO trocar para StatusVenda status;
 
     public Venda(Integer id, Float valorTotal, Boolean disponibilidade, Cliente cliente, Campanha campanha, List<Produto> produtos, FormaPagamento formaPagamento) {
         this.id = id;

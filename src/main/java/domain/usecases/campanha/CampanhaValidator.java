@@ -17,9 +17,9 @@ public class CampanhaValidator extends Validator<Campanha> {
             notification.addError("Codigo da campanha não pode estar nulo ou vazio");
         if(nullOrEmpty(campanha.getEdicao()))
             notification.addError("Edição não pode ser nula ou vazia");
-        if(nullOrEmpty(campanha.getDataExpiracao()))
+        if(isNull(campanha.getDataExpiracao()))
             notification.addError("Data de expiração não pode ser nula");
-        if(nullOrEmpty(campanha.getDataLancamento()))
+        if(isNull(campanha.getDataLancamento()))
             notification.addError("Data de Lançamento não pode ser nula");
         if(nullOrEmpty(campanha.getNome()))
             notification.addError("Nome não pode ser nulo ou vazio");

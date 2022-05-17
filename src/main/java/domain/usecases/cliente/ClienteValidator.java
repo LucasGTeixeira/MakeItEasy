@@ -19,9 +19,9 @@ public class ClienteValidator extends Validator<Cliente> {
             notification.addError("Campo Email está vazio ou nulo");
         if(nullOrEmpty(cliente.getEndereco()))
             notification.addError("Campo Endereço está vazio ou nulo");
-        if(nullOrEmpty(cliente.getStatus()))
+        if(isNull(cliente.getStatus()))
             notification.addError("Campo status está nulo");
-        if(nullOrEmpty(cliente.getDataNascimento()))
+        if(isNull(cliente.getDataNascimento()))
             notification.addError("Campo data nascimento está nulo");
         if(nullOrEmpty(cliente.getNomeCompleto()))
             notification.addError("Campo Nome está vazio ou nulo");

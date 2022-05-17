@@ -24,10 +24,14 @@ public class AdicionarCampanhaUseCase {
         if(notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        if(campanhaDAO.findByCodigo(campanha.getCodigo()).isPresent())
+        String codigoOptional = campanha.getCodigo();
+        boolean codigoCampanhaAlreadyExists = campanhaDAO.findByCodigo(codigoOptional).isPresent();
+        if(codigoCampanhaAlreadyExists)
             throw new EntityAlreadyExistsException("Já existe uma campanha com este código");
 
-        if(empresaDAO.findByCnpj(campanha.getCnpjEmpresa()).isEmpty())
+        String cnpjEmpresaOptional = campanha.getCnpjEmpresa();
+        boolean cnpjEmpresaNotFound = empresaDAO.findByCnpj(cnpjEmpresaOptional).isEmpty();
+        if(cnpjEmpresaNotFound)
             throw new EntityNotFoundException("Não há nenhuma empresa com este Cnpj");
 
         return campanhaDAO.create(campanha);

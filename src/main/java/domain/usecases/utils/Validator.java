@@ -31,6 +31,10 @@ public abstract class Validator<T> {
         return integer == null || integer <= 0;
     }
 
+    public static boolean isNullOrLesserEqual(Float floatNumber){
+        return floatNumber == null || floatNumber <= 0;
+    }
+
     public static boolean isNullOrLesserEqual(BigDecimal bigDecimal){
         return bigDecimal == null || bigDecimal.compareTo(BigDecimal.valueOf(0)) <= 0;
     }

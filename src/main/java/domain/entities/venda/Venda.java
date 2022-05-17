@@ -8,21 +8,27 @@ import java.util.List;
 
 public class Venda {
     private Integer id;
+    private String cpfCliente;
+    private Integer codProduto;
     private Float valorTotal;
-    private Cliente cliente;
-    private Campanha campanha;
-    private List<Produto> produtos;
     private FormaPagamento formaPagamento;
-    private Boolean disponibilidade; //TODO trocar para StatusVenda status;
+    private StatusVenda statusVenda; //TODO trocar para StatusVenda status;
 
-    public Venda(Integer id, Float valorTotal, Boolean disponibilidade, Cliente cliente, Campanha campanha, List<Produto> produtos, FormaPagamento formaPagamento) {
-        this.id = id;
+    public Venda(String cpfCliente, Integer codProduto, Float valorTotal, FormaPagamento formaPagamento, StatusVenda statusVenda) {
+        this.cpfCliente = cpfCliente;
+        this.codProduto = codProduto;
         this.valorTotal = valorTotal;
-        this.disponibilidade = disponibilidade;
-        this.cliente = cliente;
-        this.campanha = campanha;
-        this.produtos = produtos;
         this.formaPagamento = formaPagamento;
+        this.statusVenda = statusVenda;
+    }
+
+    public Venda(Integer id, String cpfCliente, Integer codProduto, Float valorTotal, FormaPagamento formaPagamento, StatusVenda statusVenda) {
+        this.id = id;
+        this.cpfCliente = cpfCliente;
+        this.codProduto = codProduto;
+        this.valorTotal = valorTotal;
+        this.formaPagamento = formaPagamento;
+        this.statusVenda = statusVenda;
     }
 
     public FormaPagamento getFormaPagamento() {
@@ -49,46 +55,39 @@ public class Venda {
         this.valorTotal = valorTotal;
     }
 
-    public Boolean getDisponibilidade() {
-        return disponibilidade;
+    public String getCpfCliente() {
+        return cpfCliente;
     }
 
-    public void setDisponibilidade(Boolean disponibilidade) {
-        this.disponibilidade = disponibilidade;
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Integer getCodProduto() {
+        return codProduto;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCodProduto(Integer codProduto) {
+        this.codProduto = codProduto;
     }
 
-    public Campanha getCampanha() {
-        return campanha;
+    public StatusVenda getStatusVenda() {
+        return statusVenda;
     }
 
-    public void setCampanha(Campanha campanha) {
-        this.campanha = campanha;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setStatusVenda(StatusVenda statusVenda) {
+        this.statusVenda = statusVenda;
     }
 
     @Override
     public String toString() {
         return "Venda{" +
-                "valorTotal=" + valorTotal +
-                ", disponibilidade=" + disponibilidade +
-                ", cliente=" + cliente +
-                ", campanha=" + campanha +
-                ", produtos=" + produtos +
+                "id=" + id +
+                ", cpfCliente='" + cpfCliente + '\'' +
+                ", codProduto=" + codProduto +
+                ", valorTotal=" + valorTotal +
+                ", formaPagamento=" + formaPagamento +
+                ", statusVenda=" + statusVenda +
                 '}';
     }
 }

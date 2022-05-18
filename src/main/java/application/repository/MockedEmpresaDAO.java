@@ -42,7 +42,8 @@ public class MockedEmpresaDAO implements EmpresaDAO {
     @Override
     public boolean update(Empresa empresa) {
         Integer id = empresa.getId();
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.replace(id, empresa);
             return true;
         }
@@ -51,7 +52,8 @@ public class MockedEmpresaDAO implements EmpresaDAO {
 
     @Override
     public boolean deleteByKey(Integer id) {
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }
@@ -61,7 +63,8 @@ public class MockedEmpresaDAO implements EmpresaDAO {
     @Override
     public boolean delete(Empresa empresa) {
         Integer id = empresa.getId();
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }

@@ -39,7 +39,8 @@ public class MockedClienteDAO implements ClienteDAO {
     @Override
     public boolean update(Cliente cliente) {
         Integer id = cliente.getId();
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.replace(id, cliente);
             return true;
         }
@@ -48,7 +49,8 @@ public class MockedClienteDAO implements ClienteDAO {
 
     @Override
     public boolean deleteByKey(Integer id) {
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }
@@ -58,7 +60,8 @@ public class MockedClienteDAO implements ClienteDAO {
     @Override
     public boolean delete(Cliente cliente) {
         Integer id = cliente.getId();
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }

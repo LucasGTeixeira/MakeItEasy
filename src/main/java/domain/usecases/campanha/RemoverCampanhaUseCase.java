@@ -4,21 +4,31 @@ import domain.entities.campanha.Campanha;
 import domain.usecases.utils.Exceptions.EntityNotFoundException;
 
 public class RemoverCampanhaUseCase {
-    private CampanhaDAO campanhaDAO;
+    private final CampanhaDAO campanhaDAO;
 
     public RemoverCampanhaUseCase(CampanhaDAO campanhaDAO) {
         this.campanhaDAO = campanhaDAO;
     }
 
     public boolean delete(Campanha campanha){
-        if(campanha == null || campanhaDAO.findByCodigo(campanha.getCodigo()).isEmpty())
-            throw new EntityNotFoundException("Campanha nula ou não encontrada");
+        if(campanha == null)
+            throw new IllegalArgumentException("Campanha não pode ser nula");
+
+        String codCampanha = campanha.getCodigo();
+        boolean codCampanhaNotFound = campanhaDAO.findByCodigo(codCampanha).isEmpty();
+        if(codCampanhaNotFound)
+            throw new EntityNotFoundException("Código da campanha não encontrado no sistema");
         return campanhaDAO.delete(campanha);
     }
 
     public boolean delete(Integer id){
-        if(id == null || campanhaDAO.findOne(id).isEmpty())
-            throw new EntityNotFoundException("Id nulo ou não encontrado");
+        if(id == null)
+            throw new IllegalArgumentException("Id não pode ser nulo");
+
+        boolean idCampanhaNotFound = campanhaDAO.findOne(id).isEmpty();
+        if(idCampanhaNotFound)
+            throw new EntityNotFoundException("Id não encontrado");
+
         return campanhaDAO.deleteByKey(id);
     }
 }

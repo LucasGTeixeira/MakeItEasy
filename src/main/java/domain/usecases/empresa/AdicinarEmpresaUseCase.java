@@ -7,7 +7,7 @@ import domain.usecases.utils.Validator;
 
 public class AdicinarEmpresaUseCase {
 
-    private EmpresaDAO empresaDAO;
+    private final EmpresaDAO empresaDAO;
 
     public AdicinarEmpresaUseCase(EmpresaDAO empresaDAO) {
         this.empresaDAO = empresaDAO;
@@ -21,7 +21,8 @@ public class AdicinarEmpresaUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String cnpj = empresa.getCnpj();
-        if(empresaDAO.findByCnpj(cnpj).isPresent())
+        boolean empresaCnpjAlreadyExists = empresaDAO.findByCnpj(cnpj).isPresent();
+        if(empresaCnpjAlreadyExists)
             throw new EntityAlreadyExistsException("Cnpj já cadastrado no sistema");
 
         return empresaDAO.create(empresa);

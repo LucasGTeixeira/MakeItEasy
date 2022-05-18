@@ -4,21 +4,26 @@ import domain.entities.venda.Venda;
 import domain.usecases.utils.Exceptions.EntityNotFoundException;
 
 public class RemoverVendaUseCase {
-    private VendaDAO vendaDAO;
+    private final VendaDAO vendaDAO;
 
     public RemoverVendaUseCase(VendaDAO vendaDAO) {
         this.vendaDAO = vendaDAO;
     }
 
-    public boolean delete(Venda venda){
+    public boolean delete(Venda venda){ //TODO é necessário esse método? já que venda não possui nenhum identificador além do id
         if(venda == null)
             throw new IllegalArgumentException("Objeto venda não pode ser nulo");
         return vendaDAO.delete(venda);
     }
 
     public boolean delete(Integer id){
-        if(id == null || vendaDAO.findOne(id).isEmpty())
-            throw new EntityNotFoundException("id nulo ou não encontrado");
+        if(id == null)
+            throw new IllegalArgumentException("id nulo ou não encontrado");
+
+        boolean idVendaNotFound = vendaDAO.findOne(id).isEmpty();
+        if(idVendaNotFound)
+            throw new EntityNotFoundException("Não há nenhuma venda com esse Id");
+
         return vendaDAO.deleteByKey(id);
     }
 }

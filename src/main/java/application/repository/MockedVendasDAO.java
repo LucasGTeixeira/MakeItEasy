@@ -1,6 +1,7 @@
 package application.repository;
 
 import domain.entities.produto.Produto;
+import domain.entities.venda.StatusVenda;
 import domain.entities.venda.Venda;
 import domain.usecases.venda.VendaDAO;
 
@@ -33,7 +34,8 @@ public class MockedVendasDAO implements VendaDAO {
     @Override
     public boolean update(Venda venda) {
         Integer id = venda.getId();
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.replace(id, venda);
             return true;
         }
@@ -42,7 +44,8 @@ public class MockedVendasDAO implements VendaDAO {
 
     @Override
     public boolean deleteByKey(Integer id) {
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }
@@ -52,8 +55,19 @@ public class MockedVendasDAO implements VendaDAO {
     @Override
     public boolean delete(Venda venda) {
         Integer id = venda.getId();
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateStatus(Venda venda) {
+        boolean isVendaStatusNotSent = venda.getStatusVenda() == StatusVenda.NAO_ENVIADO;
+        if(isVendaStatusNotSent) {
+            venda.setStatusVenda(StatusVenda.ENVIADO);
             return true;
         }
         return false;

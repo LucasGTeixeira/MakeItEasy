@@ -39,7 +39,8 @@ public class MockedProdutosDAO implements ProdutoDAO {
     @Override
     public boolean update(Produto produto) {
         Integer id = produto.getId();
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.replace(id, produto);
             return true;
         }
@@ -48,7 +49,8 @@ public class MockedProdutosDAO implements ProdutoDAO {
 
     @Override
     public boolean deleteByKey(Integer id) {
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }
@@ -58,7 +60,8 @@ public class MockedProdutosDAO implements ProdutoDAO {
     @Override
     public boolean delete(Produto produto) {
         Integer id = produto.getId();
-        if(fakeDb.containsKey(id)) {
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }

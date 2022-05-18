@@ -13,33 +13,32 @@ import domain.usecases.utils.Notification;
 import domain.usecases.utils.Validator;
 
 public class AdicionarVendaUseCase {
-    private ProdutoDAO produtoDAO;
-    private CampanhaDAO campanhaDAO;
-    private ClienteDAO clienteDAO;
-    private VendaDAO vendaDAO;
-    private EmpresaDAO empresaDAO;
+    private final ProdutoDAO produtoDAO;
+    private final ClienteDAO clienteDAO;
+    private final VendaDAO vendaDAO;
 
-    public AdicionarVendaUseCase(ProdutoDAO produtoDAO, CampanhaDAO campanhaDAO, ClienteDAO clienteDAO, VendaDAO vendaDAO, EmpresaDAO empresaDAO) {
+    public AdicionarVendaUseCase(ProdutoDAO produtoDAO, ClienteDAO clienteDAO, VendaDAO vendaDAO) {
         this.produtoDAO = produtoDAO;
-        this.campanhaDAO = campanhaDAO;
         this.clienteDAO = clienteDAO;
         this.vendaDAO = vendaDAO;
-        this.empresaDAO = empresaDAO;
     }
 
     public Integer insert(Venda venda){
         Validator<Venda> validator = new VendaValidator();
         Notification notification = validator.validate(venda);
+
         if(notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
         Integer codProduto = venda.getCodProduto();
-        if(produtoDAO.findByCodProduto(codProduto).isEmpty())
+        boolean codProdutoNotFound = produtoDAO.findByCodProduto(codProduto).isEmpty();
+        if(codProdutoNotFound)
             throw new EntityNotFoundException("Produto indicado não encontrado");
 
         String cpfCliente = venda.getCpfCliente();
-        if(clienteDAO.findByCpf(cpfCliente).isEmpty())
-            throw new EntityNotFoundException("Cliente não pertence ao sistema");
+        boolean cpfClienteNotFound = clienteDAO.findByCpf(cpfCliente).isEmpty();
+        if(cpfClienteNotFound)
+            throw new EntityNotFoundException("Cliente indicado não encontrado");
 
         return vendaDAO.create(venda);
     }

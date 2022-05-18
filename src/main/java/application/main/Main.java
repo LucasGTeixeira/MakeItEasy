@@ -1,15 +1,17 @@
 package application.main;
 
-import application.repository.MockedCampanhaDAO;
-import application.repository.MockedClienteDAO;
-import application.repository.MockedEmpresaDAO;
+import application.repository.*;
 import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;
 import domain.entities.cliente.ClienteStatus;
 import domain.entities.empresa.Empresa;
+import domain.entities.produto.Produto;
+import domain.entities.venda.Venda;
 import domain.usecases.campanha.*;
 import domain.usecases.cliente.*;
 import domain.usecases.empresa.*;
+import domain.usecases.produto.*;
+import domain.usecases.venda.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +20,15 @@ import java.util.Optional;
 
 public class Main {
 
+    private static AdicionarProdutoUseCase adicionarProdutoUseCase;
+    private static ListarProdutosUseCase listarProdutosUseCase;
+    private static ModificarProdutoUseCase modificarProdutoUseCase;
+    private static RemoverProdutoUseCase removerProdutoUseCase;
+
+    private static AdicionarVendaUseCase adicionarVendaUseCase;
+    private static ListarVendasUseCase listarVendasUseCase;
+    private static ModificarVendaUseCase modificarVendaUseCase;
+    private static RemoverVendaUseCase removerVendaUseCase;
     private static AdicionarClienteUseCase adicionarClienteUseCase;
     private static ListarClientesUseCase listarClientesUseCase;
     private static ModificarClienteUseCase modificarClienteUseCase;
@@ -137,8 +148,20 @@ public class Main {
 
     private static void injecaoDependencias() {
         CampanhaDAO campanhaDAO = new MockedCampanhaDAO();
+        ProdutoDAO produtoDAO = new MockedProdutosDAO();
+        VendaDAO vendaDAO = new MockedVendasDAO();
         EmpresaDAO empresaDAO = new MockedEmpresaDAO();
         ClienteDAO clienteDAO = new MockedClienteDAO();
+
+        adicionarVendaUseCase = new AdicionarVendaUseCase(produtoDAO, clienteDAO, vendaDAO);
+        listarVendasUseCase = new ListarVendasUseCase(vendaDAO);
+        modificarVendaUseCase = new ModificarVendaUseCase(vendaDAO);
+        removerVendaUseCase = new RemoverVendaUseCase(vendaDAO);
+
+        adicionarProdutoUseCase = new AdicionarProdutoUseCase(produtoDAO, campanhaDAO);
+        listarProdutosUseCase = new ListarProdutosUseCase(produtoDAO);
+        modificarVendaUseCase = new ModificarVendaUseCase(vendaDAO);
+        removerVendaUseCase = new RemoverVendaUseCase(vendaDAO);
 
         adicionarCampanhaUseCase = new AdicionarCampanhaUseCase(campanhaDAO, empresaDAO);
         listarCampanhasUseCase = new ListarCampanhasUseCase(campanhaDAO);

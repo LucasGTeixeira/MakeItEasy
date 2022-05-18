@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ListarEmpresasUseCase {
-    private EmpresaDAO empresaDAO;
+    private final EmpresaDAO empresaDAO;
 
     public ListarEmpresasUseCase(EmpresaDAO empresaDAO) {
         this.empresaDAO = empresaDAO;

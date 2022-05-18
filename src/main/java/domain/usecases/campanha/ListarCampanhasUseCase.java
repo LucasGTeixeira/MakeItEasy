@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ListarCampanhasUseCase {
-    private CampanhaDAO campanhaDAO;
+    private final CampanhaDAO campanhaDAO;
 
     public ListarCampanhasUseCase(CampanhaDAO campanhaDAO) {
         this.campanhaDAO = campanhaDAO;

@@ -47,7 +47,8 @@ public class MockedCampanhaDAO implements CampanhaDAO {
     @Override
     public boolean update(Campanha campanha) {
         Integer id = campanha.getId();
-        if(fakeDb.containsKey(id)) {
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb) {
             fakeDb.replace(id, campanha);
             return true;
         }
@@ -56,7 +57,8 @@ public class MockedCampanhaDAO implements CampanhaDAO {
 
     @Override
     public boolean deleteByKey(Integer id) {
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }
@@ -66,7 +68,8 @@ public class MockedCampanhaDAO implements CampanhaDAO {
     @Override
     public boolean delete(Campanha campanha) {
         Integer id = campanha.getId();
-        if(fakeDb.containsKey(id)){
+        boolean idFoundOnDb = fakeDb.containsKey(id);
+        if(idFoundOnDb){
             fakeDb.remove(id);
             return true;
         }

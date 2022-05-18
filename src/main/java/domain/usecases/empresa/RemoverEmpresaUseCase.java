@@ -11,8 +11,8 @@ import java.util.Optional;
 
 public class RemoverEmpresaUseCase {
 
-    private EmpresaDAO empresaDAO;
-    private CampanhaDAO campanhaDAO;
+    private final EmpresaDAO empresaDAO;
+    private final CampanhaDAO campanhaDAO;
 
     public RemoverEmpresaUseCase(EmpresaDAO empresaDAO, CampanhaDAO campanhaDAO) {
         this.empresaDAO = empresaDAO;
@@ -24,18 +24,33 @@ public class RemoverEmpresaUseCase {
     }
 
     public boolean delete(Empresa empresa){
-        if(empresa == null || empresaDAO.findByCnpj(empresa.getCnpj()).isEmpty() || isEmpresaInCampanha(empresa))
-            throw new EntityNotFoundException("Empresa nula ou não encontrada");
+        if(empresa == null)
+            throw new IllegalArgumentException("Empresa não pode ser nula");
+
+        String empresaCnpj = empresa.getCnpj();
+        boolean empresaCnpjNotFound = empresaDAO.findByCnpj(empresaCnpj).isEmpty();
+        if(empresaCnpjNotFound)
+            throw new EntityNotFoundException("Não há nenhuma empresa com esse cnpj no sistema");
+
+        boolean isEmpresaRelatedToCampanha = isEmpresaInCampanha(empresa);
+        if(isEmpresaRelatedToCampanha)
+            throw new EmpresaRelatedToCampanhaException("remoção inválida, pois esta empresa está ligada com uma campanha");
+
         return empresaDAO.delete(empresa);
     }
 
     public boolean delete(Integer id){
-        boolean idNotFound = empresaDAO.findOne(id).isEmpty();
-        if(id == null || idNotFound)
+        if(id == null)
             throw new EntityNotFoundException("id nulo ou não encontrado");
+
+        boolean idNotFound = empresaDAO.findOne(id).isEmpty();
+        if(idNotFound)
+            throw new EntityNotFoundException("Não há nenhuma empresa com esse id no sistema");
+
         boolean isEmpresaRelatedToCampanha = isEmpresaInCampanha(empresaDAO.findOne(id).get());
         if (isEmpresaRelatedToCampanha)
             throw new EmpresaRelatedToCampanhaException("Há campanhas relacionadas com esta empresa");
+
         return empresaDAO.deleteByKey(id);
     }
 }

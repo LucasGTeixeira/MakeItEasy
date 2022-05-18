@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ListarProdutosUseCase {
-    private ProdutoDAO produtoDAO;
+    private final ProdutoDAO produtoDAO;
 
     public ListarProdutosUseCase(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;

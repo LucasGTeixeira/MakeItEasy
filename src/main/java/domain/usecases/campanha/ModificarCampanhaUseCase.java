@@ -7,7 +7,7 @@ import domain.usecases.utils.Validator;
 
 public class ModificarCampanhaUseCase {
 
-    private CampanhaDAO campanhaDAO;
+    private final CampanhaDAO campanhaDAO;
 
     public ModificarCampanhaUseCase(CampanhaDAO campanhaDAO) {
         this.campanhaDAO = campanhaDAO;
@@ -21,7 +21,8 @@ public class ModificarCampanhaUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String codCampanha = campanha.getCodigo();
-        if(campanhaDAO.findByCodigo(codCampanha).isEmpty())
+        boolean codCampanhaNotFound = campanhaDAO.findByCodigo(codCampanha).isEmpty();
+        if(codCampanhaNotFound)
             throw new EntityNotFoundException("Não há nenhuma campanha com este código");
 
         return campanhaDAO.update(campanha);

@@ -7,7 +7,7 @@ import domain.usecases.utils.Validator;
 
 public class ModificarClienteUseCase {
 
-    private ClienteDAO clienteDAO;
+    private final ClienteDAO clienteDAO;
 
     public ModificarClienteUseCase(ClienteDAO clienteDAO) {
         this.clienteDAO = clienteDAO;
@@ -21,7 +21,8 @@ public class ModificarClienteUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String cpf = cliente.getCpf();
-        if(clienteDAO.findByCpf(cpf).isEmpty())
+        boolean clienteCpfNotFound = clienteDAO.findByCpf(cpf).isEmpty();
+        if(clienteCpfNotFound)
             throw new EntityNotFoundException("não há nenhum cliente com esse cpf no sistema");
 
         return clienteDAO.update(cliente);

@@ -9,8 +9,8 @@ import domain.usecases.utils.Validator;
 
 public class AdicionarCampanhaUseCase {
 
-    private CampanhaDAO campanhaDAO;
-    private EmpresaDAO empresaDAO;
+    private final CampanhaDAO campanhaDAO;
+    private final EmpresaDAO empresaDAO;
 
     public AdicionarCampanhaUseCase(CampanhaDAO campanhaDAO, EmpresaDAO empresaDAO) {
         this.campanhaDAO = campanhaDAO;

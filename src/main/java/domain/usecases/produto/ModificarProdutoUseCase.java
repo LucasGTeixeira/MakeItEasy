@@ -20,7 +20,8 @@ public class ModificarProdutoUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         Integer codProduto = produto.getCodProduto();
-        if(produtoDAO.findByCodProduto(codProduto).isEmpty())
+        boolean codProdutoNotFound = produtoDAO.findByCodProduto(codProduto).isEmpty();
+        if(codProdutoNotFound)
             throw new EntityNotFoundException("Codigo do produto não existe no sistema");
 
         return produtoDAO.update(produto);

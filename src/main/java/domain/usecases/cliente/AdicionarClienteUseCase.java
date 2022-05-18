@@ -7,7 +7,7 @@ import domain.usecases.utils.Validator;
 
 public class AdicionarClienteUseCase {
 
-    public ClienteDAO clienteDAO;
+    public final ClienteDAO clienteDAO;
 
     public AdicionarClienteUseCase(ClienteDAO clienteDAO) {
         this.clienteDAO = clienteDAO;
@@ -21,7 +21,8 @@ public class AdicionarClienteUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String cpf = cliente.getCpf();
-        if(clienteDAO.findByCpf(cpf).isPresent())
+        boolean clientIdAlreadyExists = clienteDAO.findByCpf(cpf).isPresent();
+        if(clientIdAlreadyExists)
             throw new EntityAlreadyExistsException("Cpf já cadastrado no sistema");
 
         return clienteDAO.create(cliente);

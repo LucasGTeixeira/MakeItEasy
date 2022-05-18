@@ -8,8 +8,8 @@ import domain.usecases.utils.Notification;
 import domain.usecases.utils.Validator;
 
 public class AdicionarProdutoUseCase {
-    private ProdutoDAO produtoDAO;
-    private CampanhaDAO campanhaDAO;
+    private final ProdutoDAO produtoDAO;
+    private final CampanhaDAO campanhaDAO;
 
     public AdicionarProdutoUseCase(ProdutoDAO produtoDAO, CampanhaDAO campanhaDAO) {
         this.produtoDAO = produtoDAO;

@@ -31,7 +31,7 @@ public class AdicionarProdutoUseCase {
         String codCampanha = produto.getCodCampanha();
         boolean CampanhaDoesNotExists = campanhaDAO.findByCodigo(codCampanha).isEmpty();
         if(CampanhaDoesNotExists)
-            throw new EntityNotFoundException("Não há camanhas com este código cadastradas no sistema");
+            throw new EntityNotFoundException("Não há campanhas com este código cadastradas no sistema");
 
         return produtoDAO.create(produto);
     }

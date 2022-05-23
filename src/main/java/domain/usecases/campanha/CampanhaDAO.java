@@ -10,3 +10,4 @@ public interface CampanhaDAO extends DAO<Campanha, Integer> {
 
     Optional<Campanha> findByCnpj(String cnpj);
 }
+

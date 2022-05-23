@@ -27,7 +27,7 @@ public class RemoverProdutoUseCase {
         if (id == null)
             throw new IllegalArgumentException("id de produto não pode ser nulo");
 
-        boolean produtoIdNotFound = produtoDAO.findByCodProduto(id).isEmpty();
+        boolean produtoIdNotFound = produtoDAO.findOne(id).isEmpty();
         if(produtoIdNotFound)
             throw new EntityNotFoundException("id não pertence a nenhum produto do sistema");
 

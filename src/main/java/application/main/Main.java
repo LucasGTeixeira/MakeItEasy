@@ -5,7 +5,10 @@ import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;
 import domain.entities.cliente.ClienteStatus;
 import domain.entities.empresa.Empresa;
+import domain.entities.produto.CategoriaProdutos;
 import domain.entities.produto.Produto;
+import domain.entities.venda.FormaPagamento;
+import domain.entities.venda.StatusVenda;
 import domain.entities.venda.Venda;
 import domain.usecases.campanha.*;
 import domain.usecases.cliente.*;
@@ -13,6 +16,7 @@ import domain.usecases.empresa.*;
 import domain.usecases.produto.*;
 import domain.usecases.venda.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -48,12 +52,11 @@ public class Main {
         injecaoDependencias();
 
         //DECALRANDO OBJETOS (SEM ID, POIS SERÁ AUTOINCREMENTADO)
-        Empresa empresa1 = new Empresa("15486", "Empresa1 Ltda");
-        Empresa empresa2 = new Empresa("15897", "Empresa2 Ltda");
-        Empresa empresa3 = new Empresa("65489", "Empresa3 Ltda");
-        Empresa empresa4 = new Empresa("11111", "Empresa4 Ltda");
+        Empresa empresa1 = new Empresa("15486", "Texas Ltda");
+        Empresa empresa2 = new Empresa("15897", "Meyer Ltda");
+        Empresa empresa3 = new Empresa("65489", "Antonio Zoia Ltda");
+        Empresa empresa4 = new Empresa("11111", "Celestino Ltda");
         Empresa empresa5 = new Empresa(3,"65489", "Empresa Modificada");
-
 
         Campanha campanha1 = new Campanha("451611", "beleza natural", "verão 2014",
                 LocalDate.of(2014, 4, 26),
@@ -67,6 +70,10 @@ public class Main {
                 LocalDate.of(2022, 2, 21),
                 LocalDate.of(2022, 3, 10),
                 "15486");
+        Campanha campanha4 = new Campanha("123456", "cozinha já", "inverno 2022",
+                LocalDate.of(2022, 2, 21),
+                LocalDate.of(2022, 3, 10),
+                "11111");
 
         Cliente cliente1 = new Cliente("48415548755", "Carlos Antonio da Silva",
                 "997884512", "carlos@email.com", "Av. Fioravante Bertaquini",
@@ -74,12 +81,45 @@ public class Main {
 
         Cliente cliente2 = new Cliente("15645789544", "Pedro Antonio da Silva",
                 "998774411", "pedro@email.com", "Av. Fioravante Bertaquini",
-                ClienteStatus.ATIVO, LocalDate.of(2000, 2, 2));
+                ClienteStatus.ATIVO, LocalDate.of(2000, 4, 3));
 
-        Cliente cliente3 = new Cliente(2,"15645789544", "Nome Modificado",
+        Cliente cliente3 = new Cliente(2,"15645789533", "Nome Modificado",
                 "998774411", "pedroModificado@email.com", "Av. Fioravante Bertaquini",
-                ClienteStatus.ATIVO, LocalDate.of(2000, 2, 2));
+                ClienteStatus.ATIVO, LocalDate.of(2000, 6, 6));
 
+        Cliente cliente4 = new Cliente("14625101827", "Vendas Beleza",
+                "997554512", "beleza@email.com", "Av. Bertaquini",
+                ClienteStatus.ATIVO, LocalDate.of(2000, 3, 4));
+
+        Cliente cliente5 = new Cliente("22648889544", "Paulo Sergio",
+                "992274411", "paulo@email.com", "Av. Sebastiao",
+                ClienteStatus.ATIVO, LocalDate.of(2000, 8, 10));
+
+        Produto produto1 = new Produto(111, "Pente", CategoriaProdutos.COSMETICOS,
+                new BigDecimal(10.0), true, "666666");
+
+        Produto produto2 = new Produto(222, "Base", CategoriaProdutos.COSMETICOS,
+                new BigDecimal(22.0), true, "666666");
+
+        Produto produto3 = new Produto(333, "Panela de pressão", CategoriaProdutos.COZINHA,
+                new BigDecimal(200.0), true, "123456");
+
+        Produto produto4 = new Produto(444, "Liquidificador master", CategoriaProdutos.COZINHA,
+                new BigDecimal(85.0), true, "666666");
+
+        Produto produto5 = new Produto(555, "Esteira", CategoriaProdutos.SAUDE_BEM_ESTAR,
+                new BigDecimal(920.0), true, "451611");
+
+        Produto produto6 = new Produto(4,444, "Modificado Liq master", CategoriaProdutos.COZINHA,
+                new BigDecimal(85.0), true, "666666");
+
+        //VENDA
+
+        Venda venda1 = new Venda("15645789544", 111, 100.00F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
+        Venda venda2 = new Venda("15645789544", 111, 200.00F, FormaPagamento.BOLETO_BANCARIO, StatusVenda.NAO_ENVIADO);
+        Venda venda3 = new Venda("22648889544", 333, 600.00F, FormaPagamento.PIX, StatusVenda.NAO_ENVIADO);
+        Venda venda4 = new Venda("48415548755", 555, 920.0F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
+        Venda venda5 = new Venda(4,"33315548766", 555, 1500.0F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
 
         //INSERINDO ENTIDADES NO HASHMAP
         Integer emp1 = adicinarEmpresaUseCase.insert(empresa1);
@@ -89,9 +129,26 @@ public class Main {
 
         Integer camp1 = adicionarCampanhaUseCase.insert(campanha1);
         Integer camp2 = adicionarCampanhaUseCase.insert(campanha2);
+        Integer camp4 = adicionarCampanhaUseCase.insert(campanha4);
 
         Integer cli1 = adicionarClienteUseCase.insert(cliente1);
         Integer cli2 = adicionarClienteUseCase.insert(cliente2);
+        Integer cli3 = adicionarClienteUseCase.insert(cliente3);
+        Integer cli4 = adicionarClienteUseCase.insert(cliente4);
+        Integer cli5 = adicionarClienteUseCase.insert(cliente5);
+
+        Integer prod1 = adicionarProdutoUseCase.insert(produto1);
+        Integer prod2 = adicionarProdutoUseCase.insert(produto2);
+        Integer prod3 = adicionarProdutoUseCase.insert(produto3);
+        Integer prod4 = adicionarProdutoUseCase.insert(produto4);
+        Integer prod5 = adicionarProdutoUseCase.insert(produto5);
+
+        //Venda
+
+        Integer v1 = adicionarVendaUseCase.insert(venda1);
+        Integer v2 = adicionarVendaUseCase.insert(venda2);
+        Integer v3 = adicionarVendaUseCase.insert(venda3);
+        Integer v4 = adicionarVendaUseCase.insert(venda4);
 
         //LISTAS COM SUCESSO
         System.out.println("\nLISTA DE TODAS AS EMPRESAS");
@@ -102,6 +159,16 @@ public class Main {
 
         System.out.println("\nLISTA DE TODOS OS CLIENTES");
         listarClientesUseCase.findAll().forEach(System.out::println);
+
+        System.out.println("\nLISTA DE TODOS OS PRODUTOS");
+        listarProdutosUseCase.findAll().forEach(System.out::println);
+
+        System.out.println("\nLISTA DE TODOS OS VENDAS");
+        listarVendasUseCase.findAll().forEach(System.out::println);
+
+        //System.out.println("\nLISTA DE TODAS OS VENDAS");
+        //listarVendasUseCase.findAll().forEach(System.out::println);
+
         //---------------- PESQUISAS COM SUCESSO ----------------
 //        System.out.println("\nENCONTRAR EMPRESA COM CNPJ '65489'");
 //        Optional<Empresa> empresaBuscada = listarEmpresasUseCase.findByCnpj("65489"); //encontrar por cnpj
@@ -115,21 +182,38 @@ public class Main {
 //        Optional<Cliente> clienteBuscado = listarClientesUseCase.findByCpf("15645789544");
 //        System.out.println(clienteBuscado);
 
+//        System.out.println("\nENCONTRAR PRODUTO COM CODIGO = 111");
+//        Optional<Produto> produtoBuscado = listarProdutosUseCase.findByCodProduto(111);
+//        System.out.println(produtoBuscado.get());
+
+//        System.out.println("\nENCONTRAR VENDA DE CODIGO = 2");
+//        Optional<Venda> vendaBuscado = listarVendasUseCase.findOne(2);
+//        System.out.println(vendaBuscado.get());
+
+
         //---------------- TESTE QUE GERA UM EmpresaRelatedToCampanhaException ----------------
         //removerEmpresaUseCase.delete(1);
 
         // ---------------- TESTES DE EXCLUSÃO COM SUCESSO ---------------------
-//        System.out.println("\n EXCLUINDO EMPRESA 2");
+//        System.out.println("\n EXCLUINDO EMPRESA: 2");
 //        removerEmpresaUseCase.delete(emp2); //removendo por cnpj
 //        listarEmpresasUseCase.findAll().forEach(System.out::println);
 //
-//        System.out.println("\n EXCLUINDO CAMPANHA 2");
+//        System.out.println("\n EXCLUINDO CAMPANHA: 2");
 //        removerCampanhaUseCase.delete(2);
 //        listarCampanhasUseCase.findAll().forEach(System.out::println);
 //
-//        System.out.println("\n EXCLUINDO CLIENTE 1");
+//        System.out.println("\n EXCLUINDO CLIENTE: 1");
 //        removerClienteUseCase.delete(1);
 //        listarClientesUseCase.findAll().forEach(System.out::println);
+
+//        System.out.println("\n EXCLUINDO PRODUTO: 2");
+//        removerProdutoUseCase.delete(2);
+//        listarProdutosUseCase.findAll().forEach(System.out::println);
+
+//        System.out.println("\n EXCLUINDO VENDA: 2");
+//        removerVendaUseCase.delete(2);
+//        listarVendasUseCase.findAll().forEach(System.out::println);
 
         // --------------- MODIFICAÇÕES COM SUCESSO ----------------------
 //        modificarEmpresaUseCase.update(empresa5);
@@ -144,7 +228,16 @@ public class Main {
 //        System.out.println("\n MODIFICANDO CLIENTE 2 COM OS DADOS DE CLIENTE 3");
 //        modificarClienteUseCase.update(cliente3);
 //        System.out.println(listarClientesUseCase.findByCpf("15645789544"));
-    }
+
+//        System.out.println("\n MODIFICANDO PRODUTO 4");
+//        modificarProdutoUseCase.update(produto6);
+//        System.out.println(listarProdutosUseCase.findByCodProduto(444).get());
+//
+//        System.out.println("\n MODIFICANDO VENDA 2");
+//        modificarVendaUseCase.update(venda5);
+//        System.out.println(listarVendasUseCase.findOne(4));
+
+   }
 
     private static void injecaoDependencias() {
         CampanhaDAO campanhaDAO = new MockedCampanhaDAO();
@@ -160,8 +253,8 @@ public class Main {
 
         adicionarProdutoUseCase = new AdicionarProdutoUseCase(produtoDAO, campanhaDAO);
         listarProdutosUseCase = new ListarProdutosUseCase(produtoDAO);
-        modificarVendaUseCase = new ModificarVendaUseCase(vendaDAO);
-        removerVendaUseCase = new RemoverVendaUseCase(vendaDAO);
+        modificarProdutoUseCase = new ModificarProdutoUseCase(produtoDAO);
+        removerProdutoUseCase = new RemoverProdutoUseCase(produtoDAO);
 
         adicionarCampanhaUseCase = new AdicionarCampanhaUseCase(campanhaDAO, empresaDAO);
         listarCampanhasUseCase = new ListarCampanhasUseCase(campanhaDAO);
@@ -178,8 +271,5 @@ public class Main {
         modificarClienteUseCase = new ModificarClienteUseCase(clienteDAO);
         removerClienteUseCase = new RemoverClienteUseCase(clienteDAO);
 
-
     }
-
-
 }

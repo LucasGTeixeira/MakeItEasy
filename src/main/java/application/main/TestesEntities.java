@@ -227,23 +227,31 @@ public class TestesEntities {
         // --------------- MODIFICAÇÕES COM SUCESSO ----------------------
         modificarEmpresaUseCase.update(empresa5);
         System.out.println("\n Modificando razão social");
-        System.out.println(listarEmpresasUseCase.findByCnpj("65489"));
+        Optional<Empresa> empresaModificada = listarEmpresasUseCase.findByCnpj("65489");
+        empresaModificada.ifPresent(System.out::println);
+
 
         modificarCampanhaUseCase.update(campanha3);
         System.out.println("\n Modificando campanha com codigo 451611");
-        System.out.println(listarCampanhasUseCase.findByCodigo("451611"));
+        Optional<Campanha> campanhaOptional = listarCampanhasUseCase.findByCodigo("451611");
+        campanhaOptional.ifPresent(System.out::println);
+
 
         System.out.println("\n MODIFICANDO CLIENTE 2 COM OS DADOS DE CLIENTE 3");
         modificarClienteUseCase.update(cliente3);
-        System.out.println(listarClientesUseCase.findByCpf("15645789544"));
+        Optional<Cliente> clienteOptional = listarClientesUseCase.findByCpf("15645789544");
+        clienteOptional.ifPresent(System.out::println);
 
         System.out.println("\n MODIFICANDO PRODUTO 4");
         modificarProdutoUseCase.update(produto6);
-        System.out.println(listarProdutosUseCase.findByCodProduto(111));
+        Optional<Produto> produtoOptional = listarProdutosUseCase.findByCodProduto(111);
+        produtoOptional.ifPresent(System.out::println);
+
 
         System.out.println("\n MODIFICANDO VENDA 2");
         modificarVendaUseCase.update(venda5);
-        System.out.println(listarVendasUseCase.findOne(4));
+        Optional<Venda> vendaOptional = listarVendasUseCase.findOne(4);
+        vendaOptional.ifPresent(System.out::println);
 
         emitirRelatorioVenda.gerarRelatorio();
         emitirRelatorioCliente.gerarRelatorio();

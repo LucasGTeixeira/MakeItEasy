@@ -25,7 +25,7 @@ public class EmitirRelatorioUseCase {
     public void gerarRelatorio(){
         String vendasString = listVendasToString();
         try (PrintWriter out = new PrintWriter("relatorio.txt")) {
-            out.println(vendasString);
+            out.println("id, cpfCliente, codProduto, valorTotal, formaPagamento, statusVenda\n" + vendasString);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Arquivo 'relatorio.txt' não encontrado");
         }

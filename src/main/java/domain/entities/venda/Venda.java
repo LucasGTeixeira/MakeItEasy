@@ -81,13 +81,11 @@ public class Venda {
 
     @Override
     public String toString() {
-        return "Venda{" +
-                "id=" + id +
-                ", cpfCliente='" + cpfCliente + '\'' +
-                ", codProduto=" + codProduto +
-                ", valorTotal=" + valorTotal +
-                ", formaPagamento=" + formaPagamento +
-                ", statusVenda=" + statusVenda +
-                '}';
+        return id + ", " +
+                cpfCliente + ", " +
+                codProduto + ", " +
+                valorTotal + ", " +
+                formaPagamento.text+ ", " +
+                statusVenda.text;
     }
 }

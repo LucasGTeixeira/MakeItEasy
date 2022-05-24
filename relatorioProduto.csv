@@ -1,6 +1,5 @@
 id, codProduto, nome, categoria, valor, disponibilidade, codCampanha
 1, 111, Pente, Cosméticos, 10.0, true, 666666
-2, 222, Base, Cosméticos, 22.0, true, 666666
 3, 333, Panela de pressão, Cozinha, 200.0, true, 123456
-4, 444, Liquidificador master, Cozinha, 85.0, true, 666666
+4, 444, Modificado Liq master, Cozinha, 85.0, true, 451611
 5, 555, Esteira, Saúde e Bem-estar, 920.0, true, 451611

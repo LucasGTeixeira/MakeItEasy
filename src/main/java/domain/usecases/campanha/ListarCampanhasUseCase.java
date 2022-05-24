@@ -1,6 +1,7 @@
 package domain.usecases.campanha;
 
 import domain.entities.campanha.Campanha;
+import domain.usecases.utils.Validator;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public class ListarCampanhasUseCase {
     }
 
     public Optional<Campanha> findByCodigo(String codigo){
-        if(codigo == null)
+        if(Validator.nullOrEmpty(codigo))
             throw new IllegalArgumentException("Código não pode ser nulo");
         return campanhaDAO.findByCodigo(codigo);
     }

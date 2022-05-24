@@ -20,7 +20,7 @@ public class ModificarCampanhaUseCase {
         if(notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        String codCampanha = campanha.getCodigo();
+        String codCampanha = campanha.getCodigo();  //VERIFICAR SE BUSCA/VERIFCA SE EXISTE PELO CODIGO OU PELO ID
         boolean codCampanhaNotFound = campanhaDAO.findByCodigo(codCampanha).isEmpty();
         if(codCampanhaNotFound)
             throw new EntityNotFoundException("Não há nenhuma campanha com este código");

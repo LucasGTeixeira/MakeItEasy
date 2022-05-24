@@ -176,7 +176,11 @@ public class Main {
 //
 //        System.out.println("\nENCONTRAR CAMPANHA COM CODIGO '666666'");
 //        Optional<Campanha> campanhaBuscada = listarCampanhasUseCase.findByCodigo("666666"); //encontrar por código
-//        System.out.println("\n" + campanhaBuscada);
+//        System.out.println("\n" + campanhaBuscada.get());
+//
+//        System.out.println("\nENCONTRAR CAMPANHA COM ID '2'");
+//        Optional<Campanha> campanhaBuscada = listarCampanhasUseCase.findOne(2); //encontrar por código
+//        System.out.println("\n" + campanhaBuscada.get());
 //
 //        System.out.println("\nENCONTRAR CLIENTE COM CPF = 15645789544");
 //        Optional<Cliente> clienteBuscado = listarClientesUseCase.findByCpf("15645789544");

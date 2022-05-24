@@ -9,7 +9,6 @@ parte instanciada do sistema
   as instancias são feitas
   - `repository:` Local onde as os mockups são feitos, implementando as interfaces definidas dentro
   dos usecases do `domain`
-  //
 - `domain:` Contém o dominio da aplicação. Desde entidades até usecases que serão usados no sistema
     - `entities:` Responsável por encapsular as entidades do sistema que serão usadas durante as instancias
     - `usecases:` Dita o comportamento do sistema e a interação entre as classes e DAOs

@@ -34,7 +34,7 @@ public class RemoverEmpresaUseCase {
 
         boolean isEmpresaRelatedToCampanha = isEmpresaInCampanha(empresa);
         if(isEmpresaRelatedToCampanha)
-            throw new EmpresaRelatedToCampanhaException("remoção inválida, pois esta empresa está ligada com uma campanha");
+            throw new EmpresaRelatedToCampanhaException("remoção inválida, pois esta empresa está ligada com uma ou mais campanhas");
 
         return empresaDAO.delete(empresa);
     }
@@ -49,7 +49,7 @@ public class RemoverEmpresaUseCase {
 
         boolean isEmpresaRelatedToCampanha = isEmpresaInCampanha(empresaDAO.findOne(id).get());
         if (isEmpresaRelatedToCampanha)
-            throw new EmpresaRelatedToCampanhaException("Há campanhas relacionadas com esta empresa");
+            throw new EmpresaRelatedToCampanhaException("remoção inválida, pois esta empresa está ligada com uma ou mais campanhas");
 
         return empresaDAO.deleteByKey(id);
     }

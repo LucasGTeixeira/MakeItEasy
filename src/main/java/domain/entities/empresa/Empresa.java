@@ -42,10 +42,8 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "Empresa{" +
-                "id=" + id +
-                ", cnpj='" + cnpj + '\'' +
-                ", razaoSocial='" + razaoSocial + '\'' +
-                '}';
+        return id + ", " +
+                cnpj + ", " +
+                razaoSocial;
     }
 }

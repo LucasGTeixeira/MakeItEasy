@@ -90,14 +90,12 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", codProduto=" + codProduto +
-                ", nome='" + nome + '\'' +
-                ", categoria=" + categoria +
-                ", valor=" + valor +
-                ", disponibilidade=" + disponibilidade +
-                ", codCampanha='" + codCampanha + '\'' +
-                '}';
+        return id + ", " +
+                codProduto + ", " +
+                nome + ", " +
+                categoria.text + ", " +
+                valor + ", " +
+                disponibilidade + ", " +
+                codCampanha;
     }
 }

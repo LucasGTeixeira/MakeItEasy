@@ -22,7 +22,7 @@ além de suas regras de negócio e validator da entidade Cliente
 além de suas regras de negócio e validator da entidade Empresa
 - `produto:` Contém as operações de adicionar, modificar, remover e listar das campanhas
 além de suas regras de negócio e validator da entidade Produto
-- `relatorio:` Define a operação de transformar uma lista de transação de vendas registradas no sistema
+- `relatorio:` Define a operação de transformar as listas de entidades registradas no sistema
 em um arquivo texto formatado no padrão CSV a fim de ser exportado para uma tabela em outras aplicações
 - `utils:` Define um conjunto de classes e interfaces que serão usadas em contextos de controle
 dentro da aplicação. Como exceptions criadas, Validators, Notifications e uma interface genérica DAO

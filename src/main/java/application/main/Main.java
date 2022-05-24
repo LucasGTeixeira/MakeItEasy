@@ -14,16 +14,11 @@ import domain.usecases.campanha.*;
 import domain.usecases.cliente.*;
 import domain.usecases.empresa.*;
 import domain.usecases.produto.*;
-import domain.usecases.relatorio.EmitirRelatorioUseCase;
+import domain.usecases.relatorio.*;
 import domain.usecases.venda.*;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 public class Main {
@@ -51,11 +46,19 @@ public class Main {
     private static ModificarEmpresaUseCase modificarEmpresaUseCase;
     private static RemoverEmpresaUseCase removerEmpresaUseCase;
 
-    public static EmitirRelatorioUseCase emitirRelatorioUseCase;
+    public static EmitirRelatorioVenda emitirRelatorioVenda;
+
+    public static EmitirRelatorioCliente emitirRelatorioCliente;
+
+    public static EmitirRelatorioProdutos emitirRelatorioProdutos;
+
+    public static EmitirRelatorioEmpresa emitirRelatorioEmpresa;
+
+    public static EmitirRelatorioCampanhas emitirRelatorioCampanhas;
 
     public static void main(String[] args) {
 
-        injecaoDependencias();
+        injecaoDependencia();
 
         //DECALRANDO OBJETOS (SEM ID, POIS SERÁ AUTOINCREMENTADO)
         Empresa empresa1 = new Empresa("15486", "Texas Ltda");
@@ -122,8 +125,8 @@ public class Main {
         //VENDA
         Venda venda1 = new Venda("15645789544", 111, 100.00F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
         Venda venda2 = new Venda("15645789544", 111, 200.00F, FormaPagamento.BOLETO_BANCARIO, StatusVenda.NAO_ENVIADO);
-        Venda venda3 = new Venda("22648889544", 333, 600.00F, FormaPagamento.PIX, StatusVenda.NAO_ENVIADO);
-        Venda venda4 = new Venda("48415548755", 555, 920.0F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
+        Venda venda3 = new Venda("22648889544", 333, 600.00F, FormaPagamento.PIX, StatusVenda.ENVIADO);
+        Venda venda4 = new Venda("48415548755", 555, 920.0F, FormaPagamento.CREDITO, StatusVenda.ENVIADO);
         Venda venda5 = new Venda(4,"33315548766", 555, 1500.0F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
 
         //EMPRESA
@@ -247,10 +250,17 @@ public class Main {
 //        modificarVendaUseCase.update(venda5);
 //        System.out.println(listarVendasUseCase.findOne(4));
 
-        emitirRelatorioUseCase.gerarRelatorio();
+        emitirRelatorioVenda.gerarRelatorio();
+        emitirRelatorioCliente.gerarRelatorio();
+        emitirRelatorioProdutos.gerarRelatorio();
+        emitirRelatorioEmpresa.gerarRelatorio();
+        emitirRelatorioCampanhas.gerarRelatorio();
+
+
+
     }
 
-    private static void injecaoDependencias() {
+    private static void injecaoDependencia() {
         CampanhaDAO campanhaDAO = new MockedCampanhaDAO();
         ProdutoDAO produtoDAO = new MockedProdutosDAO();
         VendaDAO vendaDAO = new MockedVendasDAO();
@@ -282,7 +292,11 @@ public class Main {
         modificarClienteUseCase = new ModificarClienteUseCase(clienteDAO);
         removerClienteUseCase = new RemoverClienteUseCase(clienteDAO);
 
-        emitirRelatorioUseCase = new EmitirRelatorioUseCase(vendaDAO);
+        emitirRelatorioVenda = new EmitirRelatorioVenda(vendaDAO);
+        emitirRelatorioCliente = new EmitirRelatorioCliente(clienteDAO);
+        emitirRelatorioProdutos = new EmitirRelatorioProdutos(produtoDAO);
+        emitirRelatorioEmpresa = new EmitirRelatorioEmpresa(empresaDAO);
+        emitirRelatorioCampanhas = new EmitirRelatorioCampanhas(campanhaDAO);
 
     }
 }

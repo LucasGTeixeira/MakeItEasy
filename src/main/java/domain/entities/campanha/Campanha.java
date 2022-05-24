@@ -93,14 +93,12 @@ public class Campanha {
 
     @Override
     public String toString() {
-        return "Campanha{" +
-                "id=" + id +
-                ", codigo='" + codigo + '\'' +
-                ", nome='" + nome + '\'' +
-                ", edicao='" + edicao + '\'' +
-                ", dataLancamento=" + dataLancamento +
-                ", dataExpiracao=" + dataExpiracao +
-                ", cnpjEmpresa='" + cnpjEmpresa + '\'' +
-                '}';
+        return id + ", " +
+                codigo + ", " +
+                nome + ", " +
+                edicao + ", " +
+                dataLancamento + ", " +
+                dataExpiracao + ", " +
+                cnpjEmpresa;
     }
 }

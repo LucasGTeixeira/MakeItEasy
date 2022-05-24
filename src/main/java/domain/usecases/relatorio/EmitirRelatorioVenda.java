@@ -8,11 +8,11 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EmitirRelatorioUseCase {
+public class EmitirRelatorioVenda {
 
     private final VendaDAO vendaDAO;
 
-    public EmitirRelatorioUseCase(VendaDAO vendaDAO) {
+    public EmitirRelatorioVenda(VendaDAO vendaDAO) {
         this.vendaDAO = vendaDAO;
     }
 
@@ -24,10 +24,10 @@ public class EmitirRelatorioUseCase {
 
     public void gerarRelatorio(){
         String vendasString = listVendasToString();
-        try (PrintWriter out = new PrintWriter("relatorio.csv")) {
+        try (PrintWriter out = new PrintWriter("relatorioVenda.csv")) {
             out.println("id, cpfCliente, codProduto, valorTotal, formaPagamento, statusVenda\n" + vendasString);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Arquivo 'relatorio.csv' não encontrado");
+            throw new RuntimeException("Arquivo 'relatorioVenda.csv' não encontrado");
         }
     }
 }

@@ -6,9 +6,9 @@ import domain.usecases.utils.Exceptions.EntityNotFoundException;
 import domain.usecases.utils.Notification;
 import domain.usecases.utils.Validator;
 public class ModificarProdutoUseCase {
-    private ProdutoDAO produtoDAO;
+    private final ProdutoDAO produtoDAO;
 
-    private CampanhaDAO campanhaDAO;
+    private final CampanhaDAO campanhaDAO;
 
     public ModificarProdutoUseCase(ProdutoDAO produtoDAO, CampanhaDAO campanhaDAO) {
         this.produtoDAO = produtoDAO;

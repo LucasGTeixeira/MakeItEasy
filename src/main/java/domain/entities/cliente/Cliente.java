@@ -99,14 +99,13 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", cpf='" + cpf + '\'' +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", email='" + email + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+        return id + ", " +
+                 cpf + ", " +
+                nomeCompleto + ", " +
+                telefone + ", " +
+                email + ", " +
+                endereco + ", " +
+                status.text + ", " +
+                dataNascimento;
     }
 }

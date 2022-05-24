@@ -1,0 +1,4 @@
+Venda{id=1, cpfCliente='15645789544', codProduto=111, valorTotal=100.0, formaPagamento=CREDITO, statusVenda=NAO_ENVIADO}
+Venda{id=2, cpfCliente='15645789544', codProduto=111, valorTotal=200.0, formaPagamento=BOLETO_BANCARIO, statusVenda=NAO_ENVIADO}
+Venda{id=3, cpfCliente='22648889544', codProduto=333, valorTotal=600.0, formaPagamento=PIX, statusVenda=NAO_ENVIADO}
+Venda{id=4, cpfCliente='48415548755', codProduto=555, valorTotal=920.0, formaPagamento=CREDITO, statusVenda=NAO_ENVIADO}

@@ -10,12 +10,6 @@ public class RemoverVendaUseCase {
         this.vendaDAO = vendaDAO;
     }
 
-    public boolean delete(Venda venda){ //TODO é necessário esse método? já que venda não possui nenhum identificador além do id
-        if(venda == null)
-            throw new IllegalArgumentException("Objeto venda não pode ser nulo");
-        return vendaDAO.delete(venda);
-    }
-
     public boolean delete(Integer id){
         if(id == null)
             throw new IllegalArgumentException("id nulo ou não encontrado");

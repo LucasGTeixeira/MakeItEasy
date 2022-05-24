@@ -14,12 +14,16 @@ import domain.usecases.campanha.*;
 import domain.usecases.cliente.*;
 import domain.usecases.empresa.*;
 import domain.usecases.produto.*;
+import domain.usecases.relatorio.EmitirRelatorioUseCase;
 import domain.usecases.venda.*;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -46,6 +50,8 @@ public class Main {
     private static ListarEmpresasUseCase listarEmpresasUseCase;
     private static ModificarEmpresaUseCase modificarEmpresaUseCase;
     private static RemoverEmpresaUseCase removerEmpresaUseCase;
+
+    public static EmitirRelatorioUseCase emitirRelatorioUseCase;
 
     public static void main(String[] args) {
 
@@ -151,20 +157,20 @@ public class Main {
         Integer v4 = adicionarVendaUseCase.insert(venda4);
 
         //LISTAS COM SUCESSO
-        System.out.println("\nLISTA DE TODAS AS EMPRESAS");
-        listarEmpresasUseCase.findAll().forEach(System.out::println);
-
-        System.out.println("\nLISTA DE TODAS AS CAMPANHAS");
-        listarCampanhasUseCase.findAll().forEach(System.out::println);
-
-        System.out.println("\nLISTA DE TODOS OS CLIENTES");
-        listarClientesUseCase.findAll().forEach(System.out::println);
-
-        System.out.println("\nLISTA DE TODOS OS PRODUTOS");
-        listarProdutosUseCase.findAll().forEach(System.out::println);
-
-        System.out.println("\nLISTA DE TODOS OS VENDAS");
-        listarVendasUseCase.findAll().forEach(System.out::println);
+//        System.out.println("\nLISTA DE TODAS AS EMPRESAS");
+//        listarEmpresasUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\nLISTA DE TODAS AS CAMPANHAS");
+//        listarCampanhasUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\nLISTA DE TODOS OS CLIENTES");
+//        listarClientesUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\nLISTA DE TODOS OS PRODUTOS");
+//        listarProdutosUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\nLISTA DE TODOS OS VENDAS");
+//        listarVendasUseCase.findAll().forEach(System.out::println);
 
         //System.out.println("\nLISTA DE TODAS OS VENDAS");
         //listarVendasUseCase.findAll().forEach(System.out::println);
@@ -196,11 +202,11 @@ public class Main {
 
 
         //---------------- TESTE QUE GERA UM EmpresaRelatedToCampanhaException ----------------
-        //removerEmpresaUseCase.delete(1);
+//        removerEmpresaUseCase.delete(1);
 
         // ---------------- TESTES DE EXCLUSÃO COM SUCESSO ---------------------
 //        System.out.println("\n EXCLUINDO EMPRESA: 2");
-//        removerEmpresaUseCase.delete(emp2); //removendo por cnpj
+//        removerEmpresaUseCase.delete(empresa2);
 //        listarEmpresasUseCase.findAll().forEach(System.out::println);
 //
 //        System.out.println("\n EXCLUINDO CAMPANHA: 2");
@@ -224,7 +230,6 @@ public class Main {
 //        System.out.println("\n Modificando razão social");
 //        System.out.println(listarEmpresasUseCase.findByCnpj("65489"));
 //
-//
 //        modificarCampanhaUseCase.update(campanha3);
 //        System.out.println("\n Modificando campanha com codigo 451611");
 //        System.out.println(listarCampanhasUseCase.findByCodigo("451611"));
@@ -241,7 +246,8 @@ public class Main {
 //        modificarVendaUseCase.update(venda5);
 //        System.out.println(listarVendasUseCase.findOne(4));
 
-   }
+        emitirRelatorioUseCase.gerarRelatorio();
+    }
 
     private static void injecaoDependencias() {
         CampanhaDAO campanhaDAO = new MockedCampanhaDAO();
@@ -257,7 +263,7 @@ public class Main {
 
         adicionarProdutoUseCase = new AdicionarProdutoUseCase(produtoDAO, campanhaDAO);
         listarProdutosUseCase = new ListarProdutosUseCase(produtoDAO);
-        modificarProdutoUseCase = new ModificarProdutoUseCase(produtoDAO);
+        modificarProdutoUseCase = new ModificarProdutoUseCase(produtoDAO, campanhaDAO);
         removerProdutoUseCase = new RemoverProdutoUseCase(produtoDAO);
 
         adicionarCampanhaUseCase = new AdicionarCampanhaUseCase(campanhaDAO, empresaDAO);
@@ -274,6 +280,8 @@ public class Main {
         listarClientesUseCase = new ListarClientesUseCase(clienteDAO);
         modificarClienteUseCase = new ModificarClienteUseCase(clienteDAO);
         removerClienteUseCase = new RemoverClienteUseCase(clienteDAO);
+
+        emitirRelatorioUseCase = new EmitirRelatorioUseCase(vendaDAO);
 
     }
 }

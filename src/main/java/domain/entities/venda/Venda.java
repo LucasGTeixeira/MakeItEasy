@@ -12,7 +12,7 @@ public class Venda {
     private Integer codProduto;
     private Float valorTotal;
     private FormaPagamento formaPagamento;
-    private StatusVenda statusVenda; //TODO trocar para StatusVenda status;
+    private StatusVenda statusVenda;
 
     public Venda(String cpfCliente, Integer codProduto, Float valorTotal, FormaPagamento formaPagamento, StatusVenda statusVenda) {
         this.cpfCliente = cpfCliente;

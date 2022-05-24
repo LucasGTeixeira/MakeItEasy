@@ -102,55 +102,56 @@ public class Main {
                 ClienteStatus.ATIVO, LocalDate.of(2000, 8, 10));
 
         Produto produto1 = new Produto(111, "Pente", CategoriaProdutos.COSMETICOS,
-                new BigDecimal(10.0), true, "666666");
+                new BigDecimal("10.0"), true, "666666");
 
         Produto produto2 = new Produto(222, "Base", CategoriaProdutos.COSMETICOS,
-                new BigDecimal(22.0), true, "666666");
+                new BigDecimal("22.0"), true, "666666");
 
         Produto produto3 = new Produto(333, "Panela de pressão", CategoriaProdutos.COZINHA,
-                new BigDecimal(200.0), true, "123456");
+                new BigDecimal("200.0"), true, "123456");
 
         Produto produto4 = new Produto(444, "Liquidificador master", CategoriaProdutos.COZINHA,
-                new BigDecimal(85.0), true, "666666");
+                new BigDecimal("85.0"), true, "666666");
 
         Produto produto5 = new Produto(555, "Esteira", CategoriaProdutos.SAUDE_BEM_ESTAR,
-                new BigDecimal(920.0), true, "451611");
+                new BigDecimal("920.0"), true, "451611");
 
         Produto produto6 = new Produto(4,444, "Modificado Liq master", CategoriaProdutos.COZINHA,
-                new BigDecimal(85.0), true, "666666");
+                new BigDecimal("85.0"), true, "666666");
 
         //VENDA
-
         Venda venda1 = new Venda("15645789544", 111, 100.00F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
         Venda venda2 = new Venda("15645789544", 111, 200.00F, FormaPagamento.BOLETO_BANCARIO, StatusVenda.NAO_ENVIADO);
         Venda venda3 = new Venda("22648889544", 333, 600.00F, FormaPagamento.PIX, StatusVenda.NAO_ENVIADO);
         Venda venda4 = new Venda("48415548755", 555, 920.0F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
         Venda venda5 = new Venda(4,"33315548766", 555, 1500.0F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
 
-        //INSERINDO ENTIDADES NO HASHMAP
+        //EMPRESA
         Integer emp1 = adicinarEmpresaUseCase.insert(empresa1);
         Integer emp2 = adicinarEmpresaUseCase.insert(empresa2);
         Integer emp3 = adicinarEmpresaUseCase.insert(empresa3);
         Integer emp4 = adicinarEmpresaUseCase.insert(empresa4);
 
+        //CAMPANHAS
         Integer camp1 = adicionarCampanhaUseCase.insert(campanha1);
         Integer camp2 = adicionarCampanhaUseCase.insert(campanha2);
         Integer camp4 = adicionarCampanhaUseCase.insert(campanha4);
 
+        //CLIENTES
         Integer cli1 = adicionarClienteUseCase.insert(cliente1);
         Integer cli2 = adicionarClienteUseCase.insert(cliente2);
         Integer cli3 = adicionarClienteUseCase.insert(cliente3);
         Integer cli4 = adicionarClienteUseCase.insert(cliente4);
         Integer cli5 = adicionarClienteUseCase.insert(cliente5);
 
+        //PRODUTOS
         Integer prod1 = adicionarProdutoUseCase.insert(produto1);
         Integer prod2 = adicionarProdutoUseCase.insert(produto2);
         Integer prod3 = adicionarProdutoUseCase.insert(produto3);
         Integer prod4 = adicionarProdutoUseCase.insert(produto4);
         Integer prod5 = adicionarProdutoUseCase.insert(produto5);
 
-        //Venda
-
+        //VENDAS
         Integer v1 = adicionarVendaUseCase.insert(venda1);
         Integer v2 = adicionarVendaUseCase.insert(venda2);
         Integer v3 = adicionarVendaUseCase.insert(venda3);

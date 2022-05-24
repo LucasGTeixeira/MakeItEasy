@@ -4,8 +4,6 @@ import domain.entities.produto.Produto;
 import domain.usecases.utils.Notification;
 import domain.usecases.utils.Validator;
 
-import java.math.BigDecimal;
-
 public class ProdutoValidator extends Validator<Produto> {
     @Override
     public Notification validate(Produto produto) {
@@ -22,9 +20,9 @@ public class ProdutoValidator extends Validator<Produto> {
             notification.addError("Categoria do produto não pode ser nula");
         if(nullOrEmpty(produto.getCodCampanha()))
             notification.addError("Codigo da Campanha não pode ser nula ou vazio");
-        if(isNullOrLesserEqual(produto.getCodProduto()))
+        if(isNullOrLesserEqualZero(produto.getCodProduto()))
             notification.addError("Codigo do produto não pode ser nulo");
-        if(isNullOrLesserEqual(produto.getValor()))
+        if(isNullOrLesserEqualZero(produto.getValor()))
             notification.addError("Valor produto não pode ser nulo ou menor igual a zero");
         if(isNull(produto.getDisponibilidade()))
             notification.addError("Disponibilidade da Campanha não pode ser nula");

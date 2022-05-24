@@ -1,7 +1,5 @@
 package domain.entities.produto;
 
-import domain.entities.campanha.Campanha;
-
 import java.math.BigDecimal;
 
 public class Produto {
@@ -10,7 +8,7 @@ public class Produto {
     private String nome;
     private CategoriaProdutos categoria;
     private BigDecimal valor;
-    private Boolean disponibilidade; //TODO checar esse campo durante o cadastro de uma venda
+    private Boolean disponibilidade;
     private String codCampanha;
 
     public Produto(Integer id, Integer codProduto, String nome, CategoriaProdutos categoria, BigDecimal valor, Boolean disponibilidade, String codCampanha) {

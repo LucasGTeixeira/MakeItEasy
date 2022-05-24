@@ -1,7 +1,6 @@
 package domain.usecases.relatorio;
 
 import domain.entities.empresa.Empresa;
-import domain.entities.produto.Produto;
 import domain.usecases.empresa.EmpresaDAO;
 
 import java.io.FileNotFoundException;

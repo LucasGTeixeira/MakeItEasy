@@ -27,15 +27,15 @@ public abstract class Validator<T> {
         return bool == null;
     }
 
-    public static boolean isNullOrLesserEqual(Integer integer){
+    public static boolean isNullOrLesserEqualZero(Integer integer){
         return integer == null || integer <= 0;
     }
 
-    public static boolean isNullOrLesserEqual(Float floatNumber){
+    public static boolean isNullOrLesserEqualZero(Float floatNumber){
         return floatNumber == null || floatNumber <= 0;
     }
 
-    public static boolean isNullOrLesserEqual(BigDecimal bigDecimal){
+    public static boolean isNullOrLesserEqualZero(BigDecimal bigDecimal){
         return bigDecimal == null || bigDecimal.compareTo(BigDecimal.valueOf(0)) <= 0;
     }
 }

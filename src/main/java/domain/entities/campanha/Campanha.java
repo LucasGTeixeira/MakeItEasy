@@ -1,7 +1,5 @@
 package domain.entities.campanha;
 
-import domain.entities.empresa.Empresa;
-
 import java.time.LocalDate;
 
 public class Campanha {

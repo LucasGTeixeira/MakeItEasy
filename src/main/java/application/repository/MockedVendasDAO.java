@@ -1,6 +1,5 @@
 package application.repository;
 
-import domain.entities.produto.Produto;
 import domain.entities.venda.StatusVenda;
 import domain.entities.venda.Venda;
 import domain.usecases.venda.VendaDAO;

@@ -1,13 +1,10 @@
 package domain.usecases.empresa;
 
-import domain.entities.campanha.Campanha;
 import domain.entities.empresa.Empresa;
 import domain.usecases.campanha.CampanhaDAO;
 import domain.usecases.utils.Exceptions.EmpresaRelatedToCampanhaException;
 import domain.usecases.utils.Exceptions.EntityNotFoundException;
 
-import java.util.Objects;
-import java.util.Optional;
 
 public class RemoverEmpresaUseCase {
 

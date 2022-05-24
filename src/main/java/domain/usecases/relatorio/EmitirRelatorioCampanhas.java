@@ -1,7 +1,6 @@
 package domain.usecases.relatorio;
 
 import domain.entities.campanha.Campanha;
-import domain.entities.cliente.Cliente;
 import domain.usecases.campanha.CampanhaDAO;
 
 import java.io.FileNotFoundException;

@@ -1,12 +1,7 @@
 package domain.usecases.venda;
 
-import domain.entities.campanha.Campanha;
-import domain.entities.cliente.Cliente;
-import domain.entities.empresa.Empresa;
 import domain.entities.venda.Venda;
-import domain.usecases.campanha.CampanhaDAO;
 import domain.usecases.cliente.ClienteDAO;
-import domain.usecases.empresa.EmpresaDAO;
 import domain.usecases.produto.ProdutoDAO;
 import domain.usecases.utils.Exceptions.EntityNotFoundException;
 import domain.usecases.utils.Notification;

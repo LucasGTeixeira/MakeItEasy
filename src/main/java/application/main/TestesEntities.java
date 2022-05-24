@@ -19,7 +19,7 @@ import domain.usecases.venda.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-public class Main {
+public class TestesEntities {
 
     private static AdicionarProdutoUseCase adicionarProdutoUseCase;
     private static ListarProdutosUseCase listarProdutosUseCase;
@@ -120,14 +120,14 @@ public class Main {
         Produto produto6 = new Produto(4,444, "Modificado Liq master", CategoriaProdutos.COZINHA,
                 new BigDecimal("85.0"), true, "666666");
 
-        //VENDAS
+        //VENDA
         Venda venda1 = new Venda("15645789544", 111, 100.00F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
         Venda venda2 = new Venda("15645789544", 111, 200.00F, FormaPagamento.BOLETO_BANCARIO, StatusVenda.NAO_ENVIADO);
         Venda venda3 = new Venda("22648889544", 333, 600.00F, FormaPagamento.PIX, StatusVenda.ENVIADO);
         Venda venda4 = new Venda("48415548755", 555, 920.0F, FormaPagamento.CREDITO, StatusVenda.ENVIADO);
         Venda venda5 = new Venda(4,"33315548766", 555, 1500.0F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
 
-        //EMPRESAS
+        //EMPRESA
         Integer emp1 = adicinarEmpresaUseCase.insert(empresa1);
         Integer emp2 = adicinarEmpresaUseCase.insert(empresa2);
         Integer emp3 = adicinarEmpresaUseCase.insert(empresa3);
@@ -158,11 +158,100 @@ public class Main {
         Integer v3 = adicionarVendaUseCase.insert(venda3);
         Integer v4 = adicionarVendaUseCase.insert(venda4);
 
-        emitirRelatorioVenda.gerarRelatorio();
-        emitirRelatorioCliente.gerarRelatorio();
-        emitirRelatorioProdutos.gerarRelatorio();
-        emitirRelatorioEmpresa.gerarRelatorio();
-        emitirRelatorioCampanhas.gerarRelatorio();
+        //LISTAS COM SUCESSO
+//        System.out.println("\nLISTA DE TODAS AS EMPRESAS");
+//        listarEmpresasUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\nLISTA DE TODAS AS CAMPANHAS");
+//        listarCampanhasUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\nLISTA DE TODOS OS CLIENTES");
+//        listarClientesUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\nLISTA DE TODOS OS PRODUTOS");
+//        listarProdutosUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\nLISTA DE TODOS OS VENDAS");
+//        listarVendasUseCase.findAll().forEach(System.out::println);
+
+        //System.out.println("\nLISTA DE TODAS OS VENDAS");
+        //listarVendasUseCase.findAll().forEach(System.out::println);
+
+        //---------------- PESQUISAS COM SUCESSO ----------------
+//        System.out.println("\nENCONTRAR EMPRESA COM CNPJ '65489'");
+//        Optional<Empresa> empresaBuscada = listarEmpresasUseCase.findByCnpj("65489"); //encontrar por cnpj
+//        System.out.println("\n" + empresaBuscada);
+//
+//        System.out.println("\nENCONTRAR CAMPANHA COM CODIGO '666666'");
+//        Optional<Campanha> campanhaBuscada = listarCampanhasUseCase.findByCodigo("666666"); //encontrar por código
+//        System.out.println("\n" + campanhaBuscada.get());
+//
+//        System.out.println("\nENCONTRAR CAMPANHA COM ID '2'");
+//        Optional<Campanha> campanhaBuscada = listarCampanhasUseCase.findOne(2); //encontrar por código
+//        System.out.println("\n" + campanhaBuscada.get());
+//
+//        System.out.println("\nENCONTRAR CLIENTE COM CPF = 15645789544");
+//        Optional<Cliente> clienteBuscado = listarClientesUseCase.findByCpf("15645789544");
+//        System.out.println(clienteBuscado);
+
+//        System.out.println("\nENCONTRAR PRODUTO COM CODIGO = 111");
+//        Optional<Produto> produtoBuscado = listarProdutosUseCase.findByCodProduto(111);
+//        System.out.println(produtoBuscado.get());
+
+//        System.out.println("\nENCONTRAR VENDA DE CODIGO = 2");
+//        Optional<Venda> vendaBuscado = listarVendasUseCase.findOne(2);
+//        System.out.println(vendaBuscado.get());
+
+        //---------------- TESTE QUE GERA UM EmpresaRelatedToCampanhaException ----------------
+//        removerEmpresaUseCase.delete(1);
+
+        // ---------------- TESTES DE EXCLUSÃO COM SUCESSO ---------------------
+//        System.out.println("\n EXCLUINDO EMPRESA: 2");
+//        removerEmpresaUseCase.delete(empresa2);
+//        listarEmpresasUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\n EXCLUINDO CAMPANHA: 2");
+//        removerCampanhaUseCase.delete(2);
+//        listarCampanhasUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\n EXCLUINDO CLIENTE: 1");
+//        removerClienteUseCase.delete(1);
+//        listarClientesUseCase.findAll().forEach(System.out::println);
+
+//        System.out.println("\n EXCLUINDO PRODUTO: 2");
+//        removerProdutoUseCase.delete(2);
+//        listarProdutosUseCase.findAll().forEach(System.out::println);
+
+//        System.out.println("\n EXCLUINDO VENDA: 2");
+//        removerVendaUseCase.delete(2);
+//        listarVendasUseCase.findAll().forEach(System.out::println);
+
+        // --------------- MODIFICAÇÕES COM SUCESSO ----------------------
+//        modificarEmpresaUseCase.update(empresa5);
+//        System.out.println("\n Modificando razão social");
+//        System.out.println(listarEmpresasUseCase.findByCnpj("65489"));
+//
+//        modificarCampanhaUseCase.update(campanha3);
+//        System.out.println("\n Modificando campanha com codigo 451611");
+//        System.out.println(listarCampanhasUseCase.findByCodigo("451611"));
+
+//        System.out.println("\n MODIFICANDO CLIENTE 2 COM OS DADOS DE CLIENTE 3");
+//        modificarClienteUseCase.update(cliente3);
+//        System.out.println(listarClientesUseCase.findByCpf("15645789544"));
+
+//        System.out.println("\n MODIFICANDO PRODUTO 4");
+//        modificarProdutoUseCase.update(produto6);
+//        System.out.println(listarProdutosUseCase.findByCodProduto(444).get());
+//
+//        System.out.println("\n MODIFICANDO VENDA 2");
+//        modificarVendaUseCase.update(venda5);
+//        System.out.println(listarVendasUseCase.findOne(4));
+
+//        emitirRelatorioVenda.gerarRelatorio();
+//        emitirRelatorioCliente.gerarRelatorio();
+//        emitirRelatorioProdutos.gerarRelatorio();
+//        emitirRelatorioEmpresa.gerarRelatorio();
+//        emitirRelatorioCampanhas.gerarRelatorio();
 
     }
 

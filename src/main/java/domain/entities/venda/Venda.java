@@ -1,11 +1,5 @@
 package domain.entities.venda;
 
-import domain.entities.campanha.Campanha;
-import domain.entities.cliente.Cliente;
-import domain.entities.produto.Produto;
-
-import java.util.List;
-
 public class Venda {
     private Integer id;
     private String cpfCliente;

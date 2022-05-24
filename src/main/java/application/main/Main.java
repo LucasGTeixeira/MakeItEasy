@@ -133,17 +133,17 @@ public class Main {
         Integer emp3 = adicinarEmpresaUseCase.insert(empresa3);
         Integer emp4 = adicinarEmpresaUseCase.insert(empresa4);
 
-        //CAMPANHAS
-        Integer camp1 = adicionarCampanhaUseCase.insert(campanha1);
-        Integer camp2 = adicionarCampanhaUseCase.insert(campanha2);
-        Integer camp4 = adicionarCampanhaUseCase.insert(campanha4);
-
         //CLIENTES
         Integer cli1 = adicionarClienteUseCase.insert(cliente1);
         Integer cli2 = adicionarClienteUseCase.insert(cliente2);
         Integer cli3 = adicionarClienteUseCase.insert(cliente3);
         Integer cli4 = adicionarClienteUseCase.insert(cliente4);
         Integer cli5 = adicionarClienteUseCase.insert(cliente5);
+
+        //CAMPANHAS
+        Integer camp1 = adicionarCampanhaUseCase.insert(campanha1);
+        Integer camp2 = adicionarCampanhaUseCase.insert(campanha2);
+        Integer camp4 = adicionarCampanhaUseCase.insert(campanha4);
 
         //PRODUTOS
         Integer prod1 = adicionarProdutoUseCase.insert(produto1);

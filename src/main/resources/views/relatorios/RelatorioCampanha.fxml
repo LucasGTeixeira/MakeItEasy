@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.relatorios.RelatorioCampanhaController">
+   <children>
+      <TableView layoutX="177.0" layoutY="30.0" prefHeight="340.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+        <columns>
+          <TableColumn fx:id="tableColumnCodigo" prefWidth="72.0" text="Codigo" />
+          <TableColumn fx:id="tableColumnNome" prefWidth="100.0" text="Nome" />
+            <TableColumn fx:id="tableColumnEdicao" prefWidth="105.0" text="Edição" />
+            <TableColumn fx:id="tableColumnDataLancamento" prefWidth="123.0" text="Data Lançamento" />
+            <TableColumn fx:id="tableColumnDataExpiracao" prefWidth="106.0" text="Data Expiração" />
+            <TableColumn fx:id="tableColumnCNPJEmpresa" prefWidth="92.0" text="CNPJ Empresa" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtCodigo" layoutX="5.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="66.0" promptText="🔎 | Codigo">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtNome" layoutX="73.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="97.0" promptText="🔎 | Nome">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtEdicao" layoutX="173.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="103.0" promptText="🔎 | Edição">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtCNPJEmpresa" layoutX="506.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="91.0" promptText="🔎 | CNPJ Empresa">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <Button fx:id="buttonEnviarCSV" layoutX="522.0" layoutY="374.0" mnemonicParsing="false" text="Enviar CSV" />
+      <Button fx:id="buttonVoltar" layoutX="442.0" layoutY="374.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Voltar" />
+      <DatePicker fx:id="dtExpiracao" layoutX="401.0" layoutY="2.0" prefHeight="25.0" prefWidth="103.0" promptText="🔎 | Data Expiração" />
+      <DatePicker fx:id="dtLancamento" layoutX="277.0" layoutY="2.0" prefHeight="25.0" prefWidth="123.0" promptText="🔎 | Data Lançamento" />
+   </children>
+</AnchorPane>

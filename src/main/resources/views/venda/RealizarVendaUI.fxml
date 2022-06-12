@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.venda.RealizarVendaController">
+   <children>
+      <Label layoutX="8.0" layoutY="8.0" text="Venda - MakeItEasy">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="78.0" text="Cliente:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="115.0" prefHeight="27.0" prefWidth="91.0" text="Campanha:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="39.0" text="Empresa:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="27.0" layoutY="153.0" text="Produtos:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ChooseProd" layoutX="119.0" layoutY="154.0" prefHeight="27.0" prefWidth="171.0" promptText="Selecione o produto" />
+      <TextField fx:id="txtQtdProdutos" layoutX="291.0" layoutY="154.0" prefHeight="27.0" prefWidth="34.0" />
+      <Button fx:id="AddQtddProd" layoutX="327.0" layoutY="154.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="41.0" text="+" />
+      <ComboBox fx:id="ChooseClient" layoutX="120.0" layoutY="78.0" prefHeight="27.0" prefWidth="191.0" promptText="Selecione o cliente" />
+      <TableView layoutX="117.0" layoutY="190.0" prefHeight="152.0" prefWidth="251.0">
+        <columns>
+          <TableColumn fx:id="ViewColumnProd" prefWidth="85.0" text="Produto" />
+          <TableColumn fx:id="ViewColumnQtdd" prefWidth="90.0" text="Quantidade" />
+            <TableColumn fx:id="ViewColumnValor" prefWidth="75.0" text="Valor" />
+        </columns>
+      </TableView>
+      <Label fx:id="ValorTotalITem" layoutX="28.0" layoutY="342.0" text="Valor Total:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ChooseEmp" layoutX="120.0" layoutY="39.0" prefHeight="27.0" prefWidth="191.0" promptText="Selecione a empresa" />
+      <ComboBox fx:id="ChooseCamp" layoutX="120.0" layoutY="115.0" prefHeight="27.0" prefWidth="165.0" promptText="Selecione a campanha" />
+      <Label layoutX="60.0" layoutY="239.0" text="Itens:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonConfirmar" layoutX="386.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Confirmar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="buttonCancelar" layoutX="494.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Cancelar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+   </children>
+</Pane>

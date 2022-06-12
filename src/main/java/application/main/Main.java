@@ -16,31 +16,36 @@ import domain.usecases.empresa.*;
 import domain.usecases.produto.*;
 import domain.usecases.relatorio.*;
 import domain.usecases.venda.*;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import view.enums.Tela;
+import view.utils.UILoader;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-public class Main {
+public class Main extends Application {
 
     private static AdicionarProdutoUseCase adicionarProdutoUseCase;
-    private static ListarProdutosUseCase listarProdutosUseCase;
+    public static ListarProdutosUseCase listarProdutosUseCase;
     private static ModificarProdutoUseCase modificarProdutoUseCase;
     private static RemoverProdutoUseCase removerProdutoUseCase;
 
     private static AdicionarVendaUseCase adicionarVendaUseCase;
-    private static ListarVendasUseCase listarVendasUseCase;
+    public static ListarVendasUseCase listarVendasUseCase;
     private static ModificarVendaUseCase modificarVendaUseCase;
     private static RemoverVendaUseCase removerVendaUseCase;
     private static AdicionarClienteUseCase adicionarClienteUseCase;
-    private static ListarClientesUseCase listarClientesUseCase;
+    public static ListarClientesUseCase listarClientesUseCase;
     private static ModificarClienteUseCase modificarClienteUseCase;
     private static RemoverClienteUseCase removerClienteUseCase;
     private static AdicionarCampanhaUseCase adicionarCampanhaUseCase;
-    private static ListarCampanhasUseCase listarCampanhasUseCase;
+    public static ListarCampanhasUseCase listarCampanhasUseCase;
     private static ModificarCampanhaUseCase modificarCampanhaUseCase;
     private static RemoverCampanhaUseCase removerCampanhaUseCase;
 
     private static AdicinarEmpresaUseCase adicinarEmpresaUseCase;
-    private static ListarEmpresasUseCase listarEmpresasUseCase;
+    public static ListarEmpresasUseCase listarEmpresasUseCase;
     private static ModificarEmpresaUseCase modificarEmpresaUseCase;
     private static RemoverEmpresaUseCase removerEmpresaUseCase;
 
@@ -54,7 +59,23 @@ public class Main {
 
     public static EmitirRelatorioCampanhas emitirRelatorioCampanhas;
 
-    public static void main(String[] args) {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        inject();
+        Scene scene = new Scene(UILoader.loadFXML(Tela.INITIAL.getNomeTela()));
+        UILoader.setScene(scene);
+
+        stage.setResizable(false);
+        stage.setMaxHeight(450);
+        stage.setMaxWidth(650);
+        stage.setMinHeight(400);
+        stage.setMinWidth(600);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void inject() {
 
         injecaoDependencia();
 
@@ -163,7 +184,7 @@ public class Main {
         emitirRelatorioProdutos.gerarRelatorio();
         emitirRelatorioEmpresa.gerarRelatorio();
         emitirRelatorioCampanhas.gerarRelatorio();
-
+        System.out.println("Injetado");
     }
 
     private static void injecaoDependencia() {

@@ -1,9 +1,9 @@
 package view.utils;
 
+import application.main.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import view.Main;
 
 import java.io.IOException;
 

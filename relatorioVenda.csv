@@ -1,4 +1,5 @@
 id, cpfCliente, codProduto, valorTotal, formaPagamento, statusVenda
 1, 15645789544, 111, 100.0, Cartão de crédito, Não enviado
+2, 15645789544, 111, 200.0, Boleto Bancário, Não enviado
 3, 22648889544, 333, 600.0, PIX, Enviado
-4, 33315548766, 555, 1500.0, Cartão de crédito, Não enviado
+4, 48415548755, 555, 920.0, Cartão de crédito, Enviado

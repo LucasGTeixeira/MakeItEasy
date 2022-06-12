@@ -23,7 +23,7 @@ public class RemoverCampanhaController {
     private void setActionListener(Button button){
         button.setOnAction(actionEvent -> {
             try {
-                UILoader.substituirTela(Tela.MENU_CLIENTE.getNomeTela());
+                UILoader.substituirTela(Tela.MENU_CAMPANHA.getNomeTela());
             } catch (IOException e) {
                 e.printStackTrace();
             }

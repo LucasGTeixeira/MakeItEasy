@@ -4,9 +4,11 @@ import application.main.Main;
 import domain.entities.campanha.Campanha;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import view.enums.Tela;
 import view.utils.UILoader;
 
@@ -32,15 +34,56 @@ public class MenuCampanhaController {
     @FXML
     private TableColumn<Campanha, String> clnNome;
 
+    @FXML
+    private Label labelCampanhaId;
+    @FXML
+    private Label labelCampanhaNome;
+    @FXML
+    private Label labelCampanhaCod;
+    @FXML
+    private Label labelCampanhaEdicao;
+    @FXML
+    private Label labelCampanhaDataLancamento;
+    @FXML
+    private Label labelCampanhaExpiracao;
+    @FXML
+    private Label labelCampanhaCNPJ;
+    @FXML
+    private Label lblSelect;
+    @FXML
+    private GridPane gridDetails;
+
+
     private final List<Campanha> campanhaList = new ArrayList<>();
 
     @FXML
     void initialize() {
+        lblSelect.setVisible(true);
+        lblSelect.setManaged(true);
+        gridDetails.setVisible(false);
+        gridDetails.setManaged(false);
         configurarColunas();
         campanhaList.addAll(Main.listarCampanhasUseCase.findAll());
         setButtonsClickListener();
         tbvCampanha.getItems().addAll(campanhaList);
         tbvCampanha.refresh();
+        tbvCampanha.getSelectionModel().selectedItemProperty().addListener((observableValue, campanhaTableViewSelectionModel, item) -> {
+            showDetails(item);
+            lblSelect.setVisible(false);
+            lblSelect.setManaged(false);
+            gridDetails.setVisible(true);
+            gridDetails.setManaged(true);
+        });
+    }
+
+    private void showDetails(Campanha campanha){
+        labelCampanhaId.setText(campanha.getId().toString());
+        labelCampanhaNome.setText(campanha.getNome());
+        labelCampanhaCod.setText(campanha.getCodigo());
+        labelCampanhaEdicao.setText(campanha.getEdicao());
+        labelCampanhaDataLancamento.setText(campanha.getDataLancamento().toString());
+        labelCampanhaExpiracao.setText(campanha.getDataExpiracao().toString());
+        labelCampanhaCNPJ.setText(campanha.getCnpjEmpresa());
     }
 
     private void configurarColunas() {

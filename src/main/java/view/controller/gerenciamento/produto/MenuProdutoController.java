@@ -1,12 +1,15 @@
 package view.controller.gerenciamento.produto;
 
 import application.main.Main;
+import domain.entities.cliente.Cliente;
 import domain.entities.produto.Produto;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import view.enums.Tela;
 import view.utils.UILoader;
 
@@ -31,15 +34,52 @@ public class MenuProdutoController {
     private TableColumn<Produto, String> clnCategoria;
     @FXML
     private TableColumn<Produto, String> clnValor;
+    @FXML
+    private Label labelNome;
+    @FXML
+    private Label labelCategoria;
+    @FXML
+    private Label labelValor;
+    @FXML
+    private Label labelDisponibilidade;
+    @FXML
+    private Label labelCampanha;
+    @FXML
+    private Label labelCodigo;
+    @FXML
+    private Label lblSelect;
+    @FXML
+    private GridPane gridDetails;
 
     private final List<Produto> produtos = new ArrayList<>();
 
     @FXML
     void initialize() {
+        showGrid(false);
         produtos.addAll(Main.listarProdutosUseCase.findAll());
         configurarColunas();
         tbvProdutos.getItems().addAll(produtos);
         setButtonsClickListener();
+        tbvProdutos.getSelectionModel().selectedItemProperty().addListener((observableValue, campanhaTableViewSelectionModel, item) -> {
+            showDetails(item);
+            showGrid(true);
+        });
+    }
+
+    private void showGrid(boolean show){
+        lblSelect.setVisible(!show);
+        lblSelect.setManaged(!show);
+        gridDetails.setVisible(show);
+        gridDetails.setManaged(show);
+    }
+
+    private void showDetails(Produto produto){
+        labelNome.setText(produto.getNome());
+        labelCategoria.setText(produto.getCategoria().name());
+        labelValor.setText(produto.getValor().toString());
+        labelDisponibilidade.setText(produto.getDisponibilidade() ? "Sim" : "Não");
+        labelCampanha.setText(produto.getCodCampanha());
+        labelCodigo.setText(produto.getCodProduto().toString());
     }
 
 

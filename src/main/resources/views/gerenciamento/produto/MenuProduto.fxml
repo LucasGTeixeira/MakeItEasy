@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -36,10 +37,10 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <GridPane layoutX="75.0" layoutY="45.0">
+                  <GridPane fx:id="gridDetails" layoutX="55.0" layoutY="62.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -51,16 +52,40 @@
                     </rowConstraints>
                      <children>
                         <Label text="Nome" />
-                        <Label fx:id="labelNome" text="Label" GridPane.columnIndex="1" />
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
+                           <children>
+                              <Label fx:id="labelNome" text="Label" />
+                           </children>
+                        </HBox>
                         <Label text="Categoria" GridPane.rowIndex="1" />
-                        <Label fx:id="labelCategoria" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Label fx:id="labelCategoria" text="Label" />
+                           </children>
+                        </HBox>
                         <Label text="Valor" GridPane.rowIndex="2" />
                         <Label prefHeight="17.0" prefWidth="69.0" text="Campanha" GridPane.rowIndex="4" />
                         <Label prefHeight="17.0" prefWidth="45.0" text="Código" GridPane.rowIndex="5" />
-                        <Label fx:id="labelValor" prefHeight="0.0" prefWidth="28.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="labelDisponibilidade" prefHeight="0.0" prefWidth="28.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="labelCampanha" prefHeight="0.0" prefWidth="28.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="labelCodigo" prefHeight="0.0" prefWidth="28.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <Label fx:id="labelValor" prefHeight="0.0" text="Label" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <Label fx:id="labelDisponibilidade" prefHeight="0.0" text="Label" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <children>
+                              <Label fx:id="labelCampanha" prefHeight="0.0" text="Label" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <children>
+                              <Label fx:id="labelCodigo" prefHeight="0.0" text="Label" />
+                           </children>
+                        </HBox>
                         <Label text="Disponibilidade" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
@@ -68,6 +93,11 @@
                   <Button fx:id="buttonAlterar" layoutX="96.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Alterar" />
                   <Button fx:id="buttonRemover" layoutX="96.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Remover" />
                   <Button fx:id="buttonVoltar" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="58.0" text="Voltar" />
+                  <Label fx:id="lblSelect" layoutX="79.0" layoutY="35.0" text="Selecione um item.">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </items>

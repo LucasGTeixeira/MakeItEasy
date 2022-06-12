@@ -1,7 +1,6 @@
 package view.controller.gerenciamento.produto;
 
 import application.main.Main;
-import domain.entities.cliente.Cliente;
 import domain.entities.produto.Produto;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,7 +1,6 @@
 package view.controller.gerenciamento.empresa;
 
 import application.main.Main;
-import domain.entities.cliente.Cliente;
 import domain.entities.empresa.Empresa;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

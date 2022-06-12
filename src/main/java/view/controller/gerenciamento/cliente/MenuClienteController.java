@@ -1,7 +1,6 @@
 package view.controller.gerenciamento.cliente;
 
 import application.main.Main;
-import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

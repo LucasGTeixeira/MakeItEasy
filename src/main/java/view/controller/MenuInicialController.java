@@ -5,8 +5,6 @@ import domain.entities.cliente.Cliente;
 import domain.entities.produto.Produto;
 import domain.entities.venda.Venda;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.beans.value.ObservableValueBase;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;

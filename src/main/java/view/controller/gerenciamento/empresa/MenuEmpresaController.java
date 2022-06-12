@@ -1,12 +1,15 @@
 package view.controller.gerenciamento.empresa;
 
 import application.main.Main;
+import domain.entities.cliente.Cliente;
 import domain.entities.empresa.Empresa;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import view.enums.Tela;
 import view.utils.UILoader;
 
@@ -31,16 +34,45 @@ public class MenuEmpresaController {
     private TableColumn<Empresa, String> clnCnpj;
     @FXML
     private TableColumn<Empresa, String> clnRazao;
+    @FXML
+    private Label labelEmpresaId;
+    @FXML
+    private Label labelEmpresaCnpj;
+    @FXML
+    private Label labelEmpresaRazaoSocial;
+    @FXML
+    private Label lblSelect;
+    @FXML
+    private GridPane gridDetails;
 
     private final List<Empresa> empresas = new ArrayList<>();
 
     @FXML
     void initialize() {
+        showGrid(false);
         empresas.addAll(Main.listarEmpresasUseCase.findAll());
         configurarColunas();
         tbvEmpresa.getItems().addAll(empresas);
         setButtonsClickListener();
+        tbvEmpresa.getSelectionModel().selectedItemProperty().addListener((observableValue, campanhaTableViewSelectionModel, item) -> {
+            showDetails(item);
+            showGrid(true);
+        });
     }
+
+    private void showGrid(boolean show){
+        lblSelect.setVisible(!show);
+        lblSelect.setManaged(!show);
+        gridDetails.setVisible(show);
+        gridDetails.setManaged(show);
+    }
+
+    private void showDetails(Empresa empresa){
+        labelEmpresaCnpj.setText(empresa.getCnpj());
+        labelEmpresaId.setText(empresa.getId().toString());
+        labelEmpresaRazaoSocial.setText(empresa.getRazaoSocial());
+    }
+
 
 
     private void configurarColunas() {

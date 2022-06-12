@@ -58,10 +58,7 @@ public class MenuCampanhaController {
 
     @FXML
     void initialize() {
-        lblSelect.setVisible(true);
-        lblSelect.setManaged(true);
-        gridDetails.setVisible(false);
-        gridDetails.setManaged(false);
+        showGrid(false);
         configurarColunas();
         campanhaList.addAll(Main.listarCampanhasUseCase.findAll());
         setButtonsClickListener();
@@ -69,11 +66,15 @@ public class MenuCampanhaController {
         tbvCampanha.refresh();
         tbvCampanha.getSelectionModel().selectedItemProperty().addListener((observableValue, campanhaTableViewSelectionModel, item) -> {
             showDetails(item);
-            lblSelect.setVisible(false);
-            lblSelect.setManaged(false);
-            gridDetails.setVisible(true);
-            gridDetails.setManaged(true);
+            showGrid(true);
         });
+    }
+
+    private void showGrid(boolean show){
+        lblSelect.setVisible(!show);
+        lblSelect.setManaged(!show);
+        gridDetails.setVisible(show);
+        gridDetails.setManaged(show);
     }
 
     private void showDetails(Campanha campanha){

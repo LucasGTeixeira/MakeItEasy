@@ -70,6 +70,8 @@ public class MenuProdutoController {
         lblSelect.setManaged(!show);
         gridDetails.setVisible(show);
         gridDetails.setManaged(show);
+        buttonAlterar.setDisable(!show);
+        buttonRemover.setDisable(!show);
     }
 
     private void showDetails(Produto produto){

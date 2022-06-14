@@ -44,9 +44,9 @@ public class Main extends Application {
     private static ModificarCampanhaUseCase modificarCampanhaUseCase;
     public static RemoverCampanhaUseCase removerCampanhaUseCase;
 
-    private static AdicinarEmpresaUseCase adicinarEmpresaUseCase;
+    public static AdicinarEmpresaUseCase adicinarEmpresaUseCase;
     public static ListarEmpresasUseCase listarEmpresasUseCase;
-    private static ModificarEmpresaUseCase modificarEmpresaUseCase;
+    public static ModificarEmpresaUseCase modificarEmpresaUseCase;
     public static RemoverEmpresaUseCase removerEmpresaUseCase;
 
     public static EmitirRelatorioVenda emitirRelatorioVenda;

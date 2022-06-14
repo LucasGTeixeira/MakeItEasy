@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 
 public class UILoader {
 
@@ -21,6 +20,7 @@ public class UILoader {
     public static void substituirTela(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
+
     public static void substituirTela(String fxml, Bundle bundleParam) throws IOException {
         bundle = bundleParam;
         scene.setRoot(loadFXML(fxml));
@@ -33,5 +33,9 @@ public class UILoader {
 
     public static Bundle getBundle() {
         return bundle;
+    }
+
+    public static void freeBundle() {
+        bundle = null;
     }
 }

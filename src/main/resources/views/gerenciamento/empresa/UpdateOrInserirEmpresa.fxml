@@ -28,7 +28,7 @@
          </children>
       </GridPane>
       <Label layoutX="57.0" layoutY="32.0" prefHeight="17.0" prefWidth="125.0" />
-      <Label fx:id="TituloAlteraPorAcao" layoutX="57.0" layoutY="32.0" prefHeight="17.0" prefWidth="92.0" text="Label">
+      <Label fx:id="lblTitulo" layoutX="57.0" layoutY="32.0" prefHeight="17.0" prefWidth="92.0" text="Label">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

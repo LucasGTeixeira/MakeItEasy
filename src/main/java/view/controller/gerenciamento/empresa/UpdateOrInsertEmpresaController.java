@@ -33,86 +33,6 @@ public class UpdateOrInsertEmpresaController {
         setButtonsClickListener();
     }
 
-    private void setButtonsClickListener() {
-        Bundle bundle = UILoader.getBundle();
-        setUpScreen(bundle);
-        setActionListener(buttonCancelar);
-    }
-
-    private void setUpScreen(Bundle bundle) {
-        ScreenMode screenMode;
-        if (bundle != null) {
-            Empresa empresa = (Empresa) bundle.getBundle("model");;
-            screenMode = ScreenMode.UPDATE;
-
-            id = empresa.getId();
-            txtEmpresaCnpj.setText(empresa.getCnpj());
-            txtEmpresaRazaoSocial.setText(empresa.getRazaoSocial());
-            setUpUpdateButton();
-        } else {
-            screenMode = ScreenMode.INSERT;
-            setUpInsertButton();
-        }
-        lblTitulo.setText(screenMode.getTitulo());
-    }
-
-    private void setUpUpdateButton() {
-        buttonConfirmar.setOnMouseClicked(mouseEvent -> {
-            String cnpj = txtEmpresaCnpj.getText();
-            String razao = txtEmpresaRazaoSocial.getText();
-            if (cnpj.isEmpty() || razao.isEmpty()) {
-                preenchaTodosOsCampos();
-                return;
-            }
-            try {
-                //todo adaptar
-                // boolean success = Main.modificarEmpresaUseCase.update(id,cnpj,razao);
-                boolean success = true;
-                if (success) {
-                    confirm();
-                } else {
-                    showUpdateErrorMessage();
-                }
-            } catch (Exception e) {
-                showUpdateErrorMessage(e);
-            }
-        });
-    }
-
-    private void setUpInsertButton() {
-        buttonConfirmar.setOnMouseClicked(mouseEvent -> {
-            String cnpj = txtEmpresaCnpj.getText();
-            String razao = txtEmpresaRazaoSocial.getText();
-            if (cnpj.isEmpty() || razao.isEmpty()) {
-                preenchaTodosOsCampos();
-                return;
-            }
-            try {
-                //todo adaptar
-                // boolean success = Main.adicinarEmpresaUseCase.update(cnpj,razao);
-                boolean success = true;
-                if (success) {
-                    confirm();
-                } else {
-                    showInsertErrorMessage();
-                }
-            } catch (Exception e) {
-                showInsertErrorMessage(e);
-            }
-        });
-    }
-
-
-    private void confirm() {
-        FabricaAlerts.criarAlertGenerico("Sucesso", "Empresa salva com sucesso", "Você será redirecionado(a) ao menu", Alert.AlertType.INFORMATION);
-        try {
-            UILoader.substituirTela(Tela.MENU_EMPRESA.getNomeTela());
-            UILoader.freeBundle();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void setActionListener(Button button) {
         button.setOnAction(actionEvent -> {
             try {
@@ -122,6 +42,85 @@ public class UpdateOrInsertEmpresaController {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void setButtonsClickListener() {
+        Bundle bundle = UILoader.getBundle();
+        setActionListener(buttonCancelar);
+        setUpScreen(bundle);
+    }
+
+    private void setUpScreen(Bundle bundle) {
+        ScreenMode screenMode;
+        if (bundle != null) {
+            Empresa empresa = (Empresa) bundle.getBundle("model");
+            screenMode = ScreenMode.UPDATE;
+            setFields(empresa);
+            buttonConfirmar.setOnMouseClicked(mouseEvent -> setUpUpdateButton());
+        } else {
+            screenMode = ScreenMode.INSERT;
+            buttonConfirmar.setOnMouseClicked(mouseEvent -> setUpInsertButton());
+        }
+        lblTitulo.setText(screenMode.getTitulo());
+    }
+
+    private void setFields(Empresa empresa){
+        id = empresa.getId();
+        txtEmpresaCnpj.setText(empresa.getCnpj());
+        txtEmpresaRazaoSocial.setText(empresa.getRazaoSocial());
+    }
+
+    private void setUpUpdateButton() {
+        String cnpj = txtEmpresaCnpj.getText();
+        String razao = txtEmpresaRazaoSocial.getText();
+        if (cnpj.isEmpty() || razao.isEmpty()) {
+            preenchaTodosOsCampos();
+            return;
+        }
+        try {
+            //todo adaptar
+            // boolean success = Main.modificarEmpresaUseCase.update(id,cnpj,razao);
+            boolean success = true;
+            if (success) {
+                confirm();
+            } else {
+                showUpdateErrorMessage();
+            }
+        } catch (Exception e) {
+            showUpdateErrorMessage(e);
+        }
+    }
+
+    private void setUpInsertButton() {
+        String cnpj = txtEmpresaCnpj.getText();
+        String razao = txtEmpresaRazaoSocial.getText();
+        if (cnpj.isEmpty() || razao.isEmpty()) {
+            preenchaTodosOsCampos();
+            return;
+        }
+        try {
+            //todo adaptar
+            // boolean success = Main.adicinarEmpresaUseCase.update(cnpj,razao);
+            boolean success = true;
+            if (success) {
+                confirm();
+            } else {
+                showInsertErrorMessage();
+            }
+        } catch (Exception e) {
+            showInsertErrorMessage(e);
+        }
+    }
+
+
+    private void confirm() throws IOException {
+        successMessage();
+        UILoader.substituirTela(Tela.MENU_EMPRESA.getNomeTela());
+        UILoader.freeBundle();
+    }
+
+    private void successMessage() {
+        FabricaAlerts.criarAlertGenerico("Sucesso", "Empresa salva com sucesso", "Você será redirecionado(a) ao menu", Alert.AlertType.INFORMATION);
     }
 
     private void preenchaTodosOsCampos() {

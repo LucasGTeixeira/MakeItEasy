@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import view.enums.Tela;
+import view.utils.Bundle;
 import view.utils.UILoader;
 
 import java.io.IOException;
@@ -105,7 +106,9 @@ public class MenuCampanhaController {
     private void setActionListener(Button button, Tela tela) {
         button.setOnAction(actionEvent -> {
             try {
-                UILoader.substituirTela(tela.getNomeTela());
+                Bundle bundle = new Bundle();
+                bundle.setBundle("model", tbvCampanha.getSelectionModel().selectedItemProperty().getValue());
+                UILoader.substituirTela(tela.getNomeTela(), bundle);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -29,7 +29,7 @@ public class Main extends Application {
     private static AdicionarProdutoUseCase adicionarProdutoUseCase;
     public static ListarProdutosUseCase listarProdutosUseCase;
     private static ModificarProdutoUseCase modificarProdutoUseCase;
-    private static RemoverProdutoUseCase removerProdutoUseCase;
+    public static RemoverProdutoUseCase removerProdutoUseCase;
 
     private static AdicionarVendaUseCase adicionarVendaUseCase;
     public static ListarVendasUseCase listarVendasUseCase;
@@ -38,16 +38,16 @@ public class Main extends Application {
     private static AdicionarClienteUseCase adicionarClienteUseCase;
     public static ListarClientesUseCase listarClientesUseCase;
     private static ModificarClienteUseCase modificarClienteUseCase;
-    private static RemoverClienteUseCase removerClienteUseCase;
+    public static RemoverClienteUseCase removerClienteUseCase;
     private static AdicionarCampanhaUseCase adicionarCampanhaUseCase;
     public static ListarCampanhasUseCase listarCampanhasUseCase;
     private static ModificarCampanhaUseCase modificarCampanhaUseCase;
-    private static RemoverCampanhaUseCase removerCampanhaUseCase;
+    public static RemoverCampanhaUseCase removerCampanhaUseCase;
 
     private static AdicinarEmpresaUseCase adicinarEmpresaUseCase;
     public static ListarEmpresasUseCase listarEmpresasUseCase;
     private static ModificarEmpresaUseCase modificarEmpresaUseCase;
-    private static RemoverEmpresaUseCase removerEmpresaUseCase;
+    public static RemoverEmpresaUseCase removerEmpresaUseCase;
 
     public static EmitirRelatorioVenda emitirRelatorioVenda;
 

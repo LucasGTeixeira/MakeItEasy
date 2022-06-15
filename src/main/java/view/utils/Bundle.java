@@ -12,4 +12,7 @@ public class Bundle {
     public Object getBundle(String key){
         return dataBundle.get(key);
     }
+    public void free(){
+        dataBundle.forEach((s, o) -> dataBundle.remove(s));
+    }
 }

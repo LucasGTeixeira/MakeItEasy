@@ -42,7 +42,6 @@ public class UpdateOrInsertCampanhaController {
         button.setOnAction(actionEvent -> {
             try {
                 UILoader.substituirTela(Tela.MENU_CAMPANHA.getNomeTela());
-                UILoader.freeBundle();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -62,8 +61,9 @@ public class UpdateOrInsertCampanhaController {
 
     private void setUpScreen(Bundle bundle) {
         ScreenMode screenMode;
-        if (bundle != null) {
-            Campanha campanha = (Campanha) bundle.getBundle("model");
+        Object model = bundle.getBundle("model");
+        if (model != null) {
+            Campanha campanha = (Campanha) model;
             screenMode = ScreenMode.UPDATE;
             id = campanha.getId();
             setFields(campanha);
@@ -136,7 +136,6 @@ public class UpdateOrInsertCampanhaController {
     private void confirm() throws IOException {
         successMessage();
         UILoader.substituirTela(Tela.MENU_CAMPANHA.getNomeTela());
-        UILoader.freeBundle();
     }
 
     private void successMessage() {

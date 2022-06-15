@@ -118,7 +118,6 @@ public class MenuCampanhaController {
         button.setOnAction(actionEvent -> {
             try {
                 UILoader.substituirTela(tela.getNomeTela());
-                UILoader.freeBundle();
             } catch (IOException e) {
                 e.printStackTrace();
             }

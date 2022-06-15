@@ -37,7 +37,6 @@ public class UpdateOrInsertEmpresaController {
         button.setOnAction(actionEvent -> {
             try {
                 UILoader.substituirTela(Tela.MENU_EMPRESA.getNomeTela());
-                UILoader.freeBundle();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,8 +51,9 @@ public class UpdateOrInsertEmpresaController {
 
     private void setUpScreen(Bundle bundle) {
         ScreenMode screenMode;
-        if (bundle != null) {
-            Empresa empresa = (Empresa) bundle.getBundle("model");
+        Object model = bundle.getBundle("model");
+        if (model != null) {
+            Empresa empresa = (Empresa) model;
             screenMode = ScreenMode.UPDATE;
             setFields(empresa);
             buttonConfirmar.setOnMouseClicked(mouseEvent -> setUpUpdateButton());
@@ -116,7 +116,6 @@ public class UpdateOrInsertEmpresaController {
     private void confirm() throws IOException {
         successMessage();
         UILoader.substituirTela(Tela.MENU_EMPRESA.getNomeTela());
-        UILoader.freeBundle();
     }
 
     private void successMessage() {

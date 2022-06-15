@@ -32,10 +32,7 @@ public class UILoader {
     }
 
     public static Bundle getBundle() {
+        if(bundle == null) bundle = new Bundle();
         return bundle;
-    }
-
-    public static void freeBundle() {
-        bundle = null;
     }
 }

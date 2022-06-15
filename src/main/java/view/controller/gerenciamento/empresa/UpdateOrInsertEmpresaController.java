@@ -36,6 +36,7 @@ public class UpdateOrInsertEmpresaController {
     private void setActionListener(Button button) {
         button.setOnAction(actionEvent -> {
             try {
+                UILoader.getBundle().free();
                 UILoader.substituirTela(Tela.MENU_EMPRESA.getNomeTela());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -115,6 +116,7 @@ public class UpdateOrInsertEmpresaController {
 
     private void confirm() throws IOException {
         successMessage();
+        UILoader.getBundle().free();
         UILoader.substituirTela(Tela.MENU_EMPRESA.getNomeTela());
     }
 

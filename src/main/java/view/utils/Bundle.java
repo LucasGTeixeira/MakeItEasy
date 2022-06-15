@@ -13,6 +13,7 @@ public class Bundle {
         return dataBundle.get(key);
     }
     public void free(){
-        dataBundle.forEach((s, o) -> dataBundle.remove(s));
+        LinkedHashMap<String, Object> dataBundle = (LinkedHashMap<String, Object>) this.dataBundle.clone();
+        dataBundle.forEach((s, o) -> this.dataBundle.remove(s));
     }
 }

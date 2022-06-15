@@ -41,6 +41,7 @@ public class UpdateOrInsertCampanhaController {
     private void setActionListener(Button button) {
         button.setOnAction(actionEvent -> {
             try {
+                UILoader.getBundle().free();
                 UILoader.substituirTela(Tela.MENU_CAMPANHA.getNomeTela());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -135,6 +136,7 @@ public class UpdateOrInsertCampanhaController {
 
     private void confirm() throws IOException {
         successMessage();
+        UILoader.getBundle().free();
         UILoader.substituirTela(Tela.MENU_CAMPANHA.getNomeTela());
     }
 

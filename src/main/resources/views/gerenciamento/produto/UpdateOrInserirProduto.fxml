@@ -37,11 +37,11 @@
             <TextField fx:id="txtCodigo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <ComboBox fx:id="cbbCampanha" prefHeight="27.0" prefWidth="165.0" promptText="Selecione a campanha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="cbbCategoria" prefHeight="27.0" prefWidth="165.0" promptText="Selecione a categoria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <CheckBox mnemonicParsing="false" text="Disponível" GridPane.rowIndex="5" />
+            <CheckBox fx:id="ckDisponivel" mnemonicParsing="false" text="Disponível" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Label layoutX="57.0" layoutY="32.0" prefHeight="17.0" prefWidth="125.0" />
-      <Label fx:id="TituloAlteraPorAcao" layoutX="57.0" layoutY="32.0" prefHeight="17.0" prefWidth="92.0" text="Label">
+      <Label fx:id="lblTitulo" layoutX="57.0" layoutY="32.0" prefHeight="17.0" prefWidth="92.0" text="Label">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

@@ -34,6 +34,8 @@ public class UpdateOrInsertCampanhaController {
 
     @FXML
     void initialize() {
+        Bundle bundle = UILoader.getBundle();
+        setUpScreen(bundle);
         setButtonsClickListener();
         setUpMasks();
     }
@@ -50,9 +52,7 @@ public class UpdateOrInsertCampanhaController {
     }
 
     private void setButtonsClickListener() {
-        Bundle bundle = UILoader.getBundle();
         setActionListener(buttonCancelar);
-        setUpScreen(bundle);
     }
 
     private void setUpMasks() {

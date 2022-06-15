@@ -92,7 +92,7 @@ public class MenuProdutoController {
     }
 
     private void setButtonsClickListener() {
-        setActionListener(buttonInserir, Tela.UPDATE_OR_INSERIR_PRODUTO);
+        setActionListenerNoBundle(buttonInserir);
         setActionListener(buttonAlterar, Tela.UPDATE_OR_INSERIR_PRODUTO);
         setActionListener(buttonVoltar, Tela.INITIAL);
         setActionListener(buttonRemover, Tela.REMOVER_PRODUTO);
@@ -104,6 +104,15 @@ public class MenuProdutoController {
                 Bundle bundle = new Bundle();
                 bundle.setBundle("model", tbvProdutos.getSelectionModel().selectedItemProperty().getValue());
                 UILoader.substituirTela(tela.getNomeTela(), bundle);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+    private void setActionListenerNoBundle(Button button) {
+        button.setOnAction(actionEvent -> {
+            try {
+                UILoader.substituirTela(Tela.UPDATE_OR_INSERIR_PRODUTO.getNomeTela());
             } catch (IOException e) {
                 e.printStackTrace();
             }

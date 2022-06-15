@@ -100,7 +100,7 @@ public class UpdateOrInsertEmpresaController {
         }
         try {
             //todo adaptar
-            // boolean success = Main.adicinarEmpresaUseCase.update(cnpj,razao);
+            // boolean success = Main.adicinarEmpresaUseCase.insert(cnpj,razao);
             boolean success = true;
             if (success) {
                 confirm();

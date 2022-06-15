@@ -97,9 +97,9 @@ public class MenuCampanhaController {
     }
 
     private void setButtonsClickListener() {
-        setActionListener(buttonInserir, Tela.UPDATE_OR_INSERIR_CAMPANHA);
+        setActionListenerNoBundle(buttonInserir, Tela.UPDATE_OR_INSERIR_CAMPANHA);
         setActionListener(buttonAlterar, Tela.UPDATE_OR_INSERIR_CAMPANHA);
-        setActionListener(buttonVoltar, Tela.INITIAL);
+        setActionListenerNoBundle(buttonVoltar, Tela.INITIAL);
         setActionListener(buttonRemover, Tela.REMOVER_CAMPANHA);
     }
 
@@ -109,6 +109,16 @@ public class MenuCampanhaController {
                 Bundle bundle = new Bundle();
                 bundle.setBundle("model", tbvCampanha.getSelectionModel().selectedItemProperty().getValue());
                 UILoader.substituirTela(tela.getNomeTela(), bundle);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+    private void setActionListenerNoBundle(Button button, Tela tela) {
+        button.setOnAction(actionEvent -> {
+            try {
+                UILoader.substituirTela(tela.getNomeTela());
+                UILoader.freeBundle();
             } catch (IOException e) {
                 e.printStackTrace();
             }

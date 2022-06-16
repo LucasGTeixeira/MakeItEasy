@@ -1,5 +1,6 @@
 package view.controller.gerenciamento.empresa;
 
+import application.main.Main;
 import domain.entities.empresa.Empresa;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -65,7 +66,7 @@ public class UpdateOrInsertEmpresaController {
         lblTitulo.setText(screenMode.getTitulo());
     }
 
-    private void setFields(Empresa empresa){
+    private void setFields(Empresa empresa) {
         id = empresa.getId();
         txtEmpresaCnpj.setText(empresa.getCnpj());
         txtEmpresaRazaoSocial.setText(empresa.getRazaoSocial());
@@ -79,9 +80,7 @@ public class UpdateOrInsertEmpresaController {
             return;
         }
         try {
-            //todo adaptar
-            // boolean success = Main.modificarEmpresaUseCase.update(id,cnpj,razao);
-            boolean success = true;
+            boolean success = Main.modificarEmpresaUseCase.update(new Empresa(id, cnpj, razao));
             if (success) {
                 confirm();
             } else {
@@ -100,14 +99,8 @@ public class UpdateOrInsertEmpresaController {
             return;
         }
         try {
-            //todo adaptar
-            // boolean success = Main.adicinarEmpresaUseCase.insert(cnpj,razao);
-            boolean success = true;
-            if (success) {
-                confirm();
-            } else {
-                showInsertErrorMessage();
-            }
+            Main.adicinarEmpresaUseCase.insert(new Empresa(cnpj, razao));
+            confirm();
         } catch (Exception e) {
             showInsertErrorMessage(e);
         }
@@ -126,10 +119,6 @@ public class UpdateOrInsertEmpresaController {
 
     private void preenchaTodosOsCampos() {
         FabricaAlerts.criarAlertGenerico("Atenção", "Preencha todos os campos", "Todos os campos são necessários", Alert.AlertType.INFORMATION);
-    }
-
-    private void showInsertErrorMessage() {
-        FabricaAlerts.criarAlertGenerico("Erro", "Não foi possível inserir essa empresa", "Você será redirecionado(a) ao menu", Alert.AlertType.INFORMATION);
     }
 
     private void showInsertErrorMessage(Exception error) {

@@ -112,6 +112,7 @@ public class MenuProdutoController {
     private void setActionListenerNoBundle(Button button) {
         button.setOnAction(actionEvent -> {
             try {
+                UILoader.getBundle().free();
                 UILoader.substituirTela(Tela.UPDATE_OR_INSERIR_PRODUTO.getNomeTela());
             } catch (IOException e) {
                 e.printStackTrace();

@@ -103,6 +103,7 @@ public class MenuEmpresaController {
     private void setActionListenerNoBundle(Button button) {
         button.setOnAction(actionEvent -> {
             try {
+                UILoader.getBundle().free();
                 UILoader.substituirTela(Tela.UPDATE_OR_INSERIR_EMPRESA.getNomeTela());
             } catch (IOException e) {
                 e.printStackTrace();

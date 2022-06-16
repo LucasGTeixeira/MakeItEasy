@@ -41,6 +41,7 @@ public class RemoverClienteController {
 
     private void redirectToMenu() {
         try {
+            UILoader.getBundle().free();
             UILoader.substituirTela(Tela.MENU_CLIENTE.getNomeTela());
         } catch (IOException e) {
             e.printStackTrace();

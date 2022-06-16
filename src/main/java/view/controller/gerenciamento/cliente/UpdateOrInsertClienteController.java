@@ -1,13 +1,15 @@
 package view.controller.gerenciamento.cliente;
 
+import application.main.Main;
 import domain.entities.cliente.Cliente;
 import domain.entities.cliente.ClienteStatus;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import view.enums.Tela;
 import view.utils.*;
-import javafx.fxml.FXML;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class UpdateOrInsertClienteController {
     @FXML
@@ -32,6 +34,7 @@ public class UpdateOrInsertClienteController {
     private ComboBox<ClienteStatus> cbbStatus;
 
     private int id;
+
     @FXML
     void initialize() {
         setButtonsClickListener();
@@ -49,7 +52,7 @@ public class UpdateOrInsertClienteController {
         });
     }
 
-    private void setUpMasks(){
+    private void setUpMasks() {
         MascaraUtils.mascaraParaData(dtNascimento);
     }
 
@@ -76,7 +79,7 @@ public class UpdateOrInsertClienteController {
         lblTitulo.setText(screenMode.getTitulo());
     }
 
-    private void setFields(Cliente cliente){
+    private void setFields(Cliente cliente) {
         id = cliente.getId();
         txtCpf.setText(cliente.getCpf());
         txtNome.setText(cliente.getNomeCompleto());
@@ -93,9 +96,14 @@ public class UpdateOrInsertClienteController {
             return;
         }
         try {
-            //todo adaptar
-            // boolean success = Main.modificarClienteUseCase.update();
-            boolean success = true;
+            String cpf = txtCpf.getText();
+            String nomeCompleto = txtNome.getText();
+            String telefone = txtTelefone.getText();
+            String email = txtEmail.getText();
+            String endereco = txtEndereco.getText();
+            ClienteStatus status = cbbStatus.getValue();
+            LocalDate dataNascimento = dtNascimento.getValue();
+            boolean success = Main.modificarClienteUseCase.update(new Cliente(id, cpf, nomeCompleto, telefone, email, endereco, status, dataNascimento));
             if (success) {
                 confirm();
             } else {
@@ -112,14 +120,15 @@ public class UpdateOrInsertClienteController {
             return;
         }
         try {
-            //todo adaptar
-            // boolean success = Main.adicinarClienteUseCase.insert();
-            boolean success = true;
-            if (success) {
-                confirm();
-            } else {
-                showInsertErrorMessage();
-            }
+            String cpf = txtCpf.getText();
+            String nomeCompleto = txtNome.getText();
+            String telefone = txtTelefone.getText();
+            String email = txtEmail.getText();
+            String endereco = txtEndereco.getText();
+            ClienteStatus status = cbbStatus.getValue();
+            LocalDate dataNascimento = dtNascimento.getValue();
+            Main.adicionarClienteUseCase.insert(new Cliente(cpf, nomeCompleto, telefone, email, endereco, status, dataNascimento));
+            confirm();
         } catch (Exception e) {
             showInsertErrorMessage(e);
         }
@@ -147,10 +156,6 @@ public class UpdateOrInsertClienteController {
 
     private void preenchaTodosOsCampos() {
         FabricaAlerts.criarAlertGenerico("Atenção", "Preencha todos os campos", "Todos os campos são necessários", Alert.AlertType.INFORMATION);
-    }
-
-    private void showInsertErrorMessage() {
-        FabricaAlerts.criarAlertGenerico("Erro", "Não foi possível inserir esse cliente", "Você será redirecionado(a) ao menu", Alert.AlertType.INFORMATION);
     }
 
     private void showInsertErrorMessage(Exception error) {

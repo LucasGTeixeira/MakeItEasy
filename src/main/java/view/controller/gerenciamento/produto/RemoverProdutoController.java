@@ -44,6 +44,7 @@ public class RemoverProdutoController {
 
     private void redirectToMenu() {
         try {
+            UILoader.getBundle().free();
             UILoader.substituirTela(Tela.MENU_PRODUTO.getNomeTela());
         } catch (IOException e) {
             e.printStackTrace();

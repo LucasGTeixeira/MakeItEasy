@@ -26,22 +26,22 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 public class Main extends Application {
 
-    private static AdicionarProdutoUseCase adicionarProdutoUseCase;
+    public static AdicionarProdutoUseCase adicionarProdutoUseCase;
     public static ListarProdutosUseCase listarProdutosUseCase;
-    private static ModificarProdutoUseCase modificarProdutoUseCase;
+    public static ModificarProdutoUseCase modificarProdutoUseCase;
     public static RemoverProdutoUseCase removerProdutoUseCase;
 
     private static AdicionarVendaUseCase adicionarVendaUseCase;
     public static ListarVendasUseCase listarVendasUseCase;
     private static ModificarVendaUseCase modificarVendaUseCase;
     private static RemoverVendaUseCase removerVendaUseCase;
-    private static AdicionarClienteUseCase adicionarClienteUseCase;
+    public static AdicionarClienteUseCase adicionarClienteUseCase;
     public static ListarClientesUseCase listarClientesUseCase;
-    private static ModificarClienteUseCase modificarClienteUseCase;
+    public static ModificarClienteUseCase modificarClienteUseCase;
     public static RemoverClienteUseCase removerClienteUseCase;
-    private static AdicionarCampanhaUseCase adicionarCampanhaUseCase;
+    public static AdicionarCampanhaUseCase adicionarCampanhaUseCase;
     public static ListarCampanhasUseCase listarCampanhasUseCase;
-    private static ModificarCampanhaUseCase modificarCampanhaUseCase;
+    public static ModificarCampanhaUseCase modificarCampanhaUseCase;
     public static RemoverCampanhaUseCase removerCampanhaUseCase;
 
     public static AdicinarEmpresaUseCase adicinarEmpresaUseCase;

@@ -42,6 +42,7 @@ public class RemoverEmpresaController {
 
     private void redirectToMenu() {
         try {
+            UILoader.getBundle().free();
             UILoader.substituirTela(Tela.MENU_EMPRESA.getNomeTela());
         } catch (IOException e) {
             e.printStackTrace();

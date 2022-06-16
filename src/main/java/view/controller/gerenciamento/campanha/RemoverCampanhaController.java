@@ -42,6 +42,7 @@ public class RemoverCampanhaController {
 
     private void redirectToMenu() {
         try {
+            UILoader.getBundle().free();
             UILoader.substituirTela(Tela.MENU_CAMPANHA.getNomeTela());
         } catch (IOException e) {
             e.printStackTrace();

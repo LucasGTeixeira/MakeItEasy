@@ -9,6 +9,7 @@ import view.enums.Tela;
 import view.utils.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class UpdateOrInsertCampanhaController {
     @FXML
@@ -92,10 +93,15 @@ public class UpdateOrInsertCampanhaController {
             preenchaTodosOsCampos();
             return;
         }
+
+        String codigo = txtCod.getText();
+        String nome = txtNome.getText();
+        String edicao = txtEdicao.getText();
+        LocalDate dataLancamento = dtLancamento.getValue();
+        LocalDate dataExpiracao = dtExpiracao.getValue();
+        String cnpjEmpresa = cbbEmpresa.getValue().getCnpj();
         try {
-            //todo adaptar
-            // boolean success = Main.modificarCampanhaUseCase.update();
-            boolean success = true;
+            boolean success = Main.modificarCampanhaUseCase.update(new Campanha(id, codigo, nome, edicao, dataLancamento, dataExpiracao, cnpjEmpresa));
             if (success) {
                 confirm();
             } else {
@@ -111,15 +117,16 @@ public class UpdateOrInsertCampanhaController {
             preenchaTodosOsCampos();
             return;
         }
+        String codigo = txtCod.getText();
+        String nome = txtNome.getText();
+        String edicao = txtEdicao.getText();
+        LocalDate dataLancamento = dtLancamento.getValue();
+        LocalDate dataExpiracao = dtExpiracao.getValue();
+        String cnpjEmpresa = cbbEmpresa.getValue().getCnpj();
+
         try {
-            //todo adaptar
-            // boolean success = Main.adicinarCampanhaUseCase.insert();
-            boolean success = true;
-            if (success) {
-                confirm();
-            } else {
-                showInsertErrorMessage();
-            }
+            Main.adicionarCampanhaUseCase.insert(new Campanha(codigo, nome, edicao, dataLancamento, dataExpiracao, cnpjEmpresa));
+            confirm();
         } catch (Exception e) {
             showInsertErrorMessage(e);
         }
@@ -146,10 +153,6 @@ public class UpdateOrInsertCampanhaController {
 
     private void preenchaTodosOsCampos() {
         FabricaAlerts.criarAlertGenerico("Atenção", "Preencha todos os campos", "Todos os campos são necessários", Alert.AlertType.INFORMATION);
-    }
-
-    private void showInsertErrorMessage() {
-        FabricaAlerts.criarAlertGenerico("Erro", "Não foi possível inserir essa campanha", "Você será redirecionado(a) ao menu", Alert.AlertType.INFORMATION);
     }
 
     private void showInsertErrorMessage(Exception error) {

@@ -10,6 +10,7 @@ import view.enums.Tela;
 import view.utils.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 public class UpdateOrInsertProdutoController {
     @FXML
@@ -64,7 +65,6 @@ public class UpdateOrInsertProdutoController {
     }
 
 
-
     private void setUpScreen(Bundle bundle) {
         ScreenMode screenMode;
         Object model = bundle.getBundle("model");
@@ -101,10 +101,15 @@ public class UpdateOrInsertProdutoController {
             preenchaTodosOsCampos();
             return;
         }
+
+        Integer codProduto = Integer.parseInt(txtCodigo.getText());
+        String nome = txtNome.getText();
+        CategoriaProdutos categoria = cbbCategoria.getValue();
+        Boolean disponibilidade = ckDisponivel.isSelected();
+        String codCampanha = cbbCampanha.getValue().getCodigo();
         try {
-            //todo adaptar
-            // boolean success = Main.modificarProdutoUseCase.update();
-            boolean success = true;
+            BigDecimal valor = new BigDecimal(txtValor.getText());
+            boolean success = Main.modificarProdutoUseCase.update(new Produto(id, codProduto, nome, categoria, valor, disponibilidade, codCampanha));
             if (success) {
                 confirm();
             } else {
@@ -120,15 +125,16 @@ public class UpdateOrInsertProdutoController {
             preenchaTodosOsCampos();
             return;
         }
+
+        Integer codProduto = Integer.parseInt(txtCodigo.getText());
+        String nome = txtNome.getText();
+        CategoriaProdutos categoria = cbbCategoria.getValue();
+        BigDecimal valor = BigDecimal.valueOf(Long.parseLong(txtValor.getText()));
+        Boolean disponibilidade = ckDisponivel.isSelected();
+        String codCampanha = cbbCampanha.getValue().getCodigo();
         try {
-            //todo adaptar
-            // boolean success = Main.adicinarProdutoUseCase.insert();
-            boolean success = true;
-            if (success) {
-                confirm();
-            } else {
-                showInsertErrorMessage();
-            }
+            Main.adicionarProdutoUseCase.insert(new Produto(id, codProduto, nome, categoria, valor, disponibilidade, codCampanha));
+            confirm();
         } catch (Exception e) {
             showInsertErrorMessage(e);
         }
@@ -152,10 +158,6 @@ public class UpdateOrInsertProdutoController {
 
     private void preenchaTodosOsCampos() {
         FabricaAlerts.criarAlertGenerico("Atenção", "Preencha todos os campos", "Todos os campos são necessários", Alert.AlertType.INFORMATION);
-    }
-
-    private void showInsertErrorMessage() {
-        FabricaAlerts.criarAlertGenerico("Erro", "Não foi possível inserir esse produto", "Você será redirecionado(a) ao menu", Alert.AlertType.INFORMATION);
     }
 
     private void showInsertErrorMessage(Exception error) {

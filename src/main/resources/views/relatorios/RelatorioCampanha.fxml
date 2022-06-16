@@ -44,5 +44,6 @@
       <Button fx:id="buttonVoltar" layoutX="442.0" layoutY="374.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Voltar" />
       <DatePicker fx:id="dtExpiracao" layoutX="401.0" layoutY="2.0" prefHeight="25.0" prefWidth="103.0" promptText="🔎 | Data Expiração" />
       <DatePicker fx:id="dtLancamento" layoutX="277.0" layoutY="2.0" prefHeight="25.0" prefWidth="123.0" promptText="🔎 | Data Lançamento" />
+      <Button fx:id="btnFiltrar" layoutX="3.0" layoutY="374.0" mnemonicParsing="false" text="Filtrar" />
    </children>
 </AnchorPane>

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.relatorios.RelatorioEmpresaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.relatorios.RelatorioEmpresaController">
    <children>
       <TableView layoutX="177.0" layoutY="30.0" prefHeight="340.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
         <columns>
@@ -27,5 +27,6 @@
       </TextField>
       <Button fx:id="buttonEnviarCSV" layoutX="522.0" layoutY="374.0" mnemonicParsing="false" text="Enviar CSV" />
       <Button fx:id="buttonVoltar" layoutX="442.0" layoutY="374.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Voltar" />
+      <Button fx:id="btnFiltrar" layoutX="2.0" layoutY="373.0" mnemonicParsing="false" text="Filtrar" />
    </children>
 </AnchorPane>

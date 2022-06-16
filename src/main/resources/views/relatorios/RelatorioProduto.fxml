@@ -48,5 +48,6 @@
       <Button fx:id="buttonEnviarCSV" layoutX="522.0" layoutY="374.0" mnemonicParsing="false" text="Enviar CSV" />
       <Button fx:id="buttonVoltar" layoutX="442.0" layoutY="374.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Voltar" />
       <CheckBox fx:id="checkDisponivel" layoutX="335.0" layoutY="7.0" mnemonicParsing="false" text="Disponível" />
+      <Button fx:id="buttonEnviarCSV1" layoutX="2.0" layoutY="373.0" mnemonicParsing="false" text="Filtrar" />
    </children>
 </AnchorPane>

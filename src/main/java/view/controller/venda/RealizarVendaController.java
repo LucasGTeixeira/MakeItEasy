@@ -144,11 +144,8 @@ public class RealizarVendaController {
             preenchaTodosOsCampos();
             return;
         }
-        //Todo logica para montar lista de produtos filtrada e multiplicando pela quantidade escolhida
-        // Usar mapa de selectedProducts para repassar itens, valor e quantidade de cada um (ProdutoSelected contém esses dados)
         try {
-            //todo adaptar
-            // boolean success = Main.adicinarProdutoUseCase.insert();
+            //todo AdaptarUC
             boolean success = true;
             if (success) {
                 confirm();

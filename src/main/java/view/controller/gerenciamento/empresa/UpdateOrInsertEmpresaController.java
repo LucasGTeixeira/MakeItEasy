@@ -80,6 +80,7 @@ public class UpdateOrInsertEmpresaController {
             return;
         }
         try {
+            //todo AdaptarUC
             boolean success = Main.modificarEmpresaUseCase.update(new Empresa(id, cnpj, razao));
             if (success) {
                 confirm();
@@ -99,6 +100,7 @@ public class UpdateOrInsertEmpresaController {
             return;
         }
         try {
+            //todo AdaptarUC
             Main.adicinarEmpresaUseCase.insert(new Empresa(cnpj, razao));
             confirm();
         } catch (Exception e) {

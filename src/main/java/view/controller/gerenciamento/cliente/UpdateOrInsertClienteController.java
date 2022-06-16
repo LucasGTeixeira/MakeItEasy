@@ -103,6 +103,7 @@ public class UpdateOrInsertClienteController {
             String endereco = txtEndereco.getText();
             ClienteStatus status = cbbStatus.getValue();
             LocalDate dataNascimento = dtNascimento.getValue();
+            //todo AdaptarUC
             boolean success = Main.modificarClienteUseCase.update(new Cliente(id, cpf, nomeCompleto, telefone, email, endereco, status, dataNascimento));
             if (success) {
                 confirm();
@@ -127,6 +128,7 @@ public class UpdateOrInsertClienteController {
             String endereco = txtEndereco.getText();
             ClienteStatus status = cbbStatus.getValue();
             LocalDate dataNascimento = dtNascimento.getValue();
+            //todo AdaptarUC
             Main.adicionarClienteUseCase.insert(new Cliente(cpf, nomeCompleto, telefone, email, endereco, status, dataNascimento));
             confirm();
         } catch (Exception e) {

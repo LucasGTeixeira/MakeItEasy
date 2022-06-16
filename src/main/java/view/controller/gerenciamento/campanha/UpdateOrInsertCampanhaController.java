@@ -101,6 +101,7 @@ public class UpdateOrInsertCampanhaController {
         LocalDate dataExpiracao = dtExpiracao.getValue();
         String cnpjEmpresa = cbbEmpresa.getValue().getCnpj();
         try {
+            //todo AdaptarUC
             boolean success = Main.modificarCampanhaUseCase.update(new Campanha(id, codigo, nome, edicao, dataLancamento, dataExpiracao, cnpjEmpresa));
             if (success) {
                 confirm();
@@ -125,6 +126,7 @@ public class UpdateOrInsertCampanhaController {
         String cnpjEmpresa = cbbEmpresa.getValue().getCnpj();
 
         try {
+            //todo AdaptarUC
             Main.adicionarCampanhaUseCase.insert(new Campanha(codigo, nome, edicao, dataLancamento, dataExpiracao, cnpjEmpresa));
             confirm();
         } catch (Exception e) {

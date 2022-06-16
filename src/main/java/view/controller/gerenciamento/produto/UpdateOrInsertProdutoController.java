@@ -109,6 +109,7 @@ public class UpdateOrInsertProdutoController {
         String codCampanha = cbbCampanha.getValue().getCodigo();
         try {
             BigDecimal valor = new BigDecimal(txtValor.getText());
+            //todo AdaptarUC
             boolean success = Main.modificarProdutoUseCase.update(new Produto(id, codProduto, nome, categoria, valor, disponibilidade, codCampanha));
             if (success) {
                 confirm();
@@ -133,6 +134,7 @@ public class UpdateOrInsertProdutoController {
         Boolean disponibilidade = ckDisponivel.isSelected();
         String codCampanha = cbbCampanha.getValue().getCodigo();
         try {
+            //todo AdaptarUC
             Main.adicionarProdutoUseCase.insert(new Produto(id, codProduto, nome, categoria, valor, disponibilidade, codCampanha));
             confirm();
         } catch (Exception e) {

@@ -17,7 +17,6 @@ import domain.usecases.produto.*;
 import domain.usecases.relatorio.*;
 import domain.usecases.venda.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 public class Main {
 
@@ -29,11 +28,12 @@ public class Main {
     private static AdicionarVendaUseCase adicionarVendaUseCase;
     private static ListarVendasUseCase listarVendasUseCase;
     private static ModificarVendaUseCase modificarVendaUseCase;
-    private static RemoverVendaUseCase removerVendaUseCase;
+
     private static AdicionarClienteUseCase adicionarClienteUseCase;
     private static ListarClientesUseCase listarClientesUseCase;
     private static ModificarClienteUseCase modificarClienteUseCase;
     private static RemoverClienteUseCase removerClienteUseCase;
+
     private static AdicionarCampanhaUseCase adicionarCampanhaUseCase;
     private static ListarCampanhasUseCase listarCampanhasUseCase;
     private static ModificarCampanhaUseCase modificarCampanhaUseCase;
@@ -45,13 +45,9 @@ public class Main {
     private static RemoverEmpresaUseCase removerEmpresaUseCase;
 
     public static EmitirRelatorioVenda emitirRelatorioVenda;
-
     public static EmitirRelatorioCliente emitirRelatorioCliente;
-
     public static EmitirRelatorioProdutos emitirRelatorioProdutos;
-
     public static EmitirRelatorioEmpresa emitirRelatorioEmpresa;
-
     public static EmitirRelatorioCampanhas emitirRelatorioCampanhas;
 
     public static void main(String[] args) {
@@ -103,29 +99,29 @@ public class Main {
                 ClienteStatus.ATIVO, LocalDate.of(2000, 8, 10));
 
         Produto produto1 = new Produto(111, "Pente", CategoriaProdutos.COSMETICOS,
-                new BigDecimal("10.0"), true, "666666");
+                10.0, true, "666666");
 
         Produto produto2 = new Produto(222, "Base", CategoriaProdutos.COSMETICOS,
-                new BigDecimal("22.0"), true, "666666");
+                22.0, true, "666666");
 
         Produto produto3 = new Produto(333, "Panela de pressão", CategoriaProdutos.COZINHA,
-                new BigDecimal("200.0"), true, "123456");
+                200.0, true, "123456");
 
         Produto produto4 = new Produto(444, "Liquidificador master", CategoriaProdutos.COZINHA,
-                new BigDecimal("85.0"), true, "666666");
+                85.0, true, "666666");
 
         Produto produto5 = new Produto(555, "Esteira", CategoriaProdutos.SAUDE_BEM_ESTAR,
-                new BigDecimal("920.0"), true, "451611");
+                920.0, true, "451611");
 
         Produto produto6 = new Produto(4,444, "Modificado Liq master", CategoriaProdutos.COZINHA,
-                new BigDecimal("85.0"), true, "666666");
+                85.0, true, "666666");
 
         //VENDAS
-        Venda venda1 = new Venda("15645789544", 111, 100.00F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
-        Venda venda2 = new Venda("15645789544", 111, 200.00F, FormaPagamento.BOLETO_BANCARIO, StatusVenda.NAO_ENVIADO);
-        Venda venda3 = new Venda("22648889544", 333, 600.00F, FormaPagamento.PIX, StatusVenda.ENVIADO);
-        Venda venda4 = new Venda("48415548755", 555, 920.0F, FormaPagamento.CREDITO, StatusVenda.ENVIADO);
-        Venda venda5 = new Venda(4,"33315548766", 555, 1500.0F, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO);
+        Venda venda1 = new Venda("15645789544", 111,  FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO,1);
+        Venda venda2 = new Venda("15645789544", 111,  FormaPagamento.BOLETO_BANCARIO, StatusVenda.NAO_ENVIADO,2);
+        Venda venda3 = new Venda("22648889544", 333,  FormaPagamento.PIX, StatusVenda.ENVIADO, 3);
+        Venda venda4 = new Venda("48415548755", 555,  FormaPagamento.CREDITO, StatusVenda.ENVIADO,4);
+        Venda venda5 = new Venda(4,"33315548766", 555, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO,5);
 
         //EMPRESAS
         Integer emp1 = adicinarEmpresaUseCase.insert(empresa1);
@@ -173,30 +169,30 @@ public class Main {
         EmpresaDAO empresaDAO = new MockedEmpresaDAO();
         ClienteDAO clienteDAO = new MockedClienteDAO();
 
-        adicionarVendaUseCase = new AdicionarVendaUseCase(produtoDAO, clienteDAO, vendaDAO);
-        listarVendasUseCase = new ListarVendasUseCase(vendaDAO);
-        modificarVendaUseCase = new ModificarVendaUseCase(vendaDAO);
-        removerVendaUseCase = new RemoverVendaUseCase(vendaDAO);
-
-        adicionarProdutoUseCase = new AdicionarProdutoUseCase(produtoDAO, campanhaDAO);
         listarProdutosUseCase = new ListarProdutosUseCase(produtoDAO);
-        modificarProdutoUseCase = new ModificarProdutoUseCase(produtoDAO, campanhaDAO);
-        removerProdutoUseCase = new RemoverProdutoUseCase(produtoDAO);
-
-        adicionarCampanhaUseCase = new AdicionarCampanhaUseCase(campanhaDAO, empresaDAO);
+        listarVendasUseCase = new ListarVendasUseCase(vendaDAO);
         listarCampanhasUseCase = new ListarCampanhasUseCase(campanhaDAO);
-        modificarCampanhaUseCase = new ModificarCampanhaUseCase(campanhaDAO);
-        removerCampanhaUseCase = new RemoverCampanhaUseCase(campanhaDAO);
-
-        adicinarEmpresaUseCase = new AdicinarEmpresaUseCase(empresaDAO);
-        listarEmpresasUseCase = new ListarEmpresasUseCase(empresaDAO);
-        modificarEmpresaUseCase = new ModificarEmpresaUseCase(empresaDAO);
-        removerEmpresaUseCase = new RemoverEmpresaUseCase(empresaDAO, campanhaDAO);
-
-        adicionarClienteUseCase = new AdicionarClienteUseCase(clienteDAO);
         listarClientesUseCase = new ListarClientesUseCase(clienteDAO);
-        modificarClienteUseCase = new ModificarClienteUseCase(clienteDAO);
-        removerClienteUseCase = new RemoverClienteUseCase(clienteDAO);
+        listarEmpresasUseCase = new ListarEmpresasUseCase(empresaDAO);
+
+        adicionarVendaUseCase = new AdicionarVendaUseCase(vendaDAO, listarClientesUseCase, listarProdutosUseCase);
+        modificarVendaUseCase = new ModificarVendaUseCase(vendaDAO);
+
+        adicionarProdutoUseCase = new AdicionarProdutoUseCase(produtoDAO, listarProdutosUseCase, listarCampanhasUseCase);
+        modificarProdutoUseCase = new ModificarProdutoUseCase(produtoDAO, listarProdutosUseCase, listarCampanhasUseCase);
+        removerProdutoUseCase = new RemoverProdutoUseCase(produtoDAO, listarProdutosUseCase);
+
+        adicionarCampanhaUseCase = new AdicionarCampanhaUseCase(campanhaDAO, listarEmpresasUseCase, listarCampanhasUseCase);
+        modificarCampanhaUseCase = new ModificarCampanhaUseCase(listarCampanhasUseCase, campanhaDAO);
+        removerCampanhaUseCase = new RemoverCampanhaUseCase(listarCampanhasUseCase, campanhaDAO);
+
+        adicinarEmpresaUseCase = new AdicinarEmpresaUseCase(empresaDAO, listarEmpresasUseCase);
+        modificarEmpresaUseCase = new ModificarEmpresaUseCase(empresaDAO, listarEmpresasUseCase);
+        removerEmpresaUseCase = new RemoverEmpresaUseCase(empresaDAO, listarEmpresasUseCase, listarCampanhasUseCase);
+
+        adicionarClienteUseCase = new AdicionarClienteUseCase(clienteDAO, listarClientesUseCase);
+        modificarClienteUseCase = new ModificarClienteUseCase(clienteDAO, listarClientesUseCase);
+        removerClienteUseCase = new RemoverClienteUseCase(clienteDAO, listarClientesUseCase);
 
         emitirRelatorioVenda = new EmitirRelatorioVenda(vendaDAO);
         emitirRelatorioCliente = new EmitirRelatorioCliente(clienteDAO);

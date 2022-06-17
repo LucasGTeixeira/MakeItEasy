@@ -1,6 +1,5 @@
 package domain.usecases.utils;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -13,7 +12,7 @@ public abstract class Validator<T> {
 
     public static boolean nullOrEmpty(Collection collection){
         return collection == null || collection.isEmpty();
-    } //sobrecarga para collections
+    }
 
     public static boolean isNull(Enum enumeracao){
         return enumeracao == null;
@@ -31,11 +30,7 @@ public abstract class Validator<T> {
         return integer == null || integer <= 0;
     }
 
-    public static boolean isNullOrLesserEqualZero(Float floatNumber){
-        return floatNumber == null || floatNumber <= 0;
-    }
-
-    public static boolean isNullOrLesserEqualZero(BigDecimal bigDecimal){
-        return bigDecimal == null || bigDecimal.compareTo(BigDecimal.valueOf(0)) <= 0;
+    public static boolean isNullOrLesserEqualZero(Double doubleNumber){
+        return doubleNumber == null || doubleNumber <= 0;
     }
 }

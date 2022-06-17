@@ -1,7 +1,7 @@
 package domain.usecases.campanha;
 
 import domain.entities.campanha.Campanha;
-import domain.usecases.empresa.EmpresaDAO;
+import domain.usecases.empresa.ListarEmpresasUseCase;
 import domain.usecases.utils.Exceptions.EntityAlreadyExistsException;
 import domain.usecases.utils.Exceptions.EntityNotFoundException;
 import domain.usecases.utils.Notification;
@@ -10,11 +10,13 @@ import domain.usecases.utils.Validator;
 public class AdicionarCampanhaUseCase {
 
     private final CampanhaDAO campanhaDAO;
-    private final EmpresaDAO empresaDAO;
+    private final ListarEmpresasUseCase listarEmpresasUseCase;
+    private final ListarCampanhasUseCase listarCampanhasUseCase;
 
-    public AdicionarCampanhaUseCase(CampanhaDAO campanhaDAO, EmpresaDAO empresaDAO) {
+    public AdicionarCampanhaUseCase(CampanhaDAO campanhaDAO, ListarEmpresasUseCase listarEmpresasUseCase, ListarCampanhasUseCase listarCampanhasUseCase) {
         this.campanhaDAO = campanhaDAO;
-        this.empresaDAO = empresaDAO;
+        this.listarEmpresasUseCase = listarEmpresasUseCase;
+        this.listarCampanhasUseCase = listarCampanhasUseCase;
     }
 
     public Integer insert(Campanha campanha){
@@ -25,12 +27,12 @@ public class AdicionarCampanhaUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String codigoOptional = campanha.getCodigo();
-        boolean codigoCampanhaAlreadyExists = campanhaDAO.findByCodigo(codigoOptional).isPresent();
+        boolean codigoCampanhaAlreadyExists = listarCampanhasUseCase.findByCodigo(codigoOptional).isPresent();
         if(codigoCampanhaAlreadyExists)
             throw new EntityAlreadyExistsException("Já existe uma campanha com este código");
 
         String cnpjEmpresaOptional = campanha.getCnpjEmpresa();
-        boolean cnpjEmpresaNotFound = empresaDAO.findByCnpj(cnpjEmpresaOptional).isEmpty();
+        boolean cnpjEmpresaNotFound = listarEmpresasUseCase.findByCnpj(cnpjEmpresaOptional).isEmpty();
         if(cnpjEmpresaNotFound)
             throw new EntityNotFoundException("Não há nenhuma empresa com este Cnpj");
 

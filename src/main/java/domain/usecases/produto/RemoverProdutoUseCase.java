@@ -6,9 +6,11 @@ import domain.usecases.utils.Exceptions.EntityNotFoundException;
 public class RemoverProdutoUseCase {
 
     private final ProdutoDAO produtoDAO;
+    private final ListarProdutosUseCase listarProdutosUseCase;
 
-    public RemoverProdutoUseCase(ProdutoDAO produtoDAO) {
+    public RemoverProdutoUseCase(ProdutoDAO produtoDAO, ListarProdutosUseCase listarProdutosUseCase) {
         this.produtoDAO = produtoDAO;
+        this.listarProdutosUseCase = listarProdutosUseCase;
     }
 
     public boolean delete(Produto produto){
@@ -16,7 +18,7 @@ public class RemoverProdutoUseCase {
             throw new IllegalArgumentException("Produto não pode ser nulo");
 
         Integer codProduto = produto.getCodProduto();
-        boolean codProdutoNotFound = produtoDAO.findByCodProduto(codProduto).isEmpty();
+        boolean codProdutoNotFound = listarProdutosUseCase.findByCodProduto(codProduto).isEmpty();
         if(codProdutoNotFound)
             throw new EntityNotFoundException("Codigo do produtão não pertece a nenhum produto no sistema");
 
@@ -27,7 +29,7 @@ public class RemoverProdutoUseCase {
         if (id == null)
             throw new IllegalArgumentException("id de produto não pode ser nulo");
 
-        boolean produtoIdNotFound = produtoDAO.findOne(id).isEmpty();
+        boolean produtoIdNotFound = listarProdutosUseCase.findOne(id).isEmpty();
         if(produtoIdNotFound)
             throw new EntityNotFoundException("id não pertence a nenhum produto do sistema");
 

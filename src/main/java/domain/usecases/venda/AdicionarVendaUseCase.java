@@ -1,21 +1,25 @@
 package domain.usecases.venda;
 
+import domain.entities.produto.Produto;
 import domain.entities.venda.Venda;
-import domain.usecases.cliente.ClienteDAO;
-import domain.usecases.produto.ProdutoDAO;
+import domain.usecases.cliente.ListarClientesUseCase;
+import domain.usecases.produto.ListarProdutosUseCase;
 import domain.usecases.utils.Exceptions.EntityNotFoundException;
 import domain.usecases.utils.Notification;
 import domain.usecases.utils.Validator;
 
-public class AdicionarVendaUseCase {
-    private final ProdutoDAO produtoDAO;
-    private final ClienteDAO clienteDAO;
-    private final VendaDAO vendaDAO;
+import java.math.BigDecimal;
+import java.util.Optional;
 
-    public AdicionarVendaUseCase(ProdutoDAO produtoDAO, ClienteDAO clienteDAO, VendaDAO vendaDAO) {
-        this.produtoDAO = produtoDAO;
-        this.clienteDAO = clienteDAO;
+public class AdicionarVendaUseCase {
+    private final VendaDAO vendaDAO;
+    private final ListarClientesUseCase listarClientesUseCase;
+    private final ListarProdutosUseCase listarProdutosUseCase;
+
+    public AdicionarVendaUseCase(VendaDAO vendaDAO, ListarClientesUseCase listarClientesUseCase, ListarProdutosUseCase listarProdutosUseCase) {
         this.vendaDAO = vendaDAO;
+        this.listarClientesUseCase = listarClientesUseCase;
+        this.listarProdutosUseCase = listarProdutosUseCase;
     }
 
     public Integer insert(Venda venda){
@@ -26,12 +30,16 @@ public class AdicionarVendaUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         Integer codProduto = venda.getCodProduto();
-        boolean codProdutoNotFound = produtoDAO.findByCodProduto(codProduto).isEmpty();
+        Optional<Produto> produtoOptional = listarProdutosUseCase.findByCodProduto(codProduto);
+        boolean codProdutoNotFound = produtoOptional.isEmpty();
         if(codProdutoNotFound)
             throw new EntityNotFoundException("Produto indicado não encontrado");
+        Double valorProduto = produtoOptional.get().getValor();
+        venda.setValorTotal(valorProduto * venda.getQntProduto());
+
 
         String cpfCliente = venda.getCpfCliente();
-        boolean cpfClienteNotFound = clienteDAO.findByCpf(cpfCliente).isEmpty();
+        boolean cpfClienteNotFound = listarClientesUseCase.findByCpf(cpfCliente).isEmpty();
         if(cpfClienteNotFound)
             throw new EntityNotFoundException("Cliente indicado não encontrado");
 

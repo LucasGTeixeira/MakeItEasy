@@ -14,10 +14,10 @@ public class VendaValidator extends Validator<Venda> {
 
         if(nullOrEmpty(venda.getCpfCliente()))
             notification.addError("cpf do cliente está nulo ou vazio");
+        if(isNullOrLesserEqualZero(venda.getQntProduto()))
+            notification.addError("a quantidade de produtos está nula ou é menor ou igual a zero");
         if(isNullOrLesserEqualZero(venda.getCodProduto()))
             notification.addError("cod produto não pode ser nulo ou menor igual a zero");
-        if(isNullOrLesserEqualZero(venda.getValorTotal()))
-            notification.addError("valor da venda não pode ser nulo ou menor igual a zero");
         if(isNull(venda.getStatusVenda()))
             notification.addError("status da venda não pode ser nulo");
         if(isNull(venda.getFormaPagamento()))

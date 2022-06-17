@@ -7,12 +7,11 @@ public class Produto {
     private Integer codProduto;
     private String nome;
     private CategoriaProdutos categoria;
-    private BigDecimal valor;
+    private Double valor;
     private Boolean disponibilidade;
     private String codCampanha;
 
-    public Produto(Integer id, Integer codProduto, String nome, CategoriaProdutos categoria, BigDecimal valor, Boolean disponibilidade, String codCampanha) {
-        this.id = id;
+    public Produto(Integer codProduto, String nome, CategoriaProdutos categoria, Double valor, Boolean disponibilidade, String codCampanha) {
         this.codProduto = codProduto;
         this.nome = nome;
         this.categoria = categoria;
@@ -21,7 +20,8 @@ public class Produto {
         this.codCampanha = codCampanha;
     }
 
-    public Produto(Integer codProduto, String nome, CategoriaProdutos categoria, BigDecimal valor, Boolean disponibilidade, String codCampanha) {
+    public Produto(Integer id, Integer codProduto, String nome, CategoriaProdutos categoria, Double valor, Boolean disponibilidade, String codCampanha) {
+        this.id = id;
         this.codProduto = codProduto;
         this.nome = nome;
         this.categoria = categoria;
@@ -38,11 +38,11 @@ public class Produto {
         this.codCampanha = codCampanha;
     }
 
-    public BigDecimal getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

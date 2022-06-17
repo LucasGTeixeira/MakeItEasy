@@ -8,9 +8,11 @@ import domain.usecases.utils.Validator;
 public class ModificarClienteUseCase {
 
     private final ClienteDAO clienteDAO;
+    private final ListarClientesUseCase listarClientesUseCase;
 
-    public ModificarClienteUseCase(ClienteDAO clienteDAO) {
+    public ModificarClienteUseCase(ClienteDAO clienteDAO, ListarClientesUseCase listarClientesUseCase) {
         this.clienteDAO = clienteDAO;
+        this.listarClientesUseCase = listarClientesUseCase;
     }
 
     public boolean update(Cliente cliente){
@@ -21,7 +23,7 @@ public class ModificarClienteUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String cpf = cliente.getCpf();
-        boolean clienteCpfNotFound = clienteDAO.findByCpf(cpf).isEmpty();
+        boolean clienteCpfNotFound = listarClientesUseCase.findByCpf(cpf).isEmpty();
         if(clienteCpfNotFound)
             throw new EntityNotFoundException("não há nenhum cliente com esse cpf no sistema");
 

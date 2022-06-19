@@ -36,7 +36,7 @@ public class TableCreator {
     private String createClienteTable() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("CREATE TABLE Cliente (\n");
+        builder.append("CREATE TABLE Cliente  (\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("cpf TEXT NOT NULL UNIQUE, \n");
         builder.append("nomeCompleto TEXT NOT NULL, \n");
@@ -44,7 +44,7 @@ public class TableCreator {
         builder.append("email TEXT NOT NULL, \n");
         builder.append("endereco TEXT NOT NULL, \n");
         builder.append("status TEXT NOT NULL, \n");
-        builder.append("dataNascimento TEXT NOT NULL, \n");
+        builder.append("dataNascimento TEXT NOT NULL \n");
         builder.append("); \n");
 
         System.out.println(builder);
@@ -54,13 +54,14 @@ public class TableCreator {
     private String createCampanhaTable() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("CREATE TABLE Campanha (\n");
-        builder.append("id TEXT NOT NULL PRIMARY KEY, \n");
+        builder.append("CREATE TABLE Campanha  (\n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("codigo TEXT NOT NULL UNIQUE, \n");
+        builder.append("nome TEXT NOT NULL UNIQUE, \n");
         builder.append("edicao TEXT NOT NULL, \n");
         builder.append("dataLancamento TEXT NOT NULL, \n");
         builder.append("dataExpiracao TEXT NOT NULL, \n");
-        builder.append("cnpjEmpresa TEXT NOT NULL, \n");
+        builder.append("cnpjEmpresa TEXT NOT NULL \n");
         builder.append("); \n");
 
         System.out.println(builder);
@@ -70,10 +71,10 @@ public class TableCreator {
     private String createEmpresaTable() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("CREATE TABLE Empresa (\n");
+        builder.append("CREATE TABLE Empresa  (\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("cnpj TEXT NOT NULL UNIQUE, \n");
-        builder.append("razaoSocial TEXT NOT NULL, \n");
+        builder.append("razaoSocial TEXT NOT NULL \n");
         builder.append("); \n");
 
         System.out.println(builder);
@@ -83,14 +84,14 @@ public class TableCreator {
     private String createProdutoTable() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("CREATE TABLE Produto (\n");
+        builder.append("CREATE TABLE Produto  (\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("codProduto INTEGER NOT NULL UNIQUE, \n");
         builder.append("nome TEXT NOT NULL, \n");
         builder.append("categoria TEXT NOT NULL, \n");
         builder.append("valor DECIMAL(5,2), \n");
-        builder.append("disponibilidade TEXT NOT NULL, \n");
-        builder.append("codCampanha TEXT NOT NULL, \n");
+        builder.append("disponibilidade BOOLEAN NOT NULL, \n");
+        builder.append("codCampanha TEXT NOT NULL \n");
         builder.append("); \n");
 
         System.out.println(builder);
@@ -107,7 +108,7 @@ public class TableCreator {
         builder.append("formaPagamento TEXT NOT NULL, \n");
         builder.append("statusVenda TEXT NOT NULL, \n");
         builder.append("qntProduto INTEGER NOT NULL, \n");
-        builder.append("valorTotal DECIMAL(5,2) NOT NULL, \n");
+        builder.append("valorTotal DECIMAL(5,2) NOT NULL \n");
         builder.append("); \n");
 
         System.out.println(builder);

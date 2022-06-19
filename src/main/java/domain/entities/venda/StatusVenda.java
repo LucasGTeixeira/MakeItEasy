@@ -1,5 +1,7 @@
 package domain.entities.venda;
 
+import java.util.Arrays;
+
 public enum StatusVenda {
     ENVIADO("Enviado"),
     NAO_ENVIADO("Não enviado");
@@ -8,5 +10,12 @@ public enum StatusVenda {
 
     StatusVenda(String text) {
         this.text = text;
+    }
+
+    public static StatusVenda toEnum(String text) {
+        return Arrays.stream(StatusVenda.values())
+                .filter(c -> text.equals(c.toString()))
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

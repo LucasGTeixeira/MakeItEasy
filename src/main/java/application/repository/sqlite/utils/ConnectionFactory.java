@@ -11,7 +11,7 @@ public class ConnectionFactory implements AutoCloseable {
     private static PreparedStatement preparedStatement;
     private static Statement statement;
 
-    public static Connection createConnection() {
+    public static Connection createConnection(){
         try {
             instantiateConnectionIfNull();
         } catch (SQLException e) {
@@ -23,24 +23,24 @@ public class ConnectionFactory implements AutoCloseable {
     private static void instantiateConnectionIfNull() throws SQLException {
         SQLiteDataSource ds = new SQLiteDataSource();
         ds.setUrl("jdbc:sqlite:database.db");
-        if (connection == null)
+        if(connection == null)
             connection = ds.getConnection();
     }
 
 
-    public static PreparedStatement createPreparedStatement(String sql) {
-        try {
+    public static PreparedStatement createPreparedStatement(String sql){
+        try{
             preparedStatement = createConnection().prepareStatement(sql);
-        } catch (SQLException e) {
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return preparedStatement;
     }
 
-    public static Statement createStatement() {
-        try {
+    public static Statement createStatement(){
+        try{
             statement = createConnection().createStatement();
-        } catch (SQLException e) {
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return statement;
@@ -53,14 +53,14 @@ public class ConnectionFactory implements AutoCloseable {
     }
 
     private void closeConnectionIfNotNull() throws SQLException {
-        if (connection != null)
+        if(connection != null)
             connection.close();
     }
 
     private void closeStatementsIfNotNull() throws SQLException {
-        if (preparedStatement != null)
+        if(preparedStatement != null)
             preparedStatement.close();
-        if (statement != null)
+        if(statement != null)
             statement.close();
     }
 }

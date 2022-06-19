@@ -1,7 +1,7 @@
 package application.main;
 
-import application.hashMap.*;
-import application.repository.hashMap.*;
+import application.repository.sqlite.DAO.*;
+import application.repository.sqlite.utils.TableCreator;
 import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;
 import domain.entities.cliente.ClienteStatus;
@@ -53,8 +53,9 @@ public class TestesEntities {
     public static EmitirRelatorioCampanhas emitirRelatorioCampanhas;
 
     public static void main(String[] args) {
-
         injecaoDependencia();
+        setupDatabase();
+
 
         //DECALRANDO OBJETOS (SEM ID, POIS SERÁ AUTOINCREMENTADO)
         Empresa empresa1 = new Empresa("15486", "Texas Ltda");
@@ -201,7 +202,7 @@ public class TestesEntities {
 
         // ---------------- TESTES DE EXCLUSÃO COM SUCESSO ---------------------
         System.out.println("\n EXCLUINDO EMPRESA: 2");
-        removerEmpresaUseCase.delete(empresa2);
+        removerEmpresaUseCase.delete(2);
         listarEmpresasUseCase.findAll().forEach(System.out::println);
 
 //        System.out.println("\n EXCLUINDO CAMPANHA: 2");
@@ -253,12 +254,16 @@ public class TestesEntities {
 
     }
 
+    private static void setupDatabase() {
+        TableCreator dbBuilder = new TableCreator();
+        dbBuilder.buildDatabaseIfMissing();
+    }
     private static void injecaoDependencia() {
-        CampanhaDAO campanhaDAO = new MockedCampanhaDAO();
-        ProdutoDAO produtoDAO = new MockedProdutosDAO();
-        VendaDAO vendaDAO = new MockedVendasDAO();
-        EmpresaDAO empresaDAO = new MockedEmpresaDAO();
-        ClienteDAO clienteDAO = new MockedClienteDAO();
+        CampanhaDAO campanhaDAO = new SqliteCampanhaDAO();
+        ProdutoDAO produtoDAO = new SqliteProdutoDAO();
+        VendaDAO vendaDAO = new SqliteVendaDAO();
+        EmpresaDAO empresaDAO = new SqliteEmpresaDAO();
+        ClienteDAO clienteDAO = new SqliteClienteDAO();
 
         listarProdutosUseCase = new ListarProdutosUseCase(produtoDAO);
         listarVendasUseCase = new ListarVendasUseCase(vendaDAO);

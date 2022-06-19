@@ -52,14 +52,14 @@ public class SqliteCampanhaDAO implements CampanhaDAO {
     @Override
     public Optional<Campanha> findByCodigo(String codigo) {
         String sql = "SELECT * FROM Campanha" +
-                "WHERE codigo = ?";
+                " WHERE codigo = ?";
         return getCampanha(codigo, sql);
     }
 
     @Override
     public Optional<Campanha> findByCnpj(String cnpj) {
         String sql = "SELECT * FROM Campanha" +
-                "WHERE cnpj = ?";
+                " WHERE cnpjEmpresa = ?";
         return getCampanha(cnpj, sql);
     }
 
@@ -81,7 +81,7 @@ public class SqliteCampanhaDAO implements CampanhaDAO {
     @Override
     public Optional<Campanha> findOne(Integer key) {
         String sql = "SELECT * FROM Campanha" +
-                "WHERE id = ?";
+                " WHERE id = ?";
         Campanha campanha = null;
 
         try(PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)){
@@ -101,8 +101,8 @@ public class SqliteCampanhaDAO implements CampanhaDAO {
         List<Campanha> campanhas = new ArrayList<>();
         String sql = "SELECT * FROM Campanha";
 
-        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
-            ResultSet resultSet = stmt.executeQuery();
+        try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
+            ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 Campanha campanha = resultSetToEntity(resultSet);
                 campanhas.add(campanha);
@@ -115,7 +115,9 @@ public class SqliteCampanhaDAO implements CampanhaDAO {
 
     @Override
     public boolean update(Campanha campanha) {
-        String sql = "UPDATE Campanha SET nome = ?, edicao = ?, dataLancamento = ?, dataExpiracao = ?, cnpjEmpresa = ? WHERE id = ?";
+        String sql = "UPDATE Campanha SET nome = ?, edicao = ?," +
+                " dataLancamento = ?, dataExpiracao = ?, cnpjEmpresa = ?" +
+                " WHERE id = ?";
 
         try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
             ps.setString(1, campanha.getNome());
@@ -123,6 +125,7 @@ public class SqliteCampanhaDAO implements CampanhaDAO {
             ps.setString(3, campanha.getDataLancamento().toString());
             ps.setString(4, campanha.getDataExpiracao().toString());
             ps.setString(5, campanha.getCnpjEmpresa());
+            ps.setInt(6, campanha.getId());
             ps.execute();
             return true;
         } catch (SQLException e) {

@@ -7,7 +7,7 @@ import domain.usecases.utils.Validator;
 
 public class AdicinarEmpresaUseCase {
     private final EmpresaDAO empresaDAO;
-    private ListarEmpresasUseCase listarEmpresasUseCase;
+    private final ListarEmpresasUseCase listarEmpresasUseCase;
 
     public AdicinarEmpresaUseCase(EmpresaDAO empresaDAO, ListarEmpresasUseCase listarEmpresasUseCase) {
         this.empresaDAO = empresaDAO;

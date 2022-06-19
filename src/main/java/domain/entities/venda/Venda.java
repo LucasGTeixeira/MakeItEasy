@@ -9,6 +9,16 @@ public class Venda {
     private Integer qntProduto;
     private Double valorTotal;
 
+    public Venda(Integer id, String cpfCliente, Integer codProduto, FormaPagamento formaPagamento, StatusVenda statusVenda, Integer qntProduto, Double valorTotal) {
+        this.id = id;
+        this.cpfCliente = cpfCliente;
+        this.codProduto = codProduto;
+        this.formaPagamento = formaPagamento;
+        this.statusVenda = statusVenda;
+        this.qntProduto = qntProduto;
+        this.valorTotal = valorTotal;
+    }
+
     public Venda(Integer id, String cpfCliente, Integer codProduto, FormaPagamento formaPagamento, StatusVenda statusVenda, Integer qntProduto) {
         this.id = id;
         this.cpfCliente = cpfCliente;

@@ -1,6 +1,5 @@
 package application.main;
 
-import application.hashMap.*;
 import application.repository.hashMap.*;
 import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;

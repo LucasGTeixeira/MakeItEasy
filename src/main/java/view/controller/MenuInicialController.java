@@ -6,6 +6,7 @@ import domain.entities.produto.Produto;
 import domain.entities.venda.Venda;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -53,6 +54,9 @@ public class MenuInicialController {
     @FXML
     private TableColumn<Venda,String> clnTotal;
 
+    @FXML
+    private Button buttonAlterar;
+
     private final List<Venda> vendas = new ArrayList<>();
 
     @FXML
@@ -62,6 +66,19 @@ public class MenuInicialController {
         List<Venda> vendasFound = Main.listarVendasUseCase.findAll();
         vendas.addAll(vendasFound);
         tbvVendas.getItems().addAll(vendas);
+        buttonAlterar.setDisable(true);
+
+        tbvVendas.getSelectionModel().selectedItemProperty().addListener((observableValue, campanhaTableViewSelectionModel, item) -> {
+            buttonAlterar.setDisable(item == null);
+        });
+        buttonAlterar.setOnMouseClicked(mouseEvent -> {
+            try {
+                UILoader.getBundle().setBundle("model",tbvVendas.getSelectionModel().getSelectedItem());
+                UILoader.substituirTela(Tela.MENU_REALIZAR_VENDA.getNomeTela());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void setUpMenuListeners(){

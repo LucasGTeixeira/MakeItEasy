@@ -5,10 +5,12 @@ import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;
 import domain.entities.empresa.Empresa;
 import domain.entities.produto.Produto;
+import domain.entities.venda.Venda;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import view.enums.Tela;
+import view.utils.Bundle;
 import view.utils.FabricaAlerts;
 import view.utils.MascaraUtils;
 import view.utils.UILoader;
@@ -54,6 +56,10 @@ public class RealizarVendaController {
         setUpMasks();
         configurarColunas();
         setFields();
+        Bundle bundle = UILoader.getBundle();
+        Object model = bundle.getBundle("model");
+        if(model == null) return;
+        Venda venda = (Venda) model;
     }
 
     private void setButtonsClickListener() {
@@ -178,7 +184,7 @@ public class RealizarVendaController {
 
 
     private void successMessage() {
-        FabricaAlerts.criarAlertGenerico("Sucesso", "Venda efetuada", "Você será redirecionado(a)  ao menu", Alert.AlertType.INFORMATION);
+        FabricaAlerts.criarAlertGenerico("Sucesso", "Venda salva", "Você será redirecionado(a)  ao menu", Alert.AlertType.INFORMATION);
     }
 
     private void preenchaTodosOsCampos() {
@@ -186,10 +192,10 @@ public class RealizarVendaController {
     }
 
     private void showInsertErrorMessage() {
-        FabricaAlerts.criarAlertGenerico("Erro", "Não foi possível efetuar essa venda", "Você será redirecionado(a) ao menu", Alert.AlertType.INFORMATION);
+        FabricaAlerts.criarAlertGenerico("Erro", "Não foi possível salvar essa venda", "Você será redirecionado(a) ao menu", Alert.AlertType.INFORMATION);
     }
 
     private void showInsertErrorMessage(Exception error) {
-        FabricaAlerts.criarAlertGenerico("Erro", "Não foi possível efetuar essa venda", "Erro: " + error.getMessage(), Alert.AlertType.INFORMATION);
+        FabricaAlerts.criarAlertGenerico("Erro", "Não foi possível salvar essa venda", "Erro: " + error.getMessage(), Alert.AlertType.INFORMATION);
     }
 }

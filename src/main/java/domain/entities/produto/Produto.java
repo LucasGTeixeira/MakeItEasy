@@ -88,6 +88,10 @@ public class Produto {
 
     @Override
     public String toString() {
+        return codProduto + ", " + nome;
+    }
+
+    public String toRelatorio(){
         return id + ", " +
                 codProduto + ", " +
                 nome + ", " +

@@ -18,7 +18,7 @@ public class EmitirRelatorioCampanhas {
 
     public String listCampanhasToString(){
         List<Campanha> CampanhaList = campanhaDAO.findAll();
-        return CampanhaList.stream().map(Campanha::toString)
+        return CampanhaList.stream().map(Campanha::toRelatorio)
                 .collect(Collectors.joining("\n"));
     }
 

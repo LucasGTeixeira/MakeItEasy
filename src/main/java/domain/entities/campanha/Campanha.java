@@ -88,6 +88,10 @@ public class Campanha {
 
     @Override
     public String toString() {
+        return codigo + ", " + nome;
+    }
+
+    public String toRelatorio(){
         return id + ", " +
                 codigo + ", " +
                 nome + ", " +

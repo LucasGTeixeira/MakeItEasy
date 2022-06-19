@@ -42,6 +42,10 @@ public class Empresa {
 
     @Override
     public String toString() {
+        return razaoSocial;
+    }
+
+    public String toRelatorio(){
         return id + ", " +
                 cnpj + ", " +
                 razaoSocial;

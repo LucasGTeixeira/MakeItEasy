@@ -18,7 +18,7 @@ public class EmitirRelatorioCliente {
 
     public String listClientesToString(){
         List<Cliente> ClienteList = clienteDAO.findAll();
-        return ClienteList.stream().map(Cliente::toString)
+        return ClienteList.stream().map(Cliente::toRelatorio)
                 .collect(Collectors.joining("\n"));
     }
 

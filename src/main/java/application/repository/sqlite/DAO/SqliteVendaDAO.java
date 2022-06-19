@@ -90,7 +90,7 @@ public class SqliteVendaDAO implements VendaDAO {
 
         try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
             setVendaBody(venda, ps);
-            ps.setInt(8, venda.getId());
+            ps.setInt(7, venda.getId());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -111,9 +111,13 @@ public class SqliteVendaDAO implements VendaDAO {
 
     @Override
     public boolean updateStatus(Venda venda) {
-        boolean StatusVendaNaoEnviado = venda.getStatusVenda() == StatusVenda.NAO_ENVIADO;
-        if(StatusVendaNaoEnviado) {
+        StatusVenda statusVenda = venda.getStatusVenda();
+        if(statusVenda == StatusVenda.NAO_ENVIADO) {
             venda.setStatusVenda(StatusVenda.ENVIADO);
+            update(venda);
+        }
+        if(statusVenda == StatusVenda.ENVIADO){
+            venda.setStatusVenda(StatusVenda.FATURADO);
             update(venda);
         }
         return false;

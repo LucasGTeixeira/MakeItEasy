@@ -98,8 +98,8 @@ public class Venda {
     @Override
     public String toString() {
         return id + ", " +
-                cpfCliente + ", " +
                 codProduto + ", " +
+                cpfCliente + ", " +
                 valorTotal + ", " +
                 formaPagamento.text+ ", " +
                 statusVenda.text;

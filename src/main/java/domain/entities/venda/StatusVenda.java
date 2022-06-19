@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public enum StatusVenda {
     ENVIADO("Enviado"),
-    NAO_ENVIADO("Não enviado");
+    NAO_ENVIADO("Não enviado"),
+    FATURADO("Faturado");
 
     final String text;
 

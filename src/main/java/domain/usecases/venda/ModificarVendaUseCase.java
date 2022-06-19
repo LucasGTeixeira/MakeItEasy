@@ -1,10 +1,11 @@
 package domain.usecases.venda;
 
+import domain.entities.venda.StatusVenda;
 import domain.entities.venda.Venda;
 import domain.usecases.utils.Notification;
 import domain.usecases.utils.Validator;
 
-public class ModificarVendaUseCase { //TODO usado para modificar o status
+public class ModificarVendaUseCase {
     private final VendaDAO vendaDAO;
 
     public ModificarVendaUseCase(VendaDAO vendaDAO) {

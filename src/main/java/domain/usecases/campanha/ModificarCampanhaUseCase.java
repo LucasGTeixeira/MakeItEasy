@@ -6,10 +6,11 @@ import domain.usecases.utils.Notification;
 import domain.usecases.utils.Validator;
 
 public class ModificarCampanhaUseCase {
-
+    private final ListarCampanhasUseCase listarCampanhasUseCase;
     private final CampanhaDAO campanhaDAO;
 
-    public ModificarCampanhaUseCase(CampanhaDAO campanhaDAO) {
+    public ModificarCampanhaUseCase(ListarCampanhasUseCase listarCampanhasUseCase, CampanhaDAO campanhaDAO) {
+        this.listarCampanhasUseCase = listarCampanhasUseCase;
         this.campanhaDAO = campanhaDAO;
     }
 
@@ -21,7 +22,7 @@ public class ModificarCampanhaUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String codCampanha = campanha.getCodigo();  //VERIFICAR SE BUSCA/VERIFCA SE EXISTE PELO CODIGO OU PELO ID
-        boolean codCampanhaNotFound = campanhaDAO.findByCodigo(codCampanha).isEmpty();
+        boolean codCampanhaNotFound = listarCampanhasUseCase.findByCodigo(codCampanha).isEmpty();
         if(codCampanhaNotFound)
             throw new EntityNotFoundException("Não há nenhuma campanha com este código");
 

@@ -8,9 +8,12 @@ import domain.usecases.utils.Validator;
 public class ModificarEmpresaUseCase {
 
     private final EmpresaDAO empresaDAO;
+    private final ListarEmpresasUseCase listarEmpresasUseCase;
 
-    public ModificarEmpresaUseCase(EmpresaDAO empresaDAO) {
+
+    public ModificarEmpresaUseCase(EmpresaDAO empresaDAO, ListarEmpresasUseCase listarEmpresasUseCase) {
         this.empresaDAO = empresaDAO;
+        this.listarEmpresasUseCase = listarEmpresasUseCase;
     }
 
     public boolean update(Empresa empresa){
@@ -21,7 +24,7 @@ public class ModificarEmpresaUseCase {
             throw new IllegalArgumentException(notification.errorMessage());
 
         String cnpj = empresa.getCnpj();
-        boolean empresaCnpjNotFound = empresaDAO.findByCnpj(cnpj).isEmpty();
+        boolean empresaCnpjNotFound = listarEmpresasUseCase.findByCnpj(cnpj).isEmpty();
         if (empresaCnpjNotFound){
             throw new EntityNotFoundException("Não existe nenhuma empresa com esse Cnpj cadastrada no sistema");
         }

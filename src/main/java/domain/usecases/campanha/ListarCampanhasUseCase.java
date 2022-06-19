@@ -28,4 +28,10 @@ public class ListarCampanhasUseCase {
             throw new IllegalArgumentException("Código não pode ser nulo");
         return campanhaDAO.findByCodigo(codigo);
     }
+
+    public Optional<Campanha> findByCnpj(String cnpj){
+        if(Validator.nullOrEmpty(cnpj))
+            throw new IllegalArgumentException("Código não pode ser nulo");
+        return campanhaDAO.findByCnpj(cnpj);
+    }
 }

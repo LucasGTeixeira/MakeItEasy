@@ -4,25 +4,47 @@ public class Venda {
     private Integer id;
     private String cpfCliente;
     private Integer codProduto;
-    private Float valorTotal;
     private FormaPagamento formaPagamento;
     private StatusVenda statusVenda;
+    private Integer qntProduto;
+    private Double valorTotal;
 
-    public Venda(String cpfCliente, Integer codProduto, Float valorTotal, FormaPagamento formaPagamento, StatusVenda statusVenda) {
-        this.cpfCliente = cpfCliente;
-        this.codProduto = codProduto;
-        this.valorTotal = valorTotal;
-        this.formaPagamento = formaPagamento;
-        this.statusVenda = statusVenda;
-    }
-
-    public Venda(Integer id, String cpfCliente, Integer codProduto, Float valorTotal, FormaPagamento formaPagamento, StatusVenda statusVenda) {
+    public Venda(Integer id, String cpfCliente, Integer codProduto, FormaPagamento formaPagamento, StatusVenda statusVenda, Integer qntProduto, Double valorTotal) {
         this.id = id;
         this.cpfCliente = cpfCliente;
         this.codProduto = codProduto;
-        this.valorTotal = valorTotal;
         this.formaPagamento = formaPagamento;
         this.statusVenda = statusVenda;
+        this.qntProduto = qntProduto;
+        this.valorTotal = valorTotal;
+    }
+
+    public Venda(Integer id, String cpfCliente, Integer codProduto, FormaPagamento formaPagamento, StatusVenda statusVenda, Integer qntProduto) {
+        this.id = id;
+        this.cpfCliente = cpfCliente;
+        this.codProduto = codProduto;
+        this.formaPagamento = formaPagamento;
+        this.statusVenda = statusVenda;
+        this.qntProduto = qntProduto;
+    }
+
+    public Venda(String cpfCliente, Integer codProduto, FormaPagamento formaPagamento, StatusVenda statusVenda, Integer qntProduto) {
+        this.cpfCliente = cpfCliente;
+        this.codProduto = codProduto;
+        this.formaPagamento = formaPagamento;
+        this.statusVenda = statusVenda;
+        this.qntProduto = qntProduto;
+    }
+
+    public Venda() {
+    }
+
+    public Integer getQntProduto() {
+        return qntProduto;
+    }
+
+    public void setQntProduto(Integer qntProduto) {
+        this.qntProduto = qntProduto;
     }
 
     public FormaPagamento getFormaPagamento() {
@@ -41,11 +63,11 @@ public class Venda {
         this.id = id;
     }
 
-    public Float getValorTotal() {
+    public Double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(Float valorTotal) {
+    public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
 

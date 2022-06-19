@@ -6,11 +6,8 @@ public class Campanha {
     private Integer id;
     private String codigo;
     private String nome;
-
     private String edicao;
-
     private LocalDate dataLancamento;
-
     private LocalDate dataExpiracao;
     private String cnpjEmpresa;
 

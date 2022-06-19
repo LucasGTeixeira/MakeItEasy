@@ -1,7 +1,7 @@
 package domain.usecases.empresa;
 
 import domain.entities.empresa.Empresa;
-import domain.usecases.campanha.CampanhaDAO;
+import domain.usecases.campanha.ListarCampanhasUseCase;
 import domain.usecases.utils.Exceptions.EmpresaRelatedToCampanhaException;
 import domain.usecases.utils.Exceptions.EntityNotFoundException;
 
@@ -9,15 +9,17 @@ import domain.usecases.utils.Exceptions.EntityNotFoundException;
 public class RemoverEmpresaUseCase {
 
     private final EmpresaDAO empresaDAO;
-    private final CampanhaDAO campanhaDAO;
+    private final ListarEmpresasUseCase listarEmpresasUseCase;
+    private final ListarCampanhasUseCase listarCampanhasUseCase;
 
-    public RemoverEmpresaUseCase(EmpresaDAO empresaDAO, CampanhaDAO campanhaDAO) {
+    public RemoverEmpresaUseCase(EmpresaDAO empresaDAO, ListarEmpresasUseCase listarEmpresasUseCase, ListarCampanhasUseCase listarCampanhasUseCase) {
         this.empresaDAO = empresaDAO;
-        this.campanhaDAO = campanhaDAO;
+        this.listarEmpresasUseCase = listarEmpresasUseCase;
+        this.listarCampanhasUseCase = listarCampanhasUseCase;
     }
 
     public boolean isEmpresaInCampanha(Empresa empresa){
-        return campanhaDAO.findByCnpj(empresa.getCnpj()).isPresent();
+        return listarCampanhasUseCase.findByCnpj(empresa.getCnpj()).isPresent();
     }
 
     public boolean delete(Empresa empresa){
@@ -25,7 +27,7 @@ public class RemoverEmpresaUseCase {
             throw new IllegalArgumentException("Empresa não pode ser nula");
 
         String empresaCnpj = empresa.getCnpj();
-        boolean empresaCnpjNotFound = empresaDAO.findByCnpj(empresaCnpj).isEmpty();
+        boolean empresaCnpjNotFound = listarEmpresasUseCase.findByCnpj(empresaCnpj).isEmpty();
         if(empresaCnpjNotFound)
             throw new EntityNotFoundException("Não há nenhuma empresa com esse cnpj no sistema");
 
@@ -40,11 +42,11 @@ public class RemoverEmpresaUseCase {
         if(id == null)
             throw new EntityNotFoundException("id nulo ou não encontrado");
 
-        boolean idNotFound = empresaDAO.findOne(id).isEmpty();
+        boolean idNotFound = listarEmpresasUseCase.findOne(id).isEmpty();
         if(idNotFound)
             throw new EntityNotFoundException("Não há nenhuma empresa com esse id no sistema");
 
-        boolean isEmpresaRelatedToCampanha = isEmpresaInCampanha(empresaDAO.findOne(id).get());
+        boolean isEmpresaRelatedToCampanha = isEmpresaInCampanha(listarEmpresasUseCase.findOne(id).get());
         if (isEmpresaRelatedToCampanha)
             throw new EmpresaRelatedToCampanhaException("remoção inválida, pois esta empresa está ligada com uma ou mais campanhas");
 

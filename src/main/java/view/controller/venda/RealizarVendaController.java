@@ -166,7 +166,7 @@ public class RealizarVendaController {
     private void setValorTotal(){
         double total = 0;
         for (ProdutoSelected selected : selectedProducts.values()) {
-            total = total + (selected.getQuantidade()*selected.getValor().doubleValue());
+            total = total + (selected.getQuantidade()*selected.getValor());
         }
         lblTotal.setText(String.valueOf(total));
     }

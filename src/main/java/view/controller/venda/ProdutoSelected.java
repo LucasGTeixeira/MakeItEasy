@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 public class ProdutoSelected {
     private final Integer codigo;
     private final String nome;
-    private final BigDecimal valor;
+    private final double valor;
     private final int quantidade;
 
-    public ProdutoSelected(Integer codigo, String nome, BigDecimal valor, int quantidade) {
+    public ProdutoSelected(Integer codigo, String nome, double valor, int quantidade) {
         this.codigo = codigo;
         this.nome = nome;
         this.valor = valor;
@@ -27,7 +27,7 @@ public class ProdutoSelected {
         return nome;
     }
 
-    public BigDecimal getValor() {
+    public double getValor() {
         return valor;
     }
 }

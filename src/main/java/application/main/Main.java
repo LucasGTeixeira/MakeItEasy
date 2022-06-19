@@ -1,6 +1,6 @@
 package application.main;
 
-import application.repository.*;
+import application.repository.hashMap.*;
 import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;
 import domain.entities.cliente.ClienteStatus;
@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 import view.enums.Tela;
 import view.utils.UILoader;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 public class Main extends Application {
 
@@ -31,19 +30,19 @@ public class Main extends Application {
     public static ModificarProdutoUseCase modificarProdutoUseCase;
     public static RemoverProdutoUseCase removerProdutoUseCase;
 
-    private static AdicionarVendaUseCase adicionarVendaUseCase;
+    public static AdicionarVendaUseCase adicionarVendaUseCase;
     public static ListarVendasUseCase listarVendasUseCase;
-    private static ModificarVendaUseCase modificarVendaUseCase;
+    public static ModificarVendaUseCase modificarVendaUseCase;
 
-    private static AdicionarClienteUseCase adicionarClienteUseCase;
-    private static ListarClientesUseCase listarClientesUseCase;
-    private static ModificarClienteUseCase modificarClienteUseCase;
-    private static RemoverClienteUseCase removerClienteUseCase;
+    public static AdicionarClienteUseCase adicionarClienteUseCase;
+    public static ListarClientesUseCase listarClientesUseCase;
+    public static ModificarClienteUseCase modificarClienteUseCase;
+    public static RemoverClienteUseCase removerClienteUseCase;
 
-    private static AdicionarCampanhaUseCase adicionarCampanhaUseCase;
-    private static ListarCampanhasUseCase listarCampanhasUseCase;
-    private static ModificarCampanhaUseCase modificarCampanhaUseCase;
-    private static RemoverCampanhaUseCase removerCampanhaUseCase;
+    public static AdicionarCampanhaUseCase adicionarCampanhaUseCase;
+    public static ListarCampanhasUseCase listarCampanhasUseCase;
+    public static ModificarCampanhaUseCase modificarCampanhaUseCase;
+    public static RemoverCampanhaUseCase removerCampanhaUseCase;
 
     public static AdicinarEmpresaUseCase adicinarEmpresaUseCase;
     public static ListarEmpresasUseCase listarEmpresasUseCase;
@@ -51,32 +50,12 @@ public class Main extends Application {
     public static RemoverEmpresaUseCase removerEmpresaUseCase;
 
     public static EmitirRelatorioVenda emitirRelatorioVenda;
-
     public static EmitirRelatorioCliente emitirRelatorioCliente;
-
     public static EmitirRelatorioProdutos emitirRelatorioProdutos;
-
     public static EmitirRelatorioEmpresa emitirRelatorioEmpresa;
-
     public static EmitirRelatorioCampanhas emitirRelatorioCampanhas;
 
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        inject();
-        Scene scene = new Scene(UILoader.loadFXML(Tela.INITIAL.getNomeTela()));
-        UILoader.setScene(scene);
-
-        stage.setResizable(false);
-        stage.setMaxHeight(450);
-        stage.setMaxWidth(650);
-        stage.setMinHeight(400);
-        stage.setMinWidth(600);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void inject() {
+    public void inject() {
 
         injecaoDependencia();
 
@@ -185,7 +164,7 @@ public class Main extends Application {
         emitirRelatorioProdutos.gerarRelatorio();
         emitirRelatorioEmpresa.gerarRelatorio();
         emitirRelatorioCampanhas.gerarRelatorio();
-        System.out.println("Injetado");
+
     }
 
     private static void injecaoDependencia() {
@@ -197,15 +176,6 @@ public class Main extends Application {
 
         listarProdutosUseCase = new ListarProdutosUseCase(produtoDAO);
         listarVendasUseCase = new ListarVendasUseCase(vendaDAO);
-        modificarVendaUseCase = new ModificarVendaUseCase(vendaDAO);
-        removerVendaUseCase = new RemoverVendaUseCase(vendaDAO);
-
-        adicionarProdutoUseCase = new AdicionarProdutoUseCase(produtoDAO, campanhaDAO);
-        listarProdutosUseCase = new ListarProdutosUseCase(produtoDAO);
-        modificarProdutoUseCase = new ModificarProdutoUseCase(produtoDAO, campanhaDAO);
-        removerProdutoUseCase = new RemoverProdutoUseCase(produtoDAO);
-
-        adicionarCampanhaUseCase = new AdicionarCampanhaUseCase(campanhaDAO, empresaDAO);
         listarCampanhasUseCase = new ListarCampanhasUseCase(campanhaDAO);
         listarClientesUseCase = new ListarClientesUseCase(clienteDAO);
         listarEmpresasUseCase = new ListarEmpresasUseCase(empresaDAO);
@@ -235,5 +205,20 @@ public class Main extends Application {
         emitirRelatorioEmpresa = new EmitirRelatorioEmpresa(empresaDAO);
         emitirRelatorioCampanhas = new EmitirRelatorioCampanhas(campanhaDAO);
 
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        inject();
+        Scene scene = new Scene(UILoader.loadFXML(Tela.INITIAL.getNomeTela()));
+        UILoader.setScene(scene);
+
+        stage.setResizable(false);
+        stage.setMaxHeight(450);
+        stage.setMaxWidth(650);
+        stage.setMinHeight(400);
+        stage.setMinWidth(600);
+        stage.setScene(scene);
+        stage.show();
     }
 }

@@ -10,7 +10,6 @@ import view.enums.Tela;
 import view.utils.*;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 public class UpdateOrInsertProdutoController {
     @FXML
@@ -108,7 +107,7 @@ public class UpdateOrInsertProdutoController {
         Boolean disponibilidade = ckDisponivel.isSelected();
         String codCampanha = cbbCampanha.getValue().getCodigo();
         try {
-            BigDecimal valor = new BigDecimal(txtValor.getText());
+            double valor = Double.parseDouble(txtValor.getText());
             //todo AdaptarUC
             boolean success = Main.modificarProdutoUseCase.update(new Produto(id, codProduto, nome, categoria, valor, disponibilidade, codCampanha));
             if (success) {
@@ -130,7 +129,7 @@ public class UpdateOrInsertProdutoController {
         Integer codProduto = Integer.parseInt(txtCodigo.getText());
         String nome = txtNome.getText();
         CategoriaProdutos categoria = cbbCategoria.getValue();
-        BigDecimal valor = BigDecimal.valueOf(Long.parseLong(txtValor.getText()));
+        double valor = Double.parseDouble(txtValor.getText());
         Boolean disponibilidade = ckDisponivel.isSelected();
         String codCampanha = cbbCampanha.getValue().getCodigo();
         try {

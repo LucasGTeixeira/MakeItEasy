@@ -1,6 +1,8 @@
 module application {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
+    requires sqlite.jdbc;
 
     opens application.main;
     opens view.enums to javafx.fxml;

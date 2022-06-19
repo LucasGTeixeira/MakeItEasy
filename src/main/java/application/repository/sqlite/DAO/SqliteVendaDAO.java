@@ -110,6 +110,24 @@ public class SqliteVendaDAO implements VendaDAO {
     }
 
     @Override
+    public List<Venda> findVendaByStatus(StatusVenda statusVenda) {
+        List<Venda> vendas = new ArrayList<>();
+        String sql = "SELECT * FROM Venda WHERE statusVenda = ?";
+
+        try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
+            ps.setString(1,statusVenda.toString());
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                Venda venda = resultSetToEntity(resultSet);
+                vendas.add(venda);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vendas;
+    }
+
+    @Override
     public boolean updateStatus(Venda venda) {
         StatusVenda statusVenda = venda.getStatusVenda();
         if(statusVenda == StatusVenda.NAO_ENVIADO) {

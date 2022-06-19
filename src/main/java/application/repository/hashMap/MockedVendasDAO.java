@@ -1,4 +1,4 @@
-package application.repository;
+package application.repository.hashMap;
 
 import domain.entities.venda.StatusVenda;
 import domain.entities.venda.Venda;

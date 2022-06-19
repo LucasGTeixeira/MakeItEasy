@@ -1,47 +1,47 @@
-package application.repository;
+package application.repository.hashMap;
 
-import domain.entities.cliente.Cliente;
-import domain.usecases.cliente.ClienteDAO;
+import domain.entities.produto.Produto;
+import domain.usecases.produto.ProdutoDAO;
 
 import java.util.*;
 
-public class MockedClienteDAO implements ClienteDAO {
+public class MockedProdutosDAO implements ProdutoDAO {
 
-    private static final Map<Integer, Cliente> fakeDb = new LinkedHashMap<>();
+    private static final Map<Integer, Produto> fakeDb = new LinkedHashMap<>();
     private static int autoIncrementId;
     @Override
-    public Integer create(Cliente cliente) {
+    public Integer create(Produto produto) {
         autoIncrementId++;
-        cliente.setId(autoIncrementId);
-        fakeDb.put(autoIncrementId, cliente);
+        produto.setId(autoIncrementId);
+        fakeDb.put(autoIncrementId, produto);
         return autoIncrementId;
     }
 
     @Override
-    public Optional<Cliente> findByCpf(String cpf) {
+    public Optional<Produto> findByCodProduto(Integer cod) {
         return fakeDb.values().stream()
-                .filter(cliente -> cliente.getCpf().equals(cpf))
+                .filter(produto -> produto.getCodProduto().equals(cod))
                 .findAny();
     }
 
     @Override
-    public Optional<Cliente> findOne(Integer id) {
+    public Optional<Produto> findOne(Integer id) {
         return fakeDb.values().stream()
-                .filter(cliente -> cliente.getId().equals(id))
+                .filter(produto -> produto.getId().equals(id))
                 .findAny();
     }
 
     @Override
-    public List<Cliente> findAll() {
+    public List<Produto> findAll() {
         return new ArrayList<>(fakeDb.values());
     }
 
     @Override
-    public boolean update(Cliente cliente) {
-        Integer id = cliente.getId();
+    public boolean update(Produto produto) {
+        Integer id = produto.getId();
         boolean idFoundOnDb = fakeDb.containsKey(id);
         if(idFoundOnDb){
-            fakeDb.replace(id, cliente);
+            fakeDb.replace(id, produto);
             return true;
         }
         return false;
@@ -58,8 +58,8 @@ public class MockedClienteDAO implements ClienteDAO {
     }
 
     @Override
-    public boolean delete(Cliente cliente) {
-        Integer id = cliente.getId();
+    public boolean delete(Produto produto) {
+        Integer id = produto.getId();
         boolean idFoundOnDb = fakeDb.containsKey(id);
         if(idFoundOnDb){
             fakeDb.remove(id);

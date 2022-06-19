@@ -1,4 +1,4 @@
-package application.repository;
+package application.repository.hashMap;
 
 import domain.entities.campanha.Campanha;
 import domain.usecases.campanha.CampanhaDAO;

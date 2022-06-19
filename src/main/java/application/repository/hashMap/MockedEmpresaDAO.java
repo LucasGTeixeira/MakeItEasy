@@ -1,4 +1,4 @@
-package application.repository;
+package application.repository.hashMap;
 
 import domain.entities.empresa.Empresa;
 import domain.usecases.empresa.EmpresaDAO;

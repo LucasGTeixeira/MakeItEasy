@@ -101,23 +101,12 @@ public class SqliteVendaDAO implements VendaDAO {
 
     @Override
     public boolean deleteByKey(Integer key) {
-        String sql = "DELETE FROM Venda WHERE id = ?";
-
-        try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
-            ps.setInt(1, key);
-            ps.execute();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return false;
     }
 
     @Override
     public boolean delete(Venda venda) {
-        if (venda == null || venda.getId() == null)
-            throw new IllegalArgumentException("Id de venda não pode ser nulo");
-        return deleteByKey(venda.getId());
+        return false;
     }
 
     @Override

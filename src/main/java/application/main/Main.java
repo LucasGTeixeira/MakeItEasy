@@ -1,6 +1,7 @@
 package application.main;
 
-import application.repository.hashMap.*;
+import application.repository.sqlite.DAO.*;
+import application.repository.sqlite.utils.TableCreator;
 import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;
 import domain.entities.cliente.ClienteStatus;
@@ -56,8 +57,8 @@ public class Main extends Application {
     public static EmitirRelatorioCampanhas emitirRelatorioCampanhas;
 
     public void inject() {
-
         injecaoDependencia();
+        setupDatabase();
 
         //DECALRANDO OBJETOS (SEM ID, POIS SERÁ AUTOINCREMENTADO)
         Empresa empresa1 = new Empresa("15486", "Texas Ltda");
@@ -159,20 +160,24 @@ public class Main extends Application {
         Integer v3 = adicionarVendaUseCase.insert(venda3);
         Integer v4 = adicionarVendaUseCase.insert(venda4);
 
-        //emitirRelatorioVenda.gerarRelatorio();
-        emitirRelatorioCliente.gerarRelatorio();
-        emitirRelatorioProdutos.gerarRelatorio();
-        emitirRelatorioEmpresa.gerarRelatorio();
-        emitirRelatorioCampanhas.gerarRelatorio();
+//        emitirRelatorioVenda.gerarRelatorio();
+//        emitirRelatorioCliente.gerarRelatorio();
+//        emitirRelatorioProdutos.gerarRelatorio();
+//        emitirRelatorioEmpresa.gerarRelatorio();
+//        emitirRelatorioCampanhas.gerarRelatorio();
 
     }
 
+    private static void setupDatabase() {
+        TableCreator dbBuilder = new TableCreator();
+        dbBuilder.buildDatabaseIfMissing();
+    }
     private static void injecaoDependencia() {
-        CampanhaDAO campanhaDAO = new MockedCampanhaDAO();
-        ProdutoDAO produtoDAO = new MockedProdutosDAO();
-        VendaDAO vendaDAO = new MockedVendasDAO();
-        EmpresaDAO empresaDAO = new MockedEmpresaDAO();
-        ClienteDAO clienteDAO = new MockedClienteDAO();
+        CampanhaDAO campanhaDAO = new SqliteCampanhaDAO();
+        ProdutoDAO produtoDAO = new SqliteProdutoDAO();
+        VendaDAO vendaDAO = new SqliteVendaDAO();
+        EmpresaDAO empresaDAO = new SqliteEmpresaDAO();
+        ClienteDAO clienteDAO = new SqliteClienteDAO();
 
         listarProdutosUseCase = new ListarProdutosUseCase(produtoDAO);
         listarVendasUseCase = new ListarVendasUseCase(vendaDAO);

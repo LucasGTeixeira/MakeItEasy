@@ -9,13 +9,13 @@ public class TableCreator {
 
     public void buildDatabaseIfMissing() {
         if (isDatabaseMissing()) {
-            System.out.println("Database is missing. Building database: \n");
+            System.out.println("Criando Banco de dados: \n");
             buildTables();
         }
     }
 
     private boolean isDatabaseMissing() {
-        return !Files.exists(Paths.get("database.db"));
+        return !Files.exists(Paths.get("makeiteasy.db"));
     }
 
     private void buildTables() {
@@ -27,7 +27,7 @@ public class TableCreator {
             statement.addBatch(createEmpresaTable());
             statement.executeBatch();
 
-            System.out.println("Database successfully created.");
+            System.out.println("Banco de dados criado com sucesso.");
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }

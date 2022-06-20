@@ -150,7 +150,6 @@ public class MenuInicialController {
 
     private void enviar() {
         Venda venda = tbvVendas.getSelectionModel().getSelectedItem();
-        venda.setStatusVenda(StatusVenda.ENVIADO);
         Main.modificarVendaUseCase.updateStatus(venda);
         showSuccessMessageEnviarVenda();
         filtrar();
@@ -161,7 +160,6 @@ public class MenuInicialController {
 
     private void faturar() {
         Venda venda = tbvVendas.getSelectionModel().getSelectedItem();
-        venda.setStatusVenda(StatusVenda.FATURADO);
         Main.modificarVendaUseCase.updateStatus(venda);
         showSuccessMessageFaturarVenda();
         filtrar();

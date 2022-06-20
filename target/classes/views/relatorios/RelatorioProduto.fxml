@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.relatorios.RelatorioProdutoController">
+   <children>
+      <TableView layoutX="177.0" layoutY="30.0" prefHeight="340.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+        <columns>
+          <TableColumn fx:id="tableColumnNome" prefWidth="111.0" text="Nome" />
+          <TableColumn fx:id="tableColumnCategoria" prefWidth="102.0" text="Categoria" />
+            <TableColumn fx:id="tableColumnValor" prefWidth="104.0" text="Valor" />
+            <TableColumn fx:id="tableColumnDisponibilidade" prefWidth="113.0" text="Disponibilidade" />
+            <TableColumn fx:id="tableColumnCampanha" prefWidth="89.0" text="Campanha" />
+            <TableColumn fx:id="tableColumnCodigo" prefWidth="79.0" text="Codigo" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtNome" layoutX="5.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="104.0" promptText="🔎 | Nome">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtCategoria" layoutX="109.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="104.0" promptText="🔎 | Categoria">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtValor" layoutX="212.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="104.0" promptText="🔎 | Valor">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtCampanha" layoutX="431.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="88.0" promptText="🔎 | Campanha">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtCodigo" layoutX="519.0" layoutY="2.0" opacity="0.4" prefHeight="25.0" prefWidth="78.0" promptText="🔎 | Codigo">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </TextField>
+      <Button fx:id="buttonEnviarCSV" layoutX="522.0" layoutY="374.0" mnemonicParsing="false" text="Enviar CSV" />
+      <Button fx:id="buttonVoltar" layoutX="442.0" layoutY="374.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Voltar" />
+      <CheckBox fx:id="checkDisponivel" layoutX="335.0" layoutY="7.0" mnemonicParsing="false" text="Disponível" />
+      <Button fx:id="buttonEnviarCSV1" layoutX="2.0" layoutY="373.0" mnemonicParsing="false" text="Filtrar" />
+   </children>
+</AnchorPane>

@@ -154,7 +154,7 @@ public class Main {
         Integer v3 = adicionarVendaUseCase.insert(venda3);
         Integer v4 = adicionarVendaUseCase.insert(venda4);
 
-        emitirRelatorioVenda.gerarRelatorio();
+        //emitirRelatorioVenda.gerarRelatorio();
         emitirRelatorioCliente.gerarRelatorio();
         emitirRelatorioProdutos.gerarRelatorio();
         emitirRelatorioEmpresa.gerarRelatorio();

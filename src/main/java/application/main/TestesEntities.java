@@ -18,6 +18,7 @@ import domain.usecases.produto.*;
 import domain.usecases.relatorio.*;
 import domain.usecases.venda.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public class TestesEntities {
@@ -261,7 +262,11 @@ public class TestesEntities {
         System.out.println("\nLISTA DE TODAS OS VENDAS FATURADAS");
         listarVendasUseCase.findVendaByStatus(StatusVenda.FATURADO).forEach(System.out::println);
 
-        emitirRelatorioVenda.gerarRelatorio();
+        List<Venda> listaVendasFaturadas = listarVendasUseCase.findVendaByStatus(StatusVenda.FATURADO);
+        List<Venda> listaVendasNaoEnviadas = listarVendasUseCase.findVendaByStatus(StatusVenda.NAO_ENVIADO);
+        List<Venda> listaVendasEnviadas = listarVendasUseCase.findVendaByStatus(StatusVenda.ENVIADO);
+
+        emitirRelatorioVenda.gerarRelatorio(listaVendasEnviadas);
         emitirRelatorioCliente.gerarRelatorio();
         emitirRelatorioProdutos.gerarRelatorio();
         emitirRelatorioEmpresa.gerarRelatorio();

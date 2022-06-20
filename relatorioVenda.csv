@@ -1,3 +1,0 @@
-id, cpfCliente, codProduto, valorTotal, formaPagamento, statusVenda
-2, 111, 15645789544, 20.0, Boleto Bancário, Enviado
-3, 333, 22648889544, 600.0, PIX, Enviado

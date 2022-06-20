@@ -3,15 +3,14 @@ package view.controller;
 import application.main.Main;
 import domain.entities.cliente.Cliente;
 import domain.entities.produto.Produto;
+import domain.entities.venda.StatusVenda;
 import domain.entities.venda.Venda;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import view.enums.Tela;
+import view.utils.FabricaAlerts;
 import view.utils.UILoader;
 
 import java.io.IOException;
@@ -31,76 +30,156 @@ public class MenuInicialController {
 
     @FXML
     private MenuItem menuItemProcessosVenda;
-
-    @FXML
-    private MenuItem menuItemRelatorioCliente;
-    @FXML
-    private MenuItem menuItemRelatorioProduto;
-    @FXML
-    private MenuItem menuItemRelatorioCampanha;
-    @FXML
-    private MenuItem menuItemRelatorioEmpresa;
-
     @FXML
     private TableView<Venda> tbvVendas;
     @FXML
-    private TableColumn<Venda,String> clnEmpresa;
+    private TableColumn<Venda, String> clnQuantidade;
     @FXML
-    private TableColumn<Venda,String> clnCampanha;
+    private TableColumn<Venda, String> clnFormaPagamento;
     @FXML
-    private TableColumn<Venda,String> clnProdutos;
+    private TableColumn<Venda, String> clnStatus;
     @FXML
-    private TableColumn<Venda,String> clnCliente;
+    private TableColumn<Venda, String> clnProdutos;
     @FXML
-    private TableColumn<Venda,String> clnTotal;
+    private TableColumn<Venda, String> clnCliente;
+    @FXML
+    private TableColumn<Venda, String> clnTotal;
+    @FXML
+    private RadioButton radioTodas;
+    @FXML
+    private RadioButton radioFaturadas;
+    @FXML
+    private RadioButton radioEnviadas;
+    @FXML
+    private RadioButton radioNaoEnviadas;
+    @FXML
+    private Label lblTotal;
+    @FXML
+    private Button buttonFiltrar;
+    @FXML
+    private Button buttonRelatorio;
+    @FXML
+    private Button buttonEnviar;
+    @FXML
+    private Button buttonFaturar;
 
-    @FXML
-    private Button buttonAlterar;
+    private final ToggleGroup group = new ToggleGroup();
 
     private final List<Venda> vendas = new ArrayList<>();
 
     @FXML
-    void initialize(){
+    void initialize() {
+        buttonFaturar.setDisable(true);
+        buttonEnviar.setDisable(true);
+        radioTodas.setToggleGroup(group);
+        radioFaturadas.setToggleGroup(group);
+        radioEnviadas.setToggleGroup(group);
+        radioNaoEnviadas.setToggleGroup(group);
         configurarColunas();
         setUpMenuListeners();
         List<Venda> vendasFound = Main.listarVendasUseCase.findAll();
-        vendas.addAll(vendasFound);
-        tbvVendas.getItems().addAll(vendas);
-        buttonAlterar.setDisable(true);
-
+        setVendas(vendasFound);
         tbvVendas.getSelectionModel().selectedItemProperty().addListener((observableValue, campanhaTableViewSelectionModel, item) -> {
-            buttonAlterar.setDisable(item == null);
-        });
-        buttonAlterar.setOnMouseClicked(mouseEvent -> {
-            try {
-                UILoader.getBundle().setBundle("model",tbvVendas.getSelectionModel().getSelectedItem());
-                UILoader.substituirTela(Tela.MENU_REALIZAR_VENDA.getNomeTela());
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(item.getStatusVenda() == StatusVenda.NAO_ENVIADO){
+                buttonFaturar.setDisable(true);
+                buttonEnviar.setDisable(false);
+            }else if((item.getStatusVenda() == StatusVenda.ENVIADO)){
+                buttonFaturar.setDisable(false);
+                buttonEnviar.setDisable(true);
+            }else{
+                buttonFaturar.setDisable(true);
+                buttonEnviar.setDisable(true);
             }
         });
+
+        buttonFiltrar.setOnAction(actionEvent -> filtrar());
+        buttonRelatorio.setOnAction(actionEvent -> gerarRelatorio());
+        buttonEnviar.setOnAction(actionEvent -> enviar());
+        buttonFaturar.setOnAction(actionEvent -> faturar());
     }
 
-    private void setUpMenuListeners(){
+    private void setVendas(List<Venda> vendasFound){
+        vendas.addAll(vendasFound);
+        tbvVendas.getItems().addAll(vendas);
+        setTotalVendas();
+    }
+
+    private void filtrar() {
+        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+        String toogleGroupValue = selectedRadioButton.getText();
+        switch (toogleGroupValue){
+            case "Todas":
+                break;
+            case "Faturadas":
+                setFilter(StatusVenda.ENVIADO);
+                break;
+            case "Enviadas":
+                setFilter(StatusVenda.ENVIADO);
+                break;
+            case "Não enviadas":
+                setFilter(StatusVenda.NAO_ENVIADO);
+                break;
+
+        }
+    }
+
+    void setFilter(StatusVenda statusVenda){
+        //todo fazer filtro com use case
+        tbvVendas.getSelectionModel().select(null);
+    }
+
+    private void gerarRelatorio() {
+        //todo passar lista filtrada
+        Main.emitirRelatorioVenda.gerarRelatorio();
+        showSuccessMessageGerarRelatorio();
+    }
+
+    private void showSuccessMessageGerarRelatorio() {
+        FabricaAlerts.criarAlertGenerico("Sucesso", "Relatório gerado", "Confira na raíz do programa", Alert.AlertType.INFORMATION);
+    }
+
+    private void enviar() {
+        showSuccessMessageEnviarVenda();
+    }
+    private void showSuccessMessageEnviarVenda() {
+        FabricaAlerts.criarAlertGenerico("Sucesso", "Venda enviada", "Sua venda foi enviada com sucesso", Alert.AlertType.INFORMATION);
+    }
+
+    private void faturar() {
+        showSuccessMessageFaturarVenda();
+    }
+    private void showSuccessMessageFaturarVenda() {
+        FabricaAlerts.criarAlertGenerico("Sucesso", "Venda faturada", "Sua venda foi faturada com sucesso", Alert.AlertType.INFORMATION);
+    }
+
+    private void setTotalVendas() {
+        double soma = 0;
+        for (Venda venda : vendas) {
+            soma = soma + venda.getValorTotal();
+        }
+        lblTotal.setText("R$" + soma);
+    }
+
+    private void setUpMenuListeners() {
         setGerenciamentoMenuListeners();
         setVendaMenuListeners();
-        setRelatorioMenuListeners();
     }
 
     private void configurarColunas() {
-        clnEmpresa.setCellValueFactory(vendaCell -> {
+        clnQuantidade.setCellValueFactory(vendaCell -> {
             Venda item = vendaCell.getValue();
-            //todo recuperar pelo id
-            return new SimpleStringProperty("Empresa");
+            return new SimpleStringProperty(item.getQntProduto().toString());
         });
-        clnCampanha.setCellValueFactory(vendaCell -> {
+        clnFormaPagamento.setCellValueFactory(vendaCell -> {
             Venda item = vendaCell.getValue();
-            //todo recuperar pelo id
-            return new SimpleStringProperty("Campanha");
+            return new SimpleStringProperty(item.getFormaPagamento().name());
+        });
+        clnStatus.setCellValueFactory(vendaCell -> {
+            Venda item = vendaCell.getValue();
+            return new SimpleStringProperty(item.getStatusVenda().name());
         });
         clnProdutos.setCellValueFactory(vendaCell -> {
             Venda item = vendaCell.getValue();
-            //todo recuperar + produtos
             Optional<Produto> produto = Main.listarProdutosUseCase.findByCodProduto(item.getCodProduto());
             return new SimpleStringProperty(produto.orElseThrow().getNome());
         });
@@ -112,26 +191,19 @@ public class MenuInicialController {
         clnTotal.setCellValueFactory(new PropertyValueFactory<>("valorTotal"));
     }
 
-    private void setGerenciamentoMenuListeners(){
+    private void setGerenciamentoMenuListeners() {
         setActionListener(menuItemCadastrosCliente, Tela.MENU_CLIENTE);
-        setActionListener(menuItemCadastrosCampanha,Tela.MENU_CAMPANHA);
-        setActionListener(menuItemCadastrosEmpresa,Tela.MENU_EMPRESA);
-        setActionListener(menuItemCadastrosProduto,Tela.MENU_PRODUTO);
+        setActionListener(menuItemCadastrosCampanha, Tela.MENU_CAMPANHA);
+        setActionListener(menuItemCadastrosEmpresa, Tela.MENU_EMPRESA);
+        setActionListener(menuItemCadastrosProduto, Tela.MENU_PRODUTO);
     }
 
 
-    private void setVendaMenuListeners(){
-        setActionListener(menuItemProcessosVenda,Tela.MENU_REALIZAR_VENDA);
+    private void setVendaMenuListeners() {
+        setActionListener(menuItemProcessosVenda, Tela.MENU_REALIZAR_VENDA);
     }
 
-    private void setRelatorioMenuListeners(){
-        setActionListener(menuItemRelatorioCliente,Tela.MENU_RELATORIO_CLIENTE);
-        setActionListener(menuItemRelatorioProduto,Tela.MENU_RELATORIO_PRODUTO);
-        setActionListener(menuItemRelatorioCampanha,Tela.MENU_RELATORIO_CAMPANHA);
-        setActionListener(menuItemRelatorioEmpresa,Tela.MENU_RELATORIO_EMPRESA);
-    }
-
-    private void setActionListener(MenuItem menuItem, Tela tela){
+    private void setActionListener(MenuItem menuItem, Tela tela) {
         menuItem.setOnAction(actionEvent -> {
             try {
                 UILoader.substituirTela(tela.getNomeTela());

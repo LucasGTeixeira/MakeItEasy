@@ -99,8 +99,12 @@ public class Cliente {
 
     @Override
     public String toString() {
+        return nomeCompleto + ", " + cpf;
+    }
+
+    public String toRelatorio(){
         return id + ", " +
-                 cpf + ", " +
+                cpf + ", " +
                 nomeCompleto + ", " +
                 telefone + ", " +
                 email + ", " +

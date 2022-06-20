@@ -90,7 +90,7 @@ public class SqliteVendaDAO implements VendaDAO {
 
         try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
             setVendaBody(venda, ps);
-            ps.setInt(8, venda.getId());
+            ps.setInt(7, venda.getId());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -101,30 +101,41 @@ public class SqliteVendaDAO implements VendaDAO {
 
     @Override
     public boolean deleteByKey(Integer key) {
-        String sql = "DELETE FROM Venda WHERE id = ?";
-
-        try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
-            ps.setInt(1, key);
-            ps.execute();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return false;
     }
 
     @Override
     public boolean delete(Venda venda) {
-        if (venda == null || venda.getId() == null)
-            throw new IllegalArgumentException("Id de venda não pode ser nulo");
-        return deleteByKey(venda.getId());
+        return false;
+    }
+
+    @Override
+    public List<Venda> findVendaByStatus(StatusVenda statusVenda) {
+        List<Venda> vendas = new ArrayList<>();
+        String sql = "SELECT * FROM Venda WHERE statusVenda = ?";
+
+        try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
+            ps.setString(1,statusVenda.toString());
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                Venda venda = resultSetToEntity(resultSet);
+                vendas.add(venda);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vendas;
     }
 
     @Override
     public boolean updateStatus(Venda venda) {
-        boolean StatusVendaNaoEnviado = venda.getStatusVenda() == StatusVenda.NAO_ENVIADO;
-        if(StatusVendaNaoEnviado) {
+        StatusVenda statusVenda = venda.getStatusVenda();
+        if(statusVenda == StatusVenda.NAO_ENVIADO) {
             venda.setStatusVenda(StatusVenda.ENVIADO);
+            update(venda);
+        }
+        if(statusVenda == StatusVenda.ENVIADO){
+            venda.setStatusVenda(StatusVenda.FATURADO);
             update(venda);
         }
         return false;

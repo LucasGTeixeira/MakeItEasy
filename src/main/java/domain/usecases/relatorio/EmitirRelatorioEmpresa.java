@@ -18,7 +18,7 @@ public class EmitirRelatorioEmpresa {
 
     public String listEmpresasToString(){
         List<Empresa> empresaList = empresaDAO.findAll();
-        return empresaList.stream().map(Empresa::toString)
+        return empresaList.stream().map(Empresa::toRelatorio)
                 .collect(Collectors.joining("\n"));
     }
 

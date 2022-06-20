@@ -63,6 +63,11 @@ public class MockedVendasDAO implements VendaDAO {
     }
 
     @Override
+    public List<Venda> findVendaByStatus(StatusVenda statusVenda) {
+        return null;
+    }
+
+    @Override
     public boolean updateStatus(Venda venda) {
         boolean isVendaStatusNotSent = venda.getStatusVenda() == StatusVenda.NAO_ENVIADO;
         if(isVendaStatusNotSent) {

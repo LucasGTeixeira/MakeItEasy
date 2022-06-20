@@ -18,6 +18,7 @@ import domain.usecases.produto.*;
 import domain.usecases.relatorio.*;
 import domain.usecases.venda.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public class TestesEntities {
@@ -121,10 +122,10 @@ public class TestesEntities {
 
         //VENDAS
         Venda venda1 = new Venda("15645789544", 111,  FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO,1);
-        Venda venda2 = new Venda("15645789544", 111,  FormaPagamento.BOLETO_BANCARIO, StatusVenda.NAO_ENVIADO,2);
+        Venda venda2 = new Venda("15645789544", 111,  FormaPagamento.BOLETO_BANCARIO, StatusVenda.ENVIADO,2);
         Venda venda3 = new Venda("22648889544", 333,  FormaPagamento.PIX, StatusVenda.ENVIADO, 3);
-        Venda venda4 = new Venda("48415548755", 555,  FormaPagamento.CREDITO, StatusVenda.ENVIADO,4);
-        Venda venda5 = new Venda(4,"33315548766", 555, FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO,5);
+        Venda venda4 = new Venda("48415548755", 555,  FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO,1);
+        Venda venda5 = new Venda(4,"48415548755", 555,  FormaPagamento.CREDITO, StatusVenda.NAO_ENVIADO,1, 920.0);
 
         //EMPRESAS
         Integer emp1 = adicinarEmpresaUseCase.insert(empresa1);
@@ -175,6 +176,13 @@ public class TestesEntities {
 
         System.out.println("\nLISTA DE TODAS OS VENDAS");
         listarVendasUseCase.findAll().forEach(System.out::println);
+
+        System.out.println("\nLISTA DE TODAS OS VENDAS NÃO ENVIADAS");
+        listarVendasUseCase.findVendaByStatus(StatusVenda.NAO_ENVIADO).forEach(System.out::println);
+
+        System.out.println("\nLISTA DE TODAS OS VENDAS ENVIADAS");
+        listarVendasUseCase.findVendaByStatus(StatusVenda.ENVIADO).forEach(System.out::println);
+
 
         //---------------- PESQUISAS COM SUCESSO ----------------
         System.out.println("\nENCONTRAR EMPRESA COM CNPJ '65489'");
@@ -241,12 +249,24 @@ public class TestesEntities {
         produtoOptional.ifPresent(System.out::println);
 
 
-        System.out.println("\n MODIFICANDO VENDA 2");
-        modificarVendaUseCase.updateStatus(venda4);
-        Optional<Venda> vendaOptional = listarVendasUseCase.findOne(4);
-        vendaOptional.ifPresent(System.out::println);
+        System.out.println("\n UPDATE VENDA 4");
+        modificarVendaUseCase.updateStatus(venda5);
+        Optional<Venda> vendaEnviada = listarVendasUseCase.findOne(4);
+        vendaEnviada.ifPresent(System.out::println);
 
-        emitirRelatorioVenda.gerarRelatorio();
+        System.out.println("\n UPDATE VENDA 4");
+        modificarVendaUseCase.updateStatus(venda5);
+        Optional<Venda> vendaFaturada = listarVendasUseCase.findOne(4);
+        vendaFaturada.ifPresent(System.out::println);
+
+        System.out.println("\nLISTA DE TODAS OS VENDAS FATURADAS");
+        listarVendasUseCase.findVendaByStatus(StatusVenda.FATURADO).forEach(System.out::println);
+
+        List<Venda> listaVendasFaturadas = listarVendasUseCase.findVendaByStatus(StatusVenda.FATURADO);
+        List<Venda> listaVendasNaoEnviadas = listarVendasUseCase.findVendaByStatus(StatusVenda.NAO_ENVIADO);
+        List<Venda> listaVendasEnviadas = listarVendasUseCase.findVendaByStatus(StatusVenda.ENVIADO);
+
+        emitirRelatorioVenda.gerarRelatorio(listaVendasEnviadas);
         emitirRelatorioCliente.gerarRelatorio();
         emitirRelatorioProdutos.gerarRelatorio();
         emitirRelatorioEmpresa.gerarRelatorio();

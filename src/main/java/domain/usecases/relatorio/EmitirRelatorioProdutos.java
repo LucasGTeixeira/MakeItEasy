@@ -17,7 +17,7 @@ public class EmitirRelatorioProdutos {
 
     public String listProdutosToString(){
         List<Produto> produtosList = produtoDAO.findAll();
-        return produtosList.stream().map(Produto::toString)
+        return produtosList.stream().map(Produto::toRelatorio)
                 .collect(Collectors.joining("\n"));
     }
 

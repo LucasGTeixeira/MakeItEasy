@@ -5,6 +5,7 @@ import domain.entities.venda.Venda;
 import domain.usecases.venda.VendaDAO;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MockedVendasDAO implements VendaDAO {
 
@@ -64,7 +65,8 @@ public class MockedVendasDAO implements VendaDAO {
 
     @Override
     public List<Venda> findVendaByStatus(StatusVenda statusVenda) {
-        return null;
+        return fakeDb.values().stream()
+                .filter(venda -> venda.getStatusVenda().equals(statusVenda)).collect(Collectors.toList());
     }
 
     @Override

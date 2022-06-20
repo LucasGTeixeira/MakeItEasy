@@ -80,6 +80,11 @@ public class MenuInicialController {
         List<Venda> vendasFound = Main.listarVendasUseCase.findAll();
         setVendas(vendasFound);
         tbvVendas.getSelectionModel().selectedItemProperty().addListener((observableValue, campanhaTableViewSelectionModel, item) -> {
+            if(item == null){
+                buttonFaturar.setDisable(true);
+                buttonEnviar.setDisable(true);
+                return;
+            }
             if(item.getStatusVenda() == StatusVenda.NAO_ENVIADO){
                 buttonFaturar.setDisable(true);
                 buttonEnviar.setDisable(false);
@@ -99,8 +104,10 @@ public class MenuInicialController {
     }
 
     private void setVendas(List<Venda> vendasFound){
+        vendas.clear();
         vendas.addAll(vendasFound);
-        tbvVendas.getItems().addAll(vendas);
+        tbvVendas.getItems().setAll(vendas);
+        tbvVendas.refresh();
         setTotalVendas();
     }
 
@@ -109,9 +116,11 @@ public class MenuInicialController {
         String toogleGroupValue = selectedRadioButton.getText();
         switch (toogleGroupValue){
             case "Todas":
+                List<Venda> vendasFound = Main.listarVendasUseCase.findAll();
+                setVendas(vendasFound);
                 break;
             case "Faturadas":
-                setFilter(StatusVenda.ENVIADO);
+                setFilter(StatusVenda.FATURADO);
                 break;
             case "Enviadas":
                 setFilter(StatusVenda.ENVIADO);
@@ -124,13 +133,14 @@ public class MenuInicialController {
     }
 
     void setFilter(StatusVenda statusVenda){
-        //todo fazer filtro com use case
-        tbvVendas.getSelectionModel().select(null);
+        List<Venda> vendas = Main.listarVendasUseCase.findVendaByStatus(statusVenda);
+        if(vendas == null) vendas = new ArrayList<>();
+        setVendas(vendas);
+        tbvVendas.getSelectionModel().selectFirst();
     }
 
     private void gerarRelatorio() {
-        //todo passar lista filtrada
-        Main.emitirRelatorioVenda.gerarRelatorio();
+        Main.emitirRelatorioVenda.gerarRelatorio(vendas);
         showSuccessMessageGerarRelatorio();
     }
 
@@ -139,14 +149,22 @@ public class MenuInicialController {
     }
 
     private void enviar() {
+        Venda venda = tbvVendas.getSelectionModel().getSelectedItem();
+        venda.setStatusVenda(StatusVenda.ENVIADO);
+        Main.modificarVendaUseCase.updateStatus(venda);
         showSuccessMessageEnviarVenda();
+        filtrar();
     }
     private void showSuccessMessageEnviarVenda() {
         FabricaAlerts.criarAlertGenerico("Sucesso", "Venda enviada", "Sua venda foi enviada com sucesso", Alert.AlertType.INFORMATION);
     }
 
     private void faturar() {
+        Venda venda = tbvVendas.getSelectionModel().getSelectedItem();
+        venda.setStatusVenda(StatusVenda.FATURADO);
+        Main.modificarVendaUseCase.updateStatus(venda);
         showSuccessMessageFaturarVenda();
+        filtrar();
     }
     private void showSuccessMessageFaturarVenda() {
         FabricaAlerts.criarAlertGenerico("Sucesso", "Venda faturada", "Sua venda foi faturada com sucesso", Alert.AlertType.INFORMATION);

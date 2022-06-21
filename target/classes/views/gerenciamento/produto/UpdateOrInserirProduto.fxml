@@ -34,7 +34,7 @@
             <Label fx:id="labelClienteStatus" text="Código" GridPane.rowIndex="4" />
             <TextField fx:id="txtNome" GridPane.columnIndex="1" />
             <TextField fx:id="txtValor" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtCodigo" GridPane.columnIndex="1" GridPane.rowIndex="4" disable="true"/>
+            <TextField fx:id="txtCodigo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <ComboBox fx:id="cbbCampanha" prefHeight="27.0" prefWidth="165.0" promptText="Selecione a campanha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="cbbCategoria" prefHeight="27.0" prefWidth="165.0" promptText="Selecione a categoria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <CheckBox fx:id="ckDisponivel" mnemonicParsing="false" text="Disponível" GridPane.rowIndex="5" />

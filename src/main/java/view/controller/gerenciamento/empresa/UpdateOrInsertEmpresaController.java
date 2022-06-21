@@ -68,6 +68,7 @@ public class UpdateOrInsertEmpresaController {
 
     private void setFields(Empresa empresa) {
         id = empresa.getId();
+        txtEmpresaCnpj.setDisable(true);
         txtEmpresaCnpj.setText(empresa.getCnpj());
         txtEmpresaRazaoSocial.setText(empresa.getRazaoSocial());
     }

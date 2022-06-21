@@ -84,6 +84,7 @@ public class UpdateOrInsertProdutoController {
     }
 
     private void setFields(Produto produto) {
+        txtCodigo.setDisable(true);
         txtCodigo.setText(produto.getCodProduto().toString());
         txtNome.setText(produto.getNome());
         txtValor.setText(produto.getValor().toString());

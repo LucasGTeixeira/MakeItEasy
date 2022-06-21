@@ -33,7 +33,7 @@
             <Label fx:id="labelCampanhaDataLancamento" text="Data Lançamento" GridPane.rowIndex="3" />
             <Label fx:id="labelCampanhaDataExpiracao" text="Data Expiração" GridPane.rowIndex="4" />
             <Label fx:id="labelCampanhaCNPJ" text="Empresa" GridPane.rowIndex="5" />
-            <TextField fx:id="txtCod" GridPane.columnIndex="1" disable="true"/>
+            <TextField fx:id="txtCod" GridPane.columnIndex="1" />
             <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtEdicao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <DatePicker fx:id="dtLancamento" GridPane.columnIndex="1" GridPane.rowIndex="3" />

@@ -80,6 +80,7 @@ public class UpdateOrInsertClienteController {
     }
 
     private void setFields(Cliente cliente) {
+        txtCpf.setDisable(true);
         id = cliente.getId();
         txtCpf.setText(cliente.getCpf());
         txtNome.setText(cliente.getNomeCompleto());

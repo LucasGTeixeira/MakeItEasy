@@ -79,6 +79,7 @@ public class UpdateOrInsertCampanhaController {
     }
 
     private void setFields(Campanha campanha) {
+        txtCod.setDisable(true);
         txtCod.setText(campanha.getCodigo());
         txtEdicao.setText(campanha.getEdicao());
         txtNome.setText(campanha.getNome());

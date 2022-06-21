@@ -39,10 +39,6 @@ public class RealizarVendaController {
         setButtonsClickListener();
         setUpMasks();
         setFields();
-        Bundle bundle = UILoader.getBundle();
-        Object model = bundle.getBundle("model");
-        if (model == null) return;
-        Venda venda = (Venda) model;
     }
 
     private void setButtonsClickListener() {

@@ -7,7 +7,7 @@ através do paradigma orientado a objetos, a fim de registrar e gerar relatório
 parte instanciada do sistema
   - `main:` Pacote responsável por conter a aplicação executável do sistema, classe "suja" onde 
   as instancias são feitas
-  - `repository:` Local onde a conexão com o banco de dados usando sql e os mockups são feitos, implementando as interfaces definidas dentro
+  - `repository:` Local onde a conexão com o banco de dados usando sql são feitos, implementando as interfaces definidas dentro
   dos usecases do `domain`
 - `domain:` Contém o dominio da aplicação. Desde entidades até usecases que serão usados no sistema
     - `entities:` Responsável por encapsular as entidades do sistema que serão usadas durante as instancias

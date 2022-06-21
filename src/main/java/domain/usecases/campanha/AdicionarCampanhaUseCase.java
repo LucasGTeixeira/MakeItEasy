@@ -26,13 +26,13 @@ public class AdicionarCampanhaUseCase {
         if(notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
 
-        String codigoOptional = campanha.getCodigo();
-        boolean codigoCampanhaAlreadyExists = listarCampanhasUseCase.findByCodigo(codigoOptional).isPresent();
+        String codigo = campanha.getCodigo();
+        boolean codigoCampanhaAlreadyExists = listarCampanhasUseCase.findByCodigo(codigo).isPresent();
         if(codigoCampanhaAlreadyExists)
             throw new EntityAlreadyExistsException("Já existe uma campanha com este código");
 
-        String cnpjEmpresaOptional = campanha.getCnpjEmpresa();
-        boolean cnpjEmpresaNotFound = listarEmpresasUseCase.findByCnpj(cnpjEmpresaOptional).isEmpty();
+        String cnpjEmpresa = campanha.getCnpjEmpresa();
+        boolean cnpjEmpresaNotFound = listarEmpresasUseCase.findByCnpj(cnpjEmpresa).isEmpty();
         if(cnpjEmpresaNotFound)
             throw new EntityNotFoundException("Não há nenhuma empresa com este Cnpj");
 

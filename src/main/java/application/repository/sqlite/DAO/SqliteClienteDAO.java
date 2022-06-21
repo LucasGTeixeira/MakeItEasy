@@ -141,7 +141,9 @@ public class SqliteClienteDAO implements ClienteDAO {
 
     @Override
     public boolean delete(Cliente cliente) {
-        if (cliente == null || cliente.getId() == null)
+        if (cliente == null)
+            throw new IllegalArgumentException("Cliente não pode ser nulo");
+        if (cliente.getId() == null)
             throw new IllegalArgumentException("Id de cliente não pode ser nulo");
         return deleteByKey(cliente.getId());
     }

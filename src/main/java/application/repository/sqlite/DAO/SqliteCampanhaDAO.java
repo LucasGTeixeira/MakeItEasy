@@ -65,7 +65,6 @@ public class SqliteCampanhaDAO implements CampanhaDAO {
 
     private Optional<Campanha> getCampanha(String attribute, String sql) {
         Campanha campanha = null;
-
         try(PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)){
             ps.setString(1, attribute);
             ResultSet resultSet = ps.executeQuery();
@@ -150,7 +149,9 @@ public class SqliteCampanhaDAO implements CampanhaDAO {
 
     @Override
     public boolean delete(Campanha campanha) {
-        if (campanha == null || campanha.getId() == null)
+        if (campanha == null)
+            throw new IllegalArgumentException("Campanha não pode ser nula");
+        if (campanha.getId() == null)
             throw new IllegalArgumentException("Id de campanha não pode ser nulo");
         return deleteByKey(campanha.getId());
     }

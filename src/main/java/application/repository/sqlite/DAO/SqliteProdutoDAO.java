@@ -140,7 +140,9 @@ public class SqliteProdutoDAO implements ProdutoDAO {
 
     @Override
     public boolean delete(Produto produto) {
-        if (produto == null || produto.getId() == null)
+        if (produto == null)
+            throw new IllegalArgumentException("Produto não pode ser nulo");
+        if (produto.getId() == null)
             throw new IllegalArgumentException("Id de produto não pode ser nulo");
         return deleteByKey(produto.getId());
     }

@@ -130,7 +130,9 @@ public class SqliteEmpresaDAO  implements EmpresaDAO {
 
     @Override
     public boolean delete(Empresa empresa) {
-        if (empresa == null || empresa.getId() == null)
+        if (empresa == null)
+            throw new IllegalArgumentException("empresa não pode ser nula");
+        if (empresa.getId() == null)
             throw new IllegalArgumentException("Id de empresa não pode ser nulo");
         return deleteByKey(empresa.getId());
     }

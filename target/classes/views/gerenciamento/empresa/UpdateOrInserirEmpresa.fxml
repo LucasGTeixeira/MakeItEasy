@@ -23,7 +23,7 @@
          <children>
             <Label fx:id="labelCampanhaCodigo" text="CNPJ" />
             <Label fx:id="labelCampanhaNome" text="Razão social" GridPane.rowIndex="1" />
-            <TextField fx:id="txtEmpresaCnpj" GridPane.columnIndex="1" />
+            <TextField fx:id="txtEmpresaCnpj" GridPane.columnIndex="1" disable="true"/>
             <TextField fx:id="txtEmpresaRazaoSocial" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>

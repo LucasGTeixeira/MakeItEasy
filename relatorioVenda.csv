@@ -1,4 +1,4 @@
 id, cpfCliente, codProduto, valorTotal, formaPagamento, statusVenda
-1, 111, 15645789544, 10.0, Cartão de crédito, Faturado
 3, 333, 22648889544, 600.0, PIX, Faturado
 4, 555, 48415548755, 3680.0, Cartão de crédito, Faturado
+5, 555, 48415548755, 920.0, Cartão de débito, Faturado

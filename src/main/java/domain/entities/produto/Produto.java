@@ -1,7 +1,5 @@
 package domain.entities.produto;
 
-import java.math.BigDecimal;
-
 public class Produto {
     private Integer id;
     private Integer codProduto;

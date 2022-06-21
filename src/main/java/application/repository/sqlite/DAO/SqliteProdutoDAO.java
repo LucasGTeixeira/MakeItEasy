@@ -52,6 +52,23 @@ public class SqliteProdutoDAO implements ProdutoDAO {
     }
 
     @Override
+    public Optional<Produto> findProdutoByCodCampanha(String codCampanha) {
+        String sql = "SELECT * FROM Produto" +
+                " WHERE codCampanha = ?";
+        Produto produto = null;
+        try (PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)) {
+            ps.setString(1, codCampanha);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                produto = resultSetToEntity(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(produto);
+    }
+
+    @Override
     public Optional<Produto> findOne(Integer key) {
         String sql = "SELECT * FROM Produto" +
                 " WHERE id = ?";

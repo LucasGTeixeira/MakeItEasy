@@ -296,11 +296,11 @@ public class TestesEntities {
 
         adicionarProdutoUseCase = new AdicionarProdutoUseCase(produtoDAO, listarProdutosUseCase, listarCampanhasUseCase);
         modificarProdutoUseCase = new ModificarProdutoUseCase(produtoDAO, listarProdutosUseCase, listarCampanhasUseCase);
-        removerProdutoUseCase = new RemoverProdutoUseCase(produtoDAO, listarProdutosUseCase);
+        removerProdutoUseCase = new RemoverProdutoUseCase(produtoDAO, listarProdutosUseCase, listarVendasUseCase);
 
         adicionarCampanhaUseCase = new AdicionarCampanhaUseCase(campanhaDAO, listarEmpresasUseCase, listarCampanhasUseCase);
         modificarCampanhaUseCase = new ModificarCampanhaUseCase(listarCampanhasUseCase, campanhaDAO);
-        removerCampanhaUseCase = new RemoverCampanhaUseCase(listarCampanhasUseCase, campanhaDAO);
+        removerCampanhaUseCase = new RemoverCampanhaUseCase(listarCampanhasUseCase, campanhaDAO, listarProdutosUseCase);
 
         adicinarEmpresaUseCase = new AdicinarEmpresaUseCase(empresaDAO, listarEmpresasUseCase);
         modificarEmpresaUseCase = new ModificarEmpresaUseCase(empresaDAO, listarEmpresasUseCase);
@@ -308,7 +308,7 @@ public class TestesEntities {
 
         adicionarClienteUseCase = new AdicionarClienteUseCase(clienteDAO, listarClientesUseCase);
         modificarClienteUseCase = new ModificarClienteUseCase(clienteDAO, listarClientesUseCase);
-        removerClienteUseCase = new RemoverClienteUseCase(clienteDAO, listarClientesUseCase);
+        removerClienteUseCase = new RemoverClienteUseCase(clienteDAO, listarClientesUseCase, listarVendasUseCase);
 
         emitirRelatorioVenda = new EmitirRelatorioVenda(vendaDAO);
         emitirRelatorioCliente = new EmitirRelatorioCliente(clienteDAO);

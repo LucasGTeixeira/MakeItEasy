@@ -18,6 +18,10 @@ public class ListarProdutosUseCase {
         return produtoDAO.findByCodProduto(cod);
     }
 
+    public Optional<Produto> findProdutoByCodCampanha(String codCampanha){
+        return produtoDAO.findProdutoByCodCampanha(codCampanha);
+    }
+
     public Optional<Produto> findOne(Integer id){
         if(id == null)
             throw new IllegalArgumentException("Id não pode ser nulo");

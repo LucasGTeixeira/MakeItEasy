@@ -9,6 +9,7 @@ import java.util.Optional;
 public class ListarVendasUseCase {
     private final VendaDAO vendaDAO;
 
+
     public ListarVendasUseCase(VendaDAO vendaDAO) {
         this.vendaDAO = vendaDAO;
     }
@@ -21,6 +22,14 @@ public class ListarVendasUseCase {
 
     public List<Venda> findAll(){
         return vendaDAO.findAll();
+    }
+
+    public Optional<Venda> findVendaByCpf(String cpf){
+        return vendaDAO.findVendaByCpf(cpf);
+    }
+
+    public Optional<Venda> findVendaByCodProduto(Integer codProduto){
+        return vendaDAO.findVendaByCodProduto(codProduto);
     }
 
     public List<Venda> findVendaByStatus(StatusVenda statusVenda){

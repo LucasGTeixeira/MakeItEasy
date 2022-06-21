@@ -128,6 +128,42 @@ public class SqliteVendaDAO implements VendaDAO {
     }
 
     @Override
+    public Optional<Venda> findVendaByCpf(String cpf) {
+        String sql = "SELECT * FROM Venda" +
+                " WHERE cpfCliente = ?";
+        Venda venda = null;
+
+        try(PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)){
+            ps.setString(1, cpf);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                venda = resultSetToEntity(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(venda);
+    }
+
+    @Override
+    public Optional<Venda> findVendaByCodProduto(Integer codProduto) {
+        String sql = "SELECT * FROM Venda" +
+                " WHERE codProduto = ?";
+        Venda venda = null;
+
+        try(PreparedStatement ps = ConnectionFactory.createPreparedStatement(sql)){
+            ps.setInt(1, codProduto);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                venda = resultSetToEntity(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(venda);
+    }
+
+    @Override
     public boolean updateStatus(Venda venda) {
         StatusVenda statusVenda = venda.getStatusVenda();
         if(statusVenda == StatusVenda.NAO_ENVIADO) {

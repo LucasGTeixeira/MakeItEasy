@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class TestesEntities {
+public class PopulateAndTestEntities {
 
     private static AdicionarProdutoUseCase adicionarProdutoUseCase;
     private static ListarProdutosUseCase listarProdutosUseCase;
@@ -208,22 +208,22 @@ public class TestesEntities {
         //---------------- TESTE QUE GERA UM EmpresaRelatedToCampanhaException ----------------
 //        removerEmpresaUseCase.delete(1);
 
-        // ---------------- TESTES DE EXCLUSÃO COM SUCESSO ---------------------
-        System.out.println("\n EXCLUINDO EMPRESA: 2");
-        removerEmpresaUseCase.delete(2);
-        listarEmpresasUseCase.findAll().forEach(System.out::println);
-
+        // ---------------- TESTES DE EXCLUSÃO ---------------------
+//        System.out.println("\n EXCLUINDO EMPRESA: 2");
+//        removerEmpresaUseCase.delete(2);
+//        listarEmpresasUseCase.findAll().forEach(System.out::println);
+//
 //        System.out.println("\n EXCLUINDO CAMPANHA: 2");
 //        removerCampanhaUseCase.delete(2);
-//        listarCampanhasUseCase.findAll().forEach(System.out::println);
-
-        System.out.println("\n EXCLUINDO CLIENTE: 1");
-        removerClienteUseCase.delete(1);
-        listarClientesUseCase.findAll().forEach(System.out::println);
-
-        System.out.println("\n EXCLUINDO PRODUTO: 2");
-        removerProdutoUseCase.delete(2);
-        listarProdutosUseCase.findAll().forEach(System.out::println);
+//       listarCampanhasUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\n EXCLUINDO CLIENTE: 1");
+//        removerClienteUseCase.delete(1);
+//        listarClientesUseCase.findAll().forEach(System.out::println);
+//
+//        System.out.println("\n EXCLUINDO PRODUTO: 2");
+//        removerProdutoUseCase.delete(2);
+//        listarProdutosUseCase.findAll().forEach(System.out::println);
 
         // --------------- MODIFICAÇÕES COM SUCESSO ----------------------
         modificarEmpresaUseCase.update(empresa5);

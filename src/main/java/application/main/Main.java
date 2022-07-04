@@ -1,6 +1,6 @@
 package application.main;
 
-import application.repository.sqlite.DAO.*;
+import application.repository.sqlite.DAOSqlite.*;
 import application.repository.sqlite.utils.TableCreator;
 import domain.usecases.campanha.*;
 import domain.usecases.cliente.*;

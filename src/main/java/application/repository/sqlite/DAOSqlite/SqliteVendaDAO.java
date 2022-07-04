@@ -1,4 +1,4 @@
-package application.repository.sqlite.DAO;
+package application.repository.sqlite.DAOSqlite;
 
 import application.repository.sqlite.utils.ConnectionFactory;
 import domain.entities.venda.FormaPagamento;

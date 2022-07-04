@@ -8,22 +8,17 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EmitirRelatorioCampanhas {
+public class EmitirRelatorioCampanhas implements EmitirRelatorio<Campanha>{
 
-    private final CampanhaDAO campanhaDAO;
-
-    public EmitirRelatorioCampanhas(CampanhaDAO campanhaDAO) {
-        this.campanhaDAO = campanhaDAO;
-    }
-
-    public String listCampanhasToString(){
-        List<Campanha> CampanhaList = campanhaDAO.findAll();
-        return CampanhaList.stream().map(Campanha::toRelatorio)
+    @Override
+    public String listToString(List<Campanha> listCampanha){
+        return listCampanha.stream().map(Campanha::toRelatorio)
                 .collect(Collectors.joining("\n"));
     }
 
-    public void gerarRelatorio(){
-        String campanhasString = listCampanhasToString();
+    @Override
+    public void gerarRelatorio(List<Campanha> listCampanha){
+        String campanhasString = listToString(listCampanha);
         try (PrintWriter out = new PrintWriter("relatorioCampanhas.csv")) {
             out.println("id, codigo, nome, edicao, dataLancamento, dataExpiracao, cnpjEmpresa\n" + campanhasString);
         } catch (FileNotFoundException e) {

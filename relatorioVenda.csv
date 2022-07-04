@@ -1,3 +1,4 @@
 id, cpfCliente, codProduto, valorTotal, formaPagamento, statusVenda
-1, 111, 15645789544, 10.0, Cartão de crédito, Não enviado
-5, 333, 14625101827, 200.0, Cartão de crédito, Não enviado
+3, 333, 22648889544, 600.0, PIX, Enviado
+5, 333, 14625101827, 200.0, Cartão de crédito, Enviado
+6, 2547, 48415548755, 250.69, Cartão de crédito, Enviado

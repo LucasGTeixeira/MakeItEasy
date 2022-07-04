@@ -1,6 +1,6 @@
 package application.main;
 
-import application.repository.sqlite.DAO.*;
+import application.repository.sqlite.DAOSqlite.*;
 import application.repository.sqlite.utils.TableCreator;
 import domain.entities.campanha.Campanha;
 import domain.entities.cliente.Cliente;
@@ -20,6 +20,8 @@ import domain.usecases.venda.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import static domain.entities.produto.CategoriaProdutos.*;
 
 public class PopulateAndTestEntities {
 
@@ -102,22 +104,22 @@ public class PopulateAndTestEntities {
                 "992274411", "paulo@email.com", "Av. Sebastiao",
                 ClienteStatus.ATIVO, LocalDate.of(2000, 8, 10));
 
-        Produto produto1 = new Produto(111, "Pente", CategoriaProdutos.COSMETICOS,
+        Produto produto1 = new Produto(111, "Pente", COSMETICOS,
                 10.0, true, "666666");
 
-        Produto produto2 = new Produto(222, "Base", CategoriaProdutos.COSMETICOS,
+        Produto produto2 = new Produto(222, "Base", COSMETICOS,
                 22.0, true, "666666");
 
-        Produto produto3 = new Produto(333, "Panela de pressão", CategoriaProdutos.COZINHA,
+        Produto produto3 = new Produto(333, "Panela de pressão", COZINHA,
                 200.0, true, "123456");
 
-        Produto produto4 = new Produto(444, "Liquidificador master", CategoriaProdutos.COZINHA,
+        Produto produto4 = new Produto(444, "Liquidificador master", COZINHA,
                 85.0, true, "666666");
 
-        Produto produto5 = new Produto(555, "Esteira", CategoriaProdutos.SAUDE_BEM_ESTAR,
+        Produto produto5 = new Produto(555, "Esteira", SAUDE_BEM_ESTAR,
                 920.0, true, "451611");
 
-        Produto produto6 = new Produto(4,444, "Modificado Liq master", CategoriaProdutos.COZINHA,
+        Produto produto6 = new Produto(4,444, "Modificado Liq master", COZINHA,
                 85.0, true, "666666");
 
         //VENDAS
@@ -267,10 +269,6 @@ public class PopulateAndTestEntities {
         List<Venda> listaVendasEnviadas = listarVendasUseCase.findVendaByStatus(StatusVenda.ENVIADO);
 
         emitirRelatorioVenda.gerarRelatorio(listaVendasEnviadas);
-        emitirRelatorioCliente.gerarRelatorio();
-        emitirRelatorioProdutos.gerarRelatorio();
-        emitirRelatorioEmpresa.gerarRelatorio();
-        emitirRelatorioCampanhas.gerarRelatorio();
 
     }
 
@@ -309,12 +307,5 @@ public class PopulateAndTestEntities {
         adicionarClienteUseCase = new AdicionarClienteUseCase(clienteDAO, listarClientesUseCase);
         modificarClienteUseCase = new ModificarClienteUseCase(clienteDAO, listarClientesUseCase);
         removerClienteUseCase = new RemoverClienteUseCase(clienteDAO, listarClientesUseCase, listarVendasUseCase);
-
-        emitirRelatorioVenda = new EmitirRelatorioVenda(vendaDAO);
-        emitirRelatorioCliente = new EmitirRelatorioCliente(clienteDAO);
-        emitirRelatorioProdutos = new EmitirRelatorioProdutos(produtoDAO);
-        emitirRelatorioEmpresa = new EmitirRelatorioEmpresa(empresaDAO);
-        emitirRelatorioCampanhas = new EmitirRelatorioCampanhas(campanhaDAO);
-
     }
 }

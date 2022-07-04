@@ -8,24 +8,19 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EmitirRelatorioCliente {
+public class EmitirRelatorioCliente implements EmitirRelatorio<Cliente>{
 
-    private final ClienteDAO clienteDAO;
-
-    public EmitirRelatorioCliente(ClienteDAO clienteDAO) {
-        this.clienteDAO = clienteDAO;
-    }
-
-    public String listClientesToString(){
-        List<Cliente> ClienteList = clienteDAO.findAll();
-        return ClienteList.stream().map(Cliente::toRelatorio)
+    @Override
+    public String listToString(List<Cliente> clienteList){
+        return clienteList.stream().map(Cliente::toRelatorio)
                 .collect(Collectors.joining("\n"));
     }
 
-    public void gerarRelatorio(){
-        String clientesString = listClientesToString();
+    @Override
+    public void gerarRelatorio(List<Cliente> clienteList){
+        String clienteString = listToString(clienteList);
         try (PrintWriter out = new PrintWriter("relatorioClientes.csv")) {
-            out.println("id, cpf, nomeCompleto, telefone, email, endereço, status, dataNascimento\n" + clientesString);
+            out.println("id, cpf, nomeCompleto, telefone, email, endereço, status, dataNascimento\n" + clienteList);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Arquivo 'relatorioClientes.csv' não encontrado");
         }

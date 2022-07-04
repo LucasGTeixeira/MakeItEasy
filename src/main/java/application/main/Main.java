@@ -87,11 +87,11 @@ public class Main extends Application {
         modificarClienteUseCase = new ModificarClienteUseCase(clienteDAO, listarClientesUseCase);
         removerClienteUseCase = new RemoverClienteUseCase(clienteDAO, listarClientesUseCase, listarVendasUseCase);
 
-        emitirRelatorioVenda = new EmitirRelatorioVenda(vendaDAO);
-        emitirRelatorioCliente = new EmitirRelatorioCliente(clienteDAO);
-        emitirRelatorioProdutos = new EmitirRelatorioProdutos(produtoDAO);
-        emitirRelatorioEmpresa = new EmitirRelatorioEmpresa(empresaDAO);
-        emitirRelatorioCampanhas = new EmitirRelatorioCampanhas(campanhaDAO);
+        emitirRelatorioVenda = new EmitirRelatorioVenda();
+        emitirRelatorioCliente = new EmitirRelatorioCliente();
+        emitirRelatorioProdutos = new EmitirRelatorioProdutos();
+        emitirRelatorioEmpresa = new EmitirRelatorioEmpresa();
+        emitirRelatorioCampanhas = new EmitirRelatorioCampanhas();
 
     }
 
